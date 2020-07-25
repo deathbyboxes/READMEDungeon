@@ -1,77 +1,76 @@
 const rng = new Math.seedrandom();
 
-function giveMeDirection(times) {
-  for (let i = 0; i < times; i++) {
-    let str = "You can move ";
-    let dirs = findHallways2();
-    str += dirs.join(", ") + " from this room.";
-    let i = str.lastIndexOf(", ");
+const generateNewPaths = () => {
+  const dirs = generateDirections();
+  const newRooms = {
+    dialog: `You can move ${strFormatList(
+      dirs,
+      ", ",
+      ", or "
+    )} from this room.`,
+    rooms: dirs.map((dir) => generateRoom(dir)),
+  };
+  return newRooms;
+};
 
-    if (dirs.length > 1)
-      str = str.slice(0, i) + str.slice(i).replace(", ", ", or ");
+const generateRoom = (dir) => {
+  const roomContent = ["nothing", "a Skeleton Soldier", "a chest"];
+  const newContent = roomContent[Math.floor(rng() * 3)];
+  let roomDialog = dir
+    ? `You go ${dir} into a new room to find ${newContent}.`
+    : `You enter into a new room to find ${newContent}.`;
+  return {
+    roomDialog: roomDialog,
+    roomContents: newContent,
+    hallways: [],
+  };
+};
 
-    console.log(str);
-  }
-}
-
-`
-you're given an array of directions: left, forward, right.
-you're given a random number between 1, 3, inclusive.
-take a random subset of directions equal to the random number
-and print them out starting from left in clockwise order.
-`
-
-const findHallways2 = () => {
-  const defHalls = ["left", "forward", "right"]
+const generateDirections = () => {
+  const defHalls = ["left", "forward", "right"];
   let num = 1;
   if (rng() < 0.4) num++;
   if (rng() < 0.25) num++;
-  let rand = Math.floor(rng() * 3)
-  console.log(num)
-  
-  if (num === 3)
-    return defHalls
-  else if (num === 1)
-    return defHalls.splice(rand, 1)
-  else{
-    defHalls.splice(rand, 1)
-    return defHalls
+  let rand = Math.floor(rng() * 3);
+
+  if (num === 3) return defHalls;
+  else if (num === 1) return defHalls.splice(rand, 1);
+  else {
+    defHalls.splice(rand, 1);
+    return defHalls;
   }
-}
+};
 
-const findHallways = () => {
-  const defHalls = [
-    { i: 0, dir: "left" },
-    { i: 1, dir: "forward" },
-    { i: 2, dir: "right" },
-  ];
+const strFormatList = (list, sep, junc) => {
+  let str = list.join(sep);
+  let i = str.lastIndexOf(sep);
 
-  let halls = shuffle(defHalls);
-  let num = 1;
-  if (rng() < 0.4) num++;
-  if (rng() < 0.25) num++;
-  console.log(Math.floor(rng() * num))
-  
-  return halls
-    .splice(0, num)
-    .sort((a, b) => a.i - b.i)
-    .map((h) => h.dir);
+  // if there is more than 1 direction, account for
+  // grammar and punctuation of a list
+  if (list.length > 1) str = str.slice(0, i) + str.slice(i).replace(sep, junc);
+  return str;
 };
 
 const shuffle = (array) => {
   let m = array.length,
     t,
     i;
-
   while (m) {
     i = Math.floor(rng() * m--);
-
     t = array[m];
     array[m] = array[i];
     array[i] = t;
   }
-
   return array;
 };
 
-giveMeDirection(1);
+const enterNewRoom = (iDir = null) => {
+  currentRoom = iDir !== null ? currentRoom.newRooms.rooms[iDir] : currentRoom;
+  currentRoom.newRooms = generateNewPaths();
+  console.log(
+    `${currentRoom.roomDialog} ${currentRoom.newRooms.dialog} What will you do?`
+  );
+};
+
+let currentRoom = generateRoom();
+enterNewRoom();

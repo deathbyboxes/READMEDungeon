@@ -70,8 +70,6 @@ body {
   border-left: none;
   left: 50%;
   opacity: 0;
-
-  transition: opacity 1s ease;
 }
 
 #health-mask {
@@ -90,6 +88,4 @@ body {
   z-index: 300;
   opacity: 1;
   background: inherit;
-
-  transition: opacity 1s ease;
 }

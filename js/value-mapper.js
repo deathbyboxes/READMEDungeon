@@ -1,5 +1,3 @@
-console.log('value mapper');
-
 // linearly maps value from the range (a..b) to (c..d)
 function mapRange (value, a, b, c, d) {
   // first map value from (a..b) to (0..1)

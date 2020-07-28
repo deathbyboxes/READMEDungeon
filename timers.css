@@ -1,0 +1,91 @@
+*{
+  box-sizing: border-box;
+}
+
+body {
+  background: black;
+}
+
+#health, #poison {
+  position: absolute;
+  z-index: 400;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 4rem;
+  color: white;
+}
+
+#poison {
+  color: #47FD4E
+}
+
+.wrapper {
+  position: relative; /*for absolute positioning*/
+  /* make it a square for perfect circle */
+  width: 250px;
+  height: 250px;
+
+  margin: 50px auto;
+
+  background: black;
+}
+
+.h-pie, .p-pie {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  /* background: #08C; */
+  border: 5px solid #47FD4E;
+}
+
+.p-pie {
+  /* reset border color */
+  border: 5px solid #FD8E0C;
+}
+
+#health-spinner, #poison-spinner {
+  border-radius: 125px 0 0 125px;
+  z-index: 200;
+  border-right: none;
+  transform-origin: 100% 50%;
+  transition: all ease .5s;
+}
+
+#health-filler {
+  border-radius: 0 125px 125px 0;
+  z-index: 100;
+  border-left: none;
+  left: 50%;
+  opacity: 1;
+}
+
+#poison-filler {
+  border-radius: 0 125px 125px 0;
+  z-index: 100;
+  border-left: none;
+  left: 50%;
+  opacity: 0;
+}
+
+#health-mask {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  z-index: 300;
+  opacity: 0;
+  background: inherit;
+}
+
+#poison-mask {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  z-index: 300;
+  opacity: 1;
+  background: inherit;
+}

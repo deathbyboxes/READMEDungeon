@@ -19,6 +19,10 @@ const generateRoom = (dir) => {
   let roomDialog = dir
     ? `You go ${dir} into a new room to find ${newContent}.`
     : `You enter into a new room to find ${newContent}.`;
+    /*
+    let roomDialog = `You ${dir ? `go ${dir}` : 'enter'} into a new room to find ${newContent}`;
+    --kw
+    */
   return {
     roomDialog: roomDialog,
     roomContents: newContent,
@@ -39,6 +43,16 @@ const generateDirections = () => {
     defHalls.splice(rand, 1);
     return defHalls;
   }
+
+  /*
+  if (num === 1) return defHalls.splice(rand, 1);
+  else {
+    if (num === 2) {
+      defHalls.splice(rand, 1);
+    }
+    return defHalls;
+  }
+  --kw */
 };
 
 const strFormatList = (list, sep, junc) => {

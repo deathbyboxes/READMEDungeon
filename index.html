@@ -4,16 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hello World</title>
+
+    <link rel="stylesheet" href="phm.css">
   </head>
   <body>
     <div id="root"></div>
+      
+      <!-- KINDA UNSUPPORTED CSS ANIMATION -->
+      <div class="wrapper">
+        <div id="phm"></div>
+        <div id="spinner" class="pie"></div>
+        <div id="filler" class="pie"></div>
+        <div id="mask"></div>
+      </div>
+
+
+
+
     <!-- RNG library -->
     <!-- github can be found here https://github.com/davidbau/seedrandom -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
     <!-- component object -->
     <!-- instructions can be found here https://gomakethings.com/a-stateful-component-helper-function-for-vanilla-js/ -->
     <script src="./js/component.js"></script>
+    <!-- value mapping functionality -->
+    <sript src="js/js-map.js"></sript>
     <!-- main script -->
     <script src="./js/index.js"></script>
+    <!-- player health meter script -->
+    <script src="js/player-health-meter.js"></script>
   </body>
 </html>

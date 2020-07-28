@@ -1,0 +1,64 @@
+*{
+  box-sizing: border-box;
+}
+
+body {
+  background: black;
+}
+
+#phm {
+  position: absolute;
+  z-index: 400;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 4rem;
+  color: white;
+}
+
+.wrapper {
+  position: relative; /*for absolute positioning*/
+  /* make it a square for perfect circle */
+  width: 250px;
+  height: 250px;
+
+  margin: auto;
+
+  background: black;
+}
+
+.pie {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  /* background: #08C; */
+  border: 5px solid #47FD4E;
+}
+
+#spinner {
+  border-radius: 125px 0 0 125px;
+  z-index: 200;
+  border-right: none;
+  transform-origin: 100% 50%;
+}
+
+#filler {
+  border-radius: 0 125px 125px 0;
+  z-index: 100;
+  border-left: none;
+  left: 50%;
+  opacity: 1;
+}
+
+#mask {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  z-index: 300;
+  opacity: 0;
+  background: inherit;
+}

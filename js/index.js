@@ -88,3 +88,8 @@ const enterNewRoom = (iDir = null) => {
 
 let currentRoom = generateRoom();
 enterNewRoom();
+
+
+//start poison timer
+//can be moved if necessary
+timers.poison();

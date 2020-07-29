@@ -13,15 +13,15 @@ const timers = {
     const healthMask = document.querySelector('#health-mask');
 
     //update poison time counter
-    PoisonUI.data.time++;
+    effects.poison.counter++;
     //if the player has health
-    if (HealthUI.data.hp > 0) {
+    if (player.hp > 0) {
       //adjust poison visual
-      let poisonAngle = mapRange(PoisonUI.data.time, 0, 6, 0, 360);
+      let poisonAngle = mapRange(effects.poison.counter, 0, effects.poison.spd, 0, 360);
       poisonLeftHalf.style.transform = `rotate(${poisonAngle}deg)`;
     
       //checking for halfway point for poison visual
-      if (PoisonUI.data.time % 6 >= 3) {
+      if (effects.poison.counter % effects.poison.spd >= Math.ceil(effects.poison.spd / 2)) {
         //timeout function to smooth animation
         setTimeout(function(){
           //hide poison mask
@@ -43,15 +43,15 @@ const timers = {
       /*DECREASING HEALTH IS HERE FOR ANIMATION TIMING*/
       /************************************************/
       //decrease player health every six seconds
-      if (PoisonUI.data.time % 6 === 0) {
-        HealthUI.data.hp -= PoisonUI.data.damage;
+      if (effects.poison.counter % effects.poison.spd === 0) {
+        player.hp += effects.poison.dmg;
       }
       //adjust health visual
-      let healthAngle = mapRange(HealthUI.data.hp, 100, 0, 0, 360);
+      let healthAngle = mapRange(player.hp, 100, 0, 0, 360);
       healthLeftHalf.style.transform = `rotate(-${healthAngle}deg)`;
 
       //checking for halfway point for health visual
-      if (HealthUI.data.hp < 50) {
+      if (player.hp < 50) {
         //hide health left half
         healthMask.style.opacity = 1;
         //hide health right half

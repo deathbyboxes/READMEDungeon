@@ -1,11 +1,11 @@
 let PoisonUI = new Component('#poison', {
   data: {
     //timer
-    time: 0,
+    time: effects.poison.counter,
     //damage to player
-    damage: 5,
+    damage: effects.poison.dmg,
     //pause flag
-    isPaused: false
+    isPaused: effects.poison.isPaused
   },
   template: function() {
     return '';

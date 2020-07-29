@@ -1,3 +1,14 @@
+:root {
+  --blue: #00C2FF;
+  --purple: #C451FA;
+  --gold: #E3B204;
+  --green: #47FD4E;
+  --orange: #FD8E0C;
+  --grey: #444444;
+  --black: #000000;
+  --white: #FCFCFC;
+}
+
 *{
   box-sizing: border-box;
 }
@@ -10,22 +21,8 @@ html, body {
 }
 
 body {
-  background: black;
+  background: var(--black);
 }
-
-/* #health {
-  position: absolute;
-  z-index: 400;
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 4rem;
-  color: white;
-} */
 
 .wrapper {
   position: relative; /*for absolute positioning*/
@@ -33,17 +30,10 @@ body {
   width: 100px;
   height: 100px;
 
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-
-  /* margin: 0 auto; */
-
-  background: black;
+  background: var(--black);
 }
 
 .health {
-  /* position: relative; */
   z-index: 1;
   width: 100%;
   height: 100%;
@@ -64,18 +54,16 @@ body {
   position: absolute;
   width: 50%;
   height: 100%;
-  /* background: #08C; */
-  border: 5px solid #47FD4E;
+  border: 5px solid var(--green);
 }
 
 .p-pie {
   /* reset border color */
-  border: 5px solid #FD8E0C;
+  border: 5px solid var(--orange);
 }
 
 #health-spinner, #poison-spinner {
   border-radius: 125px 0 0 125px;
-  /* z-index: 2; */
   border-right: none;
   transform-origin: 100% 50%;
   transition: all ease .5s;
@@ -101,18 +89,16 @@ body {
   width: 50%;
   height: 100%;
   position: absolute;
-  z-index: 2;
   opacity: 0;
-  background: black;
+  background: var(--black);
 }
 
 #poison-mask {
   width: 50%;
   height: 100%;
   position: absolute;
-  z-index: 2;
   opacity: 1;
-  background: black;
+  background: var(--black);
   /* clip left side as to not interfere with the health bar */
   border-top-left-radius: 50%;
   border-bottom-left-radius: 50%;

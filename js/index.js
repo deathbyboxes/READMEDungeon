@@ -92,4 +92,4 @@ enterNewRoom();
 
 //start poison timer
 //can be moved if necessary
-timers.poison();
+const poisonTimer = setInterval(timers.poison, 1000);

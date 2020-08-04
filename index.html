@@ -5,42 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hello World</title>
 
-    <link rel="stylesheet" href="timers.css">
+    <link rel="stylesheet" href="index.css">
   </head>
   <body>
     <div id="root"></div>
       
-      <!-- KINDA UNSUPPORTED CSS ANIMATION -->
-      <div class="wrapper">
-        <div id="health"></div>
-        <div id="health-spinner" class="h-pie"></div>
-        <div id="health-filler" class="h-pie"></div>
-        <div id="health-mask"></div>
-      </div>
+      <div id="health"></div>
+      <div id="poison"></div>
 
       <div class="wrapper">
-        <div id="poison"></div>
-        <div id="poison-spinner" class="p-pie"></div>
-        <div id="poison-filler" class="p-pie"></div>
-        <div id="poison-mask"></div>
+        <div class="health">
+          <div id="health-spinner" class="h-pie"></div>
+          <div id="health-filler" class="h-pie"></div>
+          <div id="health-mask"></div>
+        </div>
+
+        <div class="poison">
+          <div id="poison-spinner" class="p-pie"></div>
+          <div id="poison-filler" class="p-pie"></div>
+          <div id="poison-mask"></div>
+        </div>
       </div>
 
-
+      
+      <!-- inv screen -->
 
 
     <!-- RNG library -->
     <!-- github can be found here https://github.com/davidbau/seedrandom -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+    
     <!-- component object -->
     <!-- instructions can be found here https://gomakethings.com/a-stateful-component-helper-function-for-vanilla-js/ -->
     <script src="./js/component.js"></script>
+    
     <!-- value mapping functionality -->
     <script src="./js/value-mapper.js"></script>
+    
+    <!-- Player object -->
+    <script src="./js/player.js"></script>
+
+    <!-- Effects object -->
+    <script src="./js/effects.js"></script>
+    
+    <!-- player health meter script -->
+    <script src="./js/health-ui.js"></script>
+    
+    <!-- poison timer -->
+    <script src="./js/poison-ui.js"></script>
+
+    <!-- global timers -->
+    <script src="./js/timers.js"></script>
+
     <!-- main script -->
     <script src="./js/index.js"></script>
-    <!-- player health meter script -->
-    <script src="./js/player-health-meter.js"></script>
-    <!-- poison timer -->
-    <script src="./js/poison-timer.js"></script>
   </body>
 </html>

@@ -10,18 +10,17 @@
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!--place container elements in here that need to be referenced to append dynamic elements into-->
+    </div>
 
     <div id="icon-bar"></div>
     
     <!-- RNG library -->
     <!-- github can be found here https://github.com/davidbau/seedrandom -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
-    
-    <!-- Icon component -->
-    <script src="./js/touch-icon.js"></script>
+
     <!-- main script -->
-    <script src="./js/index.js"></script>
-    
+    <script type="module" src="./js/app.js"></script>
   </body>
 </html>

@@ -1,4 +1,12 @@
-const rng = new Math.seedrandom();
+// TODO: this is not a class yet but I plan to convert it to one. -kc 8/6/2020
+
+export const enterNewRoom = (iDir = null) => {
+  currentRoom = iDir !== null ? currentRoom.newRooms.rooms[iDir] : generateRoom();
+  currentRoom.newRooms = generateNewPaths();
+  console.log(
+    `${currentRoom.roomDialog} ${currentRoom.newRooms.dialog} What will you do?`
+  );
+};
 
 const generateNewPaths = () => {
   const dirs = generateDirections();
@@ -54,42 +62,3 @@ const generateDirections = () => {
   }
   --kw */
 };
-
-const strFormatList = (list, sep, junc) => {
-  let str = list.join(sep);
-  let i = str.lastIndexOf(sep);
-
-  // if there is more than 1 direction, account for
-  // grammar and punctuation of a list
-  if (list.length > 1) str = str.slice(0, i) + str.slice(i).replace(sep, junc);
-  return str;
-};
-
-const shuffle = (array) => {
-  let m = array.length,
-    t,
-    i;
-  while (m) {
-    i = Math.floor(rng() * m--);
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
-  }
-  return array;
-};
-
-const enterNewRoom = (iDir = null) => {
-  currentRoom = iDir !== null ? currentRoom.newRooms.rooms[iDir] : currentRoom;
-  currentRoom.newRooms = generateNewPaths();
-  console.log(
-    `${currentRoom.roomDialog} ${currentRoom.newRooms.dialog} What will you do?`
-  );
-};
-
-let currentRoom = generateRoom();
-enterNewRoom();
-
-
-//start poison timer
-//can be moved if necessary
-const poisonTimer = setInterval(timers.poison, 1000);

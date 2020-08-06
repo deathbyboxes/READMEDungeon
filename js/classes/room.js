@@ -1,4 +1,4 @@
-// this is not a class yet but I plan to convert it to one.
+// TODO: this is not a class yet but I plan to convert it to one. -kc 8/6/2020
 
 export const enterNewRoom = (iDir = null) => {
   currentRoom = iDir !== null ? currentRoom.newRooms.rooms[iDir] : generateRoom();

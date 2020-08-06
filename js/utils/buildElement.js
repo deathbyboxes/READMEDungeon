@@ -1,3 +1,10 @@
+/*
+  * This function will build web components (custom or otherwise) using pure javascript
+  * and returns the element built.
+  * @param el - the DOM element you wish to create
+  * @param attrs - an object listing the attributes you wish to add to the element
+  * @param props - properties you wish the element to have that are stored in the element's class 
+*/
 export function buildElement(el, attrs, props) {
   let element = document.createElement(el);
   if (attrs)

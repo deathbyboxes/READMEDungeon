@@ -7,7 +7,7 @@ export default class Player extends Character {
   }
 
   damage(pts) {
-    // TODO: create effect class that has an enum type to avoid comparing strings.
+    // TODO: create effect class that has an enum type to avoid comparing strings. -kc 8/6/2020
     if (this.effects.filter((ef) => ef.type === "impervious").length > 0)
       return;
     pts -= this.def;

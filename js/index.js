@@ -89,7 +89,61 @@ const enterNewRoom = (iDir = null) => {
 let currentRoom = generateRoom();
 enterNewRoom();
 
+// KEVIN TO TEST ICON CLASS
+const playerInfo = {
+  type: 'player',
+  hp: 100,
+  iconImg: 'user'
+}
 
-//start poison timer
-//can be moved if necessary
-const poisonTimer = setInterval(timers.poison, 1000);
+const enemy1Info = {
+  type: 'enemy',
+  hp: 10,
+  atk: 3,
+  spd: 3,
+  isLocked: false,
+  iconImg: 'skull'
+}
+
+const enemy2Info = {
+  type: 'enemy',
+  hp: 10,
+  atk: 3,
+  spd: 3,
+  isLocked: true,
+  iconImg: 'skull'
+}
+
+const chest1Info = {
+  type: 'chest',
+  inv: ['potion'],
+  isLocked: true,
+  iconImg: 'boxes'
+}
+
+const chest2Info = {
+  type: 'chest',
+  inv: ['armor'],
+  isLocked: true,
+  iconImg: 'boxes'
+}
+
+let iconBar = document.querySelector('#icon-bar');
+
+let player = new TouchIcon();
+let enemy1 = new TouchIcon();
+let chest1 = new TouchIcon();
+let enemy2 = new TouchIcon();
+let chest2 = new TouchIcon();
+
+player.setState = playerInfo;
+enemy1.setState = enemy1Info;
+chest1.setState = chest1Info;
+enemy2.setState = enemy2Info;
+chest2.setState = chest2Info;
+
+iconBar.appendChild(player);
+iconBar.appendChild(enemy1);
+iconBar.appendChild(chest1);
+iconBar.appendChild(enemy2);
+iconBar.appendChild(chest2);

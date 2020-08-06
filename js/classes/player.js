@@ -1,9 +1,11 @@
 import Character from "./character.js";
 
 export default class Player extends Character {
-  constructor(name, hp, atk, spd, def) {
-    super(name, hp, atk, spd);
+  constructor(name, hp, atk, spd, icon, def) {
+    super(name, hp, atk, spd, icon);
     this.def = def;
+
+    this._icon = 'user';
   }
 
   damage(pts) {
@@ -13,5 +15,11 @@ export default class Player extends Character {
     pts -= this.def;
     if (pts < 0) pts = 0;
     super.damage(pts);
+  }
+
+  get getInfo() {
+    return {
+      icon: this._icon,
+    };
   }
 }

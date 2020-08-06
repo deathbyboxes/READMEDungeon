@@ -1,6 +1,6 @@
-class TouchIcon extends HTMLElement {
+export default class TouchIcon extends HTMLElement {
   connectedCallback() {
-    if (this._state.type === 'player')
+    if (this._state.icon === 'user')
       this.classList.add('player');
     this.setAttribute('locked',this._state.isLocked);
     this.render();
@@ -33,7 +33,7 @@ class TouchIcon extends HTMLElement {
 
   render() {
     this.innerHTML = `
-      <i class='fas fa-${this._state.iconImg}'></i>
+      <i class='fas fa-${this._state.icon}'></i>
     `
   }
 }

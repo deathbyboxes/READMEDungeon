@@ -31,15 +31,6 @@ class Rand {
     num = max ? Math.floor(num * (max + 1 - min)) + min : num
     return num;
   };
-
-  /*
-    * returns a random number with desired number of fractional and integer parts
-    * @param frac - how many decimals you want the number to have
-    * @param int - how many whole number digits you want the number to have
-  */
-  randomDecimal = (frac, int = 0) => {
-    return +(this._rng() * Math.pow(10,int)).toFixed(frac)
-  };
 }
 
 let rand = new Rand();

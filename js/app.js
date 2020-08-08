@@ -13,8 +13,8 @@ import InfoSection from './components/info-section.js';
 
 // KEVIN TO TEST ICON CLASS
 const Chad = new Player('Chad',100,5,5,0);
-const Delilah = new Enemy('skelton soldier',10,3,3,false);
-const Marco = new Enemy('skelton soldier',10,3,3,true);
+const Delilah = new Enemy('skeleton soldier',10,3,3,false);
+const Marco = new Enemy('skeleton soldier',10,3,3,true);
 
 let iconBar = document.querySelector('#icon-bar');
 iconBar.appendChild(Chad._createIcon);

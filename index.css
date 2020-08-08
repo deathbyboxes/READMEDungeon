@@ -129,12 +129,12 @@ info-section {
   padding: 30px;
 }
 
-.name {
+.icon-name {
   text-transform: uppercase;
   font-size: 1.7rem;
 }
 
-.action {
+.action-button {
   width: 65%;
 
   text-align: center;
@@ -145,4 +145,8 @@ info-section {
 
   padding: 10px 0;
   margin: 0 auto;
+}
+
+.e-hp, .e-atk {
+  font-size: 1.5rem;
 }

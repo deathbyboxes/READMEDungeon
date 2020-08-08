@@ -10,14 +10,17 @@ export default class InfoSection extends HTMLElement {
     super();
   }
 
-  render() {
-    this.innerHTML = `
-      <div class="name">skeleton soldier</div>
-      <div class="stats">
-        <div>ATK: 3</div>
-        <div>SPD: 3</div>
-      </div>
-      <div class="action">Attack</div>`
+  render(content) {
+    if (content) this.innerHTML = content;
+    else this.innerHTML = '';
+      // `
+      // <div class="name"></div>
+      // <div class="e-health"></div>
+      // <div class="stats">
+      //   <div id="atk"></div>
+      //   <div id="spd"></div>
+      // </div>
+      // <div class="action">Attack</div>`
   }
 }
 

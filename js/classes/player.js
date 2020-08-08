@@ -1,4 +1,5 @@
 import Character from "./character.js";
+import buildElement from "../utils/buildElement.js";
 
 export default class Player extends Character {
   constructor(name, hp, atk, spd, icon, def) {
@@ -6,6 +7,9 @@ export default class Player extends Character {
     this.def = def;
 
     this._icon = 'user';
+
+    //build an icon
+    this._createIcon = buildElement('touch-icon', {class: 'player'}, this.getInfo);
   }
 
   damage(pts) {

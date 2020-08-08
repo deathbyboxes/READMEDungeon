@@ -1,20 +1,20 @@
 /*
  * Bootstrap js module
- * only place initilization functions and variables
+ * only place initialization functions and variables
  * within this script. utilize ES6 modules to import
  * and export dependency modules to any new scripts
  * you create.
  */
-
 import Player from './classes/player.js';
 import Enemy from './classes/enemy.js';
 import './components/touch-icon.js';
 import InfoSection from './components/info-section.js';
+import Rand from "./utils/rng.js";
 
 // KEVIN TO TEST ICON CLASS
-const Chad = new Player('Chad',100,5,5,0);
-const Delilah = new Enemy('skeleton soldier',10,3,3,false);
-const Marco = new Enemy('skeleton soldier',10,3,3,true);
+const Chad = new Player('Chad',{hp:100, atk:5, spd:5, def:0});
+const Delilah = new Enemy('skeleton soldier',{hp:10, atk:3, spd:3, isLocked:false});
+const Marco = new Enemy('skeleton soldier',{hp:10, atk:3, spd:3, isLocked:true});
 
 let iconBar = document.querySelector('#icon-bar');
 iconBar.appendChild(Chad._createIcon);
@@ -24,3 +24,16 @@ iconBar.appendChild(Marco._createIcon);
 let footer = document.querySelector('#footer');
 let infoSection = new InfoSection();
 footer.appendChild(infoSection);
+
+// * giving rng a null value will create an near unpredictable seed.
+// * when you've initialized a seed, you cannot 
+Rand.rng = null
+ 
+// * test out attacking features of player and enemy by uncommenting the lines below
+// const p = new Player("Keith", {hp: 100, atk: 5, spd: 7, def: 0});
+// const e = new Enemy("Skeleton Soldier", {hp: 20, atk: 3, spd: 3});
+// e.startAttackTimer(p);
+
+// setInterval(() => {
+//   p.attack(e);
+// }, 5000 - (p._stats.spd * 500));

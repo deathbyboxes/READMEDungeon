@@ -34,8 +34,10 @@ export default class TouchIcon extends HTMLElement {
             <div class="e-atk">ATK: ${this.atk}</div>
             <div class="action-button">Attack</div>`
          
+          //remove old info section
           let oldInfo = document.querySelector('info-section');
           footer.removeChild(oldInfo);
+          //create new info section, append, and render
           let infoSection = new InfoSection();
           footer.appendChild(infoSection);
           infoSection.render(content);

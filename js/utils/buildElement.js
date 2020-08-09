@@ -5,7 +5,7 @@
   * @param attrs - an object listing the attributes you wish to add to the element
   * @param props - properties you wish the element to have that are stored in the element's class 
 */
-export function buildElement(el, attrs, props) {
+export default function buildElement(el, attrs, props) {
   let element = document.createElement(el);
   if (attrs)
     for (let [attr, val] of Object.entries(attrs)) {

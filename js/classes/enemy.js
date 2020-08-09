@@ -1,10 +1,17 @@
 import Character from "./character.js";
+import buildElement from "../utils/buildElement.js";
 
 export default class Enemy extends Character {
-  // TODO: discuss differences enemy class has from generic character class -kc 8/6/2020
   constructor(name, stats) {
     super(name, stats);
     this.attackTimer = null;
+
+    this._icon = 'skull';
+
+    this._isLocked = stats.isLocked;
+
+    //buildIcon()
+    this._elements['createIcon'] = buildElement('touch-icon', {class: 'icon'}, this.getInfo);
   }
 
   startAttackTimer (p) {
@@ -22,4 +29,17 @@ export default class Enemy extends Character {
     this.stopAttackTimer();
     super.destroy();
   }
+
+  get getInfo() {
+    return {
+      name: this._name,
+      hp: this._stats.hp,
+      atk: this._stats.atk,
+      spd: this._stats.spd,
+      icon: this._icon,
+      isLocked: this._isLocked
+    };
+  }
+
+
 }

@@ -1,4 +1,5 @@
 import Character from "./character.js";
+import buildElement from "../utils/buildElement.js";
 
 const armorSlots = {
   head: null,
@@ -12,12 +13,20 @@ const weaponSlots = {
   lHand: null,
   rHand: null
 }
+
 class Player extends Character {
   constructor(name, stats) {
     super(name, stats);
     this._armor = armorSlots;
     this._weapon = weaponSlots;
+
+    this._icon = 'user';
+
+    //build an icon
+    this._elements['createIcon'] = buildElement('touch-icon', {class: 'player'}, this.getInfo);
   }
+
+  
 
   damage(pts) {
     // TODO: create effect class that has an enum type to avoid comparing strings. -kc 8/6/2020
@@ -28,6 +37,12 @@ class Player extends Character {
     super.damage(pts);
   }
 
+  get getInfo() {
+    return {
+      icon: this._icon,
+    };
+  }
+  
   computeStats(item, isEquip) {
     let multi = isEquip ? 1 : -1
     for(const stat of Object.keys(item.stats)) {

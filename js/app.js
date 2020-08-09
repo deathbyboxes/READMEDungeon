@@ -5,10 +5,13 @@
  * and export dependency modules to any new scripts
  * you create.
  */
-
 import Rand from "./utils/rng.js";
-import Player from "./classes/player.js";
-import Enemy from "./classes/enemy.js";
+
+//importing test files
+import '../keith.js';
+import '../kevin.js';
+
+
 
 // * giving rng a null value will create an near unpredictable seed.
 // * when you've initialized a seed, you cannot 

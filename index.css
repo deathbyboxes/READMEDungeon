@@ -113,7 +113,7 @@ touch-icon {
   border-top-right-radius: 50%;
 }
 
-info-section {
+#info-section {
   position: absolute;
   width: 100%;
   height: calc(100% - 60px);

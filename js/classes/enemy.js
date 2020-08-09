@@ -11,7 +11,7 @@ export default class Enemy extends Character {
     this._isLocked = stats.isLocked;
 
     //buildIcon()
-    this._createIcon = buildElement('touch-icon', {class: 'icon'}, this.getInfo);
+    this._elements['createIcon'] = buildElement('touch-icon', {class: 'icon'}, this.getInfo);
   }
 
   startAttackTimer (p) {

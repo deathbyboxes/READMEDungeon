@@ -23,7 +23,7 @@ class Player extends Character {
     this._icon = 'user';
 
     //build an icon
-    this._createIcon = buildElement('touch-icon', {class: 'player'}, this.getInfo);
+    this._elements['createIcon'] = buildElement('touch-icon', {class: 'player'}, this.getInfo);
   }
 
   

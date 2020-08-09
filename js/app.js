@@ -5,25 +5,13 @@
  * and export dependency modules to any new scripts
  * you create.
  */
-import Player from './classes/player.js';
-import Enemy from './classes/enemy.js';
-import './components/touch-icon.js';
-import InfoSection from './components/info-section.js';
 import Rand from "./utils/rng.js";
 
-// KEVIN TO TEST ICON CLASS
-const Chad = new Player('Chad',{hp:100, atk:5, spd:5, def:0});
-const Delilah = new Enemy('skeleton soldier',{hp:10, atk:3, spd:3, isLocked:false});
-const Marco = new Enemy('skeleton soldier',{hp:10, atk:3, spd:3, isLocked:true});
+//importing test files
+import '../keith.js';
+import '../kevin.js';
 
-let iconBar = document.querySelector('#icon-bar');
-iconBar.appendChild(Chad._createIcon);
-iconBar.appendChild(Delilah._createIcon);
-iconBar.appendChild(Marco._createIcon);
 
-let footer = document.querySelector('#footer');
-let infoSection = new InfoSection();
-footer.appendChild(infoSection);
 
 // * giving rng a null value will create an near unpredictable seed.
 // * when you've initialized a seed, you cannot 

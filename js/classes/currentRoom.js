@@ -2,10 +2,18 @@ import Rand from "../utils/rng.js";
 import Enemy from "./enemy.js";
 import Item from "./item.js";
 
+const contentTypes = {
+  enemy: 0,
+  chest: 1,
+  potion: 2,
+  weapon: 3,
+  armor: 4,
+};
+
 class Room {
   constructor(direction = "") {
-    this._direction = direction;
-    this._contents = generateContents();
+    this.direction = direction;
+    this.contentTypes = generateContents();
   }
 }
 
@@ -16,14 +24,19 @@ export class CurrentRoom {
     this._room = room;
     this._connectedRooms = generatePaths();
     this._player = player;
+    this._contents = initContents(this._room.contentTypes);
   }
 }
 
 function generateContents() {
-  let contentLen = Rand.random(4);
+  const contentLen = Rand.random(4);
+  const types = Object.keys(contentTypes);
   let contents = [];
   for (let i = 0; i < contentLen; i++) {
-    let content = null;
+    contents.push({
+      type: contentTypes[types[Rand.random(types.length - 1)]],
+      isFound: false,
+    });
   }
   return contents;
 }

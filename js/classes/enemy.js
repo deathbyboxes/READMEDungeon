@@ -1,6 +1,9 @@
 import Character from "./character.js";
+import { enemies } from "../data/enemies.js";
+import statDelegator from "../utils/statDelegator.js";
+import Rand from "../utils/rng.js";
 
-export default class Enemy extends Character {
+class Enemy extends Character {
   // TODO: discuss differences enemy class has from generic character class -kc 8/6/2020
   constructor(name, stats) {
     super(name, stats);
@@ -23,3 +26,12 @@ export default class Enemy extends Character {
     super.destroy();
   }
 }
+
+export default function generateEnemy () {
+  let enemy = enemies[Rand.random(enemies.length - 1)]
+  let stats = statDelegator({atk: 0, hp: 0, spd: 0}, enemy.pts)
+
+  return new Enemy(enemy.name, stats);
+}
+
+

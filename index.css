@@ -5,6 +5,7 @@
   --green: #47FD4E;
   --orange: #FD8E0C;
   --grey: #444444;
+  --l-grey: #aaaaaa;
   --black: #000000;
   --white: #FCFCFC;
 }
@@ -18,88 +19,134 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+
+  /* background: black; */
 }
-
-body {
-  background: var(--black);
-}
-
-.wrapper {
-  position: relative; /*for absolute positioning*/
-  /* make it a square for perfect circle */
-  width: 100px;
-  height: 100px;
-
-  background: var(--black);
-}
-
-.health {
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-}
-
-.poison {
+#footer {
   position: absolute;
-  top: 12.5%;
-  left: 12.5%;
-  z-index: 2; 
-  width: 75%;
-  height: 75%;
+  bottom: 0;
+  width: 100%;
+  height: 40%;
+}
+
+#icon-bar {
+  width: 100%;
+
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(auto-fit, 20%);
+
+  padding: 10px;
+}
+
+touch-icon {
+  position: relative;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.5rem;
+  color: var(--white);
+
+  background: var(--black);
 
   border-radius: 50%;
 }
 
-.h-pie, .p-pie {
+.player {position: relative;}
+.player::after {
+  content: '';
   position: absolute;
-  width: 50%;
+  right: -15px;
+
+  width: 2px;
   height: 100%;
-  border: 5px solid var(--green);
+
+  background: grey;
 }
 
-.p-pie {
-  /* reset border color */
-  border: 5px solid var(--orange);
+[locked=true] {
+  background: var(--l-grey) !important;
 }
 
-#health-spinner, #poison-spinner {
-  border-radius: 125px 0 0 125px;
-  border-right: none;
-  transform-origin: 100% 50%;
-  transition: all ease .5s;
-}
-
-#health-filler {
-  border-radius: 0 125px 125px 0;
-  z-index: 100;
-  border-left: none;
-  left: 50%;
-  opacity: 1;
-}
-
-#poison-filler {
-  border-radius: 0 125px 125px 0;
-  z-index: 100;
-  border-left: none;
-  left: 50%;
-  opacity: 0;
-}
-
-#health-mask {
-  width: 50%;
-  height: 100%;
+[locked=true]::after {
+  content: '\f023';
   position: absolute;
-  opacity: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: black;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+.active::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  z-index: 2;
+  width: calc(100% + 10px);
+  height: 10px;
+
   background: var(--black);
 }
-
-#poison-mask {
-  width: 50%;
-  height: 100%;
+.active::after {
+  content: '';
   position: absolute;
-  opacity: 1;
+  z-index: -1;
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+
   background: var(--black);
-  /* clip left side as to not interfere with the health bar */
+
+  /* border: 5px solid var(--black); */
   border-top-left-radius: 50%;
-  border-bottom-left-radius: 50%;
+  border-top-right-radius: 50%;
+}
+
+#info-section {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 60px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* align-items: flex-start; */
+
+  color: var(--white);
+  background: black;
+
+  padding: 30px;
+}
+
+.icon-name {
+  text-transform: uppercase;
+  font-size: 1.7rem;
+}
+
+.action-button {
+  width: 65%;
+
+  text-align: center;
+  font-size: 1.7rem;
+  /* font-weight: 300; */
+
+  background: var(--purple);
+
+  padding: 10px 0;
+  margin: 0 auto;
+}
+
+.e-hp, .e-atk {
+  font-size: 1.5rem;
 }

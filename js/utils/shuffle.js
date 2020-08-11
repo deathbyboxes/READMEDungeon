@@ -1,3 +1,5 @@
+import Rand from "../utils/rng.js";
+
 /*
  * This function will randomly shuffle any array using the Fisher-Yates method.
  * This mutates the array in place and returns the newly shuffled array.
@@ -7,7 +9,7 @@
 export default function shuffle(arr) {
   let m = arr.length, t, i;
   while (m) {
-    i = Math.floor(rng() * m--);
+    i = Math.floor(Rand.random() * m--);
     t = arr[m];
     arr[m] = arr[i];
     arr[i] = t;

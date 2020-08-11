@@ -13,7 +13,6 @@ export default function statGen(stats) {
     let max = stats[key] + Rand.random(3);
     min = min <= 0 ? 1 : min;
     max = max >= 100 ? 100 : max;
-    console.log(max, min)
     stats[key] = Rand.random(max, min)
   }
   return stats;

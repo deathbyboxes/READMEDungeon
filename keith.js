@@ -5,14 +5,16 @@
 
 import Player from "./js/classes/player.js";
 import Enemy from "./js/classes/enemy.js";
+import EnterRoom from "./js/classes/currentRoom.js";
 
 const p = new Player("Keith", {hp: 100, atk: 2, spd: 2, def: 0});
 const e = Enemy();
-console.log(e)
 // const sword = new Item("Sword", "weapon", {atk: 10, spd: 3});
 // const helmet = new Item("Helmet", "armor", {def: 5});
 
-e.startAttackTimer();
-setInterval(() => {
-  p.attack(e);
-}, 5000 - (p._stats.spd * 500));
+// e.startAttackTimer();
+// setInterval(() => {
+//   p.attack(e);
+// }, 5000 - (p._stats.spd * 500));
+
+EnterRoom();

@@ -23,7 +23,6 @@ class Enemy extends Character {
   startAttackTimer() {
     let self = this;
     let mappedVal = mapRange(this._stats.spd, 1, 100, 15000, 1000);
-    console.log(this._stats.spd, mappedVal)
     this._attackTimer = setInterval(function () {
       self.attack(Player());
     }, mappedVal);

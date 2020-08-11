@@ -4,6 +4,7 @@ import Rand from "../utils/rng.js";
 import buildElement from "../utils/buildElement.js";
 import statGen from "../utils/statGen.js";
 import mapRange from "../utils/valueMapper.js";
+import Player from "../classes/player.js";
 
 class Enemy extends Character {
   // TODO: discuss differences enemy class has from generic character class -kc 8/6/2020
@@ -19,12 +20,12 @@ class Enemy extends Character {
     this._elements['createIcon'] = buildElement('touch-icon', {class: 'icon'}, this.getInfo);
   }
 
-  startAttackTimer(p) {
+  startAttackTimer() {
     let self = this;
     let mappedVal = mapRange(this._stats.spd, 1, 100, 15000, 1000);
     console.log(this._stats.spd, mappedVal)
     this._attackTimer = setInterval(function () {
-      self.attack(p);
+      self.attack(Player());
     }, mappedVal);
   }
 

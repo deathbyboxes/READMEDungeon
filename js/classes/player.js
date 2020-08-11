@@ -15,6 +15,15 @@ const weaponSlots = {
 };
 
 const invLimit = 5;
+let player = null;
+
+export default function createPlayer(name, stats) {
+  if (!player) {
+    player = new Player(name, stats);
+  }
+
+  return player;
+}
 
 class Player extends Character {
   constructor(name, stats) {
@@ -28,8 +37,6 @@ class Player extends Character {
     //build an icon
     this._elements['createIcon'] = buildElement('touch-icon', {class: 'player'}, this.getInfo);
   }
-
-  
 
   damage(pts) {
     // TODO: create effect class that has an enum type to avoid comparing strings. -kc 8/6/2020
@@ -96,5 +103,3 @@ class Player extends Character {
     }
   }
 }
-
-export default Player;

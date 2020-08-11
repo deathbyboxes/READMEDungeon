@@ -10,7 +10,3 @@ import Rand from "./utils/rng.js";
 //importing test files
 import '../keith.js';
 import '../kevin.js';
-
-// * giving rng a null value will create an near unpredictable seed.
-// * when you've initialized a seed, you cannot 
-Rand.rng = null

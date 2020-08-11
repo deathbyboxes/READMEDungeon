@@ -35,4 +35,7 @@ class Rand {
 
 let rand = new Rand();
 
+// TODO: remove this for production
+rand.rng = null;
+
 export default rand;

@@ -14,15 +14,15 @@ export default class Enemy extends Character {
     this._elements['createIcon'] = buildElement('touch-icon', {class: 'icon'}, this.getInfo);
   }
 
-  startAttackTimer (p) {
+  startAttackTimer(p) {
     let self = this;
-    this.attackTimer = setInterval(function() {
-      self.attack(p)
-    } , 5000 - (this._stats.spd * 500))
+    this._attackTimer = setInterval(function () {
+      self.attack(p);
+    }, 5000 - this._stats.spd * 500);
   }
 
-  stopAttackTimer () {
-    clearInterval(this.attackTimer);
+  stopAttackTimer() {
+    clearInterval(this._attackTimer);
   }
 
   destroy() {

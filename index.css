@@ -193,11 +193,22 @@ touch-icon {
 
 .title {
   font-size: 2rem;
-  margin-top: -35px;
+  margin-top: -40px;
   z-index: 2;
 }
 
+.locked-title {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  border-radius: 50%;
+  background: var(--l-grey);
+
+  opacity: .7;
+}
 .locked-title i {
   position: relative;
   z-index: 1;
@@ -217,5 +228,5 @@ touch-icon {
 
   border-radius: 50%;
 
-  background: var(--l-grey);
+  /* background: var(--l-grey); */
 }

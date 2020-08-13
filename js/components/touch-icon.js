@@ -20,7 +20,9 @@ export default class TouchIcon extends HTMLElement {
       //action icon clicked
       } else {
         //remove all active classes
-        document.querySelector('.icon').classList.remove('active');
+        document.querySelectorAll('.icon').forEach(el => {
+          el.classList.remove('active');
+        })
         //if icon is unlocked
         if (!this.isLocked)
           //add active to clicked action icon

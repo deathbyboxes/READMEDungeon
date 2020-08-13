@@ -13,7 +13,9 @@ export default class TouchIcon extends HTMLElement {
 
     //click listener
     this.addEventListener('click', e => {
-      let footer = document.querySelector('#footer');
+      //grab info section
+      let infoSection = document.querySelector('#info-section');
+
       //player icon clicked
       if (this.icon === 'user') {
         //display user action options
@@ -24,7 +26,7 @@ export default class TouchIcon extends HTMLElement {
           el.classList.remove('active');
         })
         //if icon is unlocked
-        if (!this.isLocked)
+        if (!this.isLocked) {
           //add active to clicked action icon
           this.classList.add('active');
           //display the clicked icon's stats
@@ -32,12 +34,29 @@ export default class TouchIcon extends HTMLElement {
             <div class="icon-name">${this.name}</div>
             <div class="e-hp">HP: ${this.hp}</div>
             <div class="e-atk">ATK: ${this.atk}</div>
-            <div class="action-button">Attack</div>`
+            <div class="action-button">Attack</div>`;
          
-          //create new info section, append, and render
-          let infoSection = document.querySelector('#info-section');
+          //render to info section
           infoSection.innerHTML = content;
-          
+        //if icon is locked
+        } else {
+          //remove blink
+          this.classList.remove('blink');
+
+          //reflow to trigger animation reset
+          void this.offsetWidth;
+
+          //apply blink class
+          this.classList.add('blink');
+
+          //display locked message
+          let content = `
+            <div class="title"><i class="fas fa-lock"></i> This task is LOCKED</div>
+            <div class="sub-title">Complete the available tasks first</div>`
+
+          //render to info section
+          infoSection.innerHTML = content;
+        }
       }
       console.log(this.name);
     });

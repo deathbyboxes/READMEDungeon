@@ -54,8 +54,11 @@ export default class TouchIcon extends HTMLElement {
 
           //display locked message
           let content = `
-            <div class="title"><i class="fas fa-lock"></i> This task is LOCKED</div>
-            <div class="sub-title">Complete the available tasks first</div>`
+            <div class="locked-content">
+              <div class="locked-title"><i class="fas fa-lock"></i></div>
+              <div class="title">LOCKED</div>
+              <div class="sub-title">Complete tasks to unlock</div>
+            </div>`;
 
           //render to info section
           infoSection.innerHTML = content;

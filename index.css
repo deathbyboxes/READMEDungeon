@@ -90,6 +90,9 @@ touch-icon {
   font-size: 1.1rem;
 }
 
+.active {
+  color: var(--purple);
+}
 .active::before {
   content: '';
   position: absolute;
@@ -152,6 +155,15 @@ touch-icon {
   font-size: 1.5rem;
 }
 
+.e-hp {
+  display: flex;
+  justify-content: space-between;
+}
+.e-health-bar {
+  width: 85%;
+  background: var(--purple);
+}
+
 .blink {
   /* background: blue !important; */
   animation: blink .2s 2;
@@ -175,4 +187,3 @@ touch-icon {
   font-size: 2rem;
   color: red;
 }
-

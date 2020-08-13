@@ -32,7 +32,10 @@ export default class TouchIcon extends HTMLElement {
           //display the clicked icon's stats
           let content = `
             <div class="icon-name">${this.name}</div>
-            <div class="e-hp">HP: ${this.hp}</div>
+            <div class="e-hp">
+              <div>HP:</div>
+              <div class="e-health-bar"></div>
+            </div>
             <div class="e-atk">ATK: ${this.atk}</div>
             <div class="action-button">Attack</div>`;
          

@@ -38,6 +38,12 @@ class Player extends Character {
     this._elements['createIcon'] = buildElement('touch-icon', {class: 'player'}, this.getInfo);
   }
 
+  get getInfo() {
+    return {
+      icon: this._icon,
+    };
+  }
+
   damage(pts) {
     // TODO: create effect class that has an enum type to avoid comparing strings. -kc 8/6/2020
     if (this._effects.filter((ef) => ef.type === "impervious").length > 0)
@@ -47,11 +53,6 @@ class Player extends Character {
     super.damage(pts);
   }
 
-  get getInfo() {
-    return {
-      icon: this._icon,
-    };
-  }
   
   computeStats(item, isEquip) {
     let multi = isEquip ? 1 : -1;

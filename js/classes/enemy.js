@@ -2,7 +2,8 @@ import Character from "./character.js";
 import { enemies } from "../data/enemies.js";
 import Rand from "../utils/rng.js";
 import buildElement from "../utils/buildElement.js";
-import statGen from "../utils/statGen.js";
+import dec from "../utils/decimalPlace.js";
+import generateStats from "../utils/generateStats.js";
 import mapRange from "../utils/valueMapper.js";
 import Player from "../classes/player.js";
 
@@ -10,14 +11,19 @@ class Enemy extends Character {
   // TODO: discuss differences enemy class has from generic character class -kc 8/6/2020
   constructor(name, stats) {
     super(name, stats);
+    this._id = dec(Rand.random(), 8);
     this.attackTimer = null;
 
-    this._icon = 'skull';
+    this._icon = "skull";
 
     this._isLocked = stats.isLocked;
 
     //buildIcon()
-    this._elements['createIcon'] = buildElement('touch-icon', {class: 'icon'}, this.getInfo);
+    this._elements["createIcon"] = buildElement(
+      "touch-icon",
+      { class: "icon" },
+      this.getInfo
+    );
   }
 
   startAttackTimer() {
@@ -44,16 +50,13 @@ class Enemy extends Character {
       atk: this._stats.atk,
       spd: this._stats.spd,
       icon: this._icon,
-      isLocked: this._isLocked
+      isLocked: this._isLocked,
     };
   }
 }
 
-export default function generateEnemy () {
-  let enemy = enemies[Rand.random(enemies.length - 1)]
-  let stats = statGen(enemy.stats)
-
+export default function generateEnemy() {
+  let enemy = Object.create(Rand.weightedRandom(enemies));
+  let stats = generateStats(enemy.stats);
   return new Enemy(enemy.name, stats);
 }
-
-

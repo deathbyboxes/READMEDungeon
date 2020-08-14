@@ -11,14 +11,32 @@ export default class TouchIcon extends HTMLElement {
   constructor() {
     super();
 
+    //set an open/close flag for the user menu
+    this._isOpen = false;
+
     //click listener
     this.addEventListener('click', e => {
       //grab info section
       let infoSection = document.querySelector('#info-section');
 
       //player icon clicked
-      if (this.icon === 'user') {
-        //display user action options
+      if (this.icon === 'user') { //display user action options
+        console.log(this._isOpen);
+        //player menu element
+        let playerMenu = document.querySelector('#player-menu');
+        if (!this._isOpen) {
+          //menu item count
+          let menuIconCount = document.querySelectorAll('.menu-item').length;
+          //adjust top of player menu
+          //number of icons x 50px (40px height + 10px margin-bottom)
+          playerMenu.style.top = `-${menuIconCount * 50}px`
+        } else {
+          //revert menu top to 0
+          playerMenu.style.top = '0';
+        }
+        
+        //change open flag
+        this._isOpen = !this._isOpen;
       //action icon clicked
       } else {
         //remove all active classes
@@ -68,6 +86,13 @@ export default class TouchIcon extends HTMLElement {
     });
   }
 
+  set setIcon(icon) {
+    this.icon = icon;
+  }
+
+  set setClass(className) {
+    this.classList.add(className);
+  }
   render() {
     this.innerHTML = `
       <i class='fas fa-${this.icon}'></i>

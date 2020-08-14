@@ -1,4 +1,6 @@
 :root {
+  font-size: 12px;
+
   --blue: #00C2FF;
   --purple: #C451FA;
   --gold: #E3B204;
@@ -19,25 +21,66 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-
-  /* background: black; */
 }
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
 #footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 40%;
+
+  display: flex;
+  flex-direction: column;
+
 }
 
 #icon-bar {
+  position: relative;
   width: 100%;
 
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: repeat(auto-fit, 20%);
 
-  padding: 10px;
+  padding: 0 10px 10px 10px;
 }
+
+/* white background over bottom half to not show icons rising */
+#icon-bar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  z-index: 0;
+  width: 100%;
+  height: calc(50% + 5px);
+
+  background: white;
+}
+
+#player-menu {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  z-index: -1;
+  width: 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  transition: all .5s ease;
+}
+
+
+
+#player-menu touch-icon {
+  margin-bottom: 10px;
+} 
 
 touch-icon {
   position: relative;
@@ -90,9 +133,6 @@ touch-icon {
   font-size: 1.1rem;
 }
 
-.active {
-  color: var(--purple);
-}
 .active::before {
   content: '';
   position: absolute;
@@ -112,22 +152,20 @@ touch-icon {
 
   background: var(--black);
 
-  /* border: 5px solid var(--black); */
   border-top-left-radius: 50%;
   border-top-right-radius: 50%;
 }
 
 #info-section {
-  position: absolute;
   width: 100%;
-  height: calc(100% - 60px);
-
+  flex: 2;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* align-items: flex-start; */
 
   color: var(--white);
+  font-size: 1.8rem;
+
   background: black;
 
   padding: 30px;
@@ -135,24 +173,17 @@ touch-icon {
 
 .icon-name {
   text-transform: uppercase;
-  font-size: 1.7rem;
 }
 
 .action-button {
   width: 65%;
 
   text-align: center;
-  font-size: 1.7rem;
-  /* font-weight: 300; */
 
   background: var(--purple);
 
   padding: 10px 0;
   margin: 0 auto;
-}
-
-.e-hp, .e-atk {
-  font-size: 1.5rem;
 }
 
 .e-hp {
@@ -161,11 +192,10 @@ touch-icon {
 }
 .e-health-bar {
   width: 85%;
-  background: var(--purple);
+  background: var(--green);
 }
 
 .blink {
-  /* background: blue !important; */
   animation: blink .2s 2;
   z-index: 1;
 }
@@ -227,6 +257,6 @@ touch-icon {
   height: calc(100% + 40px);
 
   border-radius: 50%;
-
-  /* background: var(--l-grey); */
 }
+
+ 

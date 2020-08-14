@@ -15,6 +15,15 @@ const weaponSlots = {
 };
 
 const invLimit = 5;
+let player = null;
+
+export default function createPlayer(name, stats) {
+  if (!player) {
+    player = new Player(name, stats);
+  }
+
+  return player;
+}
 
 class Player extends Character {
   constructor(name, stats) {
@@ -95,5 +104,3 @@ class Player extends Character {
     }
   }
 }
-
-export default Player;

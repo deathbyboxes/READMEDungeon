@@ -1,3 +1,5 @@
+import shuffle from "../utils/shuffle.js";
+
 /*
   ! This class replaces the Math.random() method. 
   ! Do not use Math.random() anywhere in the app, instead import this module
@@ -31,8 +33,26 @@ class Rand {
     num = max ? Math.floor(num * (max + 1 - min)) + min : num
     return num;
   };
+
+  /*
+    * returns an item in an array of items with defined weighted odds
+    * @param {Array} items - an array of objects with "weight" properties
+    * return {Object} - an object within the array
+  */
+  weightedRandom(items) {
+    const totWeight = items.reduce((a, c) => a + c.weight, 0);
+    let n = this.random() * totWeight;
+    for (const item of items) {
+      if (n < item.weight)
+        return shuffle(items.filter(t => t.weight === item.weight))[0]
+      n -= item.weight;
+    }
+  }
 }
 
 let rand = new Rand();
+
+// TODO: remove this for production
+rand.rng = null;
 
 export default rand;

@@ -1,28 +1,49 @@
 import Rand from "../utils/rng.js";
 import dec from "../utils/decimalPlace.js";
-import { allObjs } from "../data/allObjs.js";
+import generateEnemy from "./enemy.js";
+import {potions} from "../data/potions.js";
+import {armor} from "../data/armor.js";
+import {weapons} from "../data/weapons.js";
 
 let currentRoom = null;
 
-const contentTypes = {
-  enemy: 0,
-  chest: 1,
-  potion: 2,
-  weapon: 3,
-  armor: 4,
-};
+const roomItems = [
+  {type: "enemy", weight:3},
+  {type: "chest", weight:1},
+]
 
-export default function enterNewRoom (iDir = null) {
-  let oldRoom
+const itemAmt = [
+  {amt: 0, weight:1},
+  {amt: 1, weight:3},
+  {amt: 2, weight:6},
+  {amt: 3, weight:2},
+  {amt: 4, weight:1},
+]
+
+
+const chestItems = [
+  {weight: 2, items:potions},
+  {weight: 1, items:armor},
+  {weight: 1, items:weapons},
+]
+
+const chestAmt = [
+  {amt: 1, weight:4},
+  {amt: 2, weight:6},
+  {amt: 3, weight:3},
+  {amt: 4, weight:2},
+  {amt: 5, weight:1},
+]
+
+export default function enterNewRoom(iDir = null) {
+  let oldRoom;
   if (!currentRoom) {
     currentRoom = new CurrentRoom();
-  }
-  else {
-    oldRoom = currentRoom
+  } else {
+    oldRoom = currentRoom;
     currentRoom = new CurrentRoom(currentRoom._connectedRooms[iDir]);
     oldRoom.destroy();
   }
-  console.log(currentRoom._id)
   return currentRoom;
 }
 
@@ -31,6 +52,7 @@ window.enterNewRoom = enterNewRoom;
 
 class Room {
   constructor(direction = "") {
+    this._id = dec(Rand.random(), 8);
     this.direction = direction;
     this.contentTypes = generateContents();
   }
@@ -42,21 +64,41 @@ class CurrentRoom {
 
     this._room = room;
     this._connectedRooms = generatePaths();
-    this._id = dec(Rand.random(), 8);
-    //this._contents = initContents(this._room.contentTypes);
+    this._contents = initContents(this._room.contentTypes);
   }
 
-  destroy () {
-    console.log(`Destroying old room: ${this._id}`)
+  destroy() {
+    console.log(`Destroying old room: ${this._id}`);
   }
 }
 
+function initContents(contents) {
+  let items = [];
+  for (let item of contents) {
+    if (item.type === 'enemy'){
+      items.push(generateEnemy())
+    } else if (item.type === 'chest') {
+      items.push(generateChest());
+    }
+  }
+  return items;
+}
+
+function generateChest() {
+  const chestSize = Rand.weightedRandom(chestAmt).amt;
+  let contents = [];
+  for (let i = 0; i < chestSize; i++) {
+    contents.push(Rand.weightedRandom(Rand.weightedRandom(chestItems).items))
+  }
+  return contents;
+}
+
 function generateContents() {
-  const contentLen = Rand.random(4);
+  const contentLen = Rand.weightedRandom(itemAmt).amt;
   let contents = [];
   for (let i = 0; i < contentLen; i++) {
     contents.push({
-      type: Rand.weightedRandom(Rand.weightedRandom(allObjs).items),
+      type: Rand.weightedRandom(roomItems).type,
       isFound: false,
     });
   }

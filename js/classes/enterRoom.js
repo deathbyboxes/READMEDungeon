@@ -2,29 +2,30 @@ import Rand from "../utils/rng.js";
 import dec from "../utils/decimalPlace.js";
 import generateEnemy from "./generateEnemy.js";
 import generateChest from "./generateChest.js";
+import generateEffect from "./generateEffect.js";
 
 let currentRoom = null;
 
 const roomItems = [
-  {type: "enemy", weight:3},
-  {type: "chest", weight:1},
-]
+  { type: "enemy", weight: 3 },
+  { type: "chest", weight: 1 },
+];
 
 const itemAmt = [
-  {amt: 0, weight:1},
-  {amt: 1, weight:3},
-  {amt: 2, weight:6},
-  {amt: 3, weight:2},
-  {amt: 4, weight:1},
-]
+  { amt: 0, weight: 1 },
+  { amt: 1, weight: 3 },
+  { amt: 2, weight: 6 },
+  { amt: 3, weight: 2 },
+  { amt: 4, weight: 1 },
+];
 
-export default function enterNewRoom(iDir = null) {
+export default function enterNewRoom(player, iDir = null) {
   let oldRoom;
   if (!currentRoom) {
-    currentRoom = new CurrentRoom();
+    currentRoom = new CurrentRoom(player);
   } else {
     oldRoom = currentRoom;
-    currentRoom = new CurrentRoom(currentRoom._connectedRooms[iDir]);
+    currentRoom = new CurrentRoom(player, currentRoom._connectedRooms[iDir]);
     oldRoom.destroy();
   }
   return currentRoom;
@@ -42,12 +43,24 @@ class Room {
 }
 
 class CurrentRoom {
-  constructor(room) {
+  constructor(player, room) {
     if (!room) room = new Room();
 
     this._room = room;
+    this._player = player;
     this._connectedRooms = generatePaths();
     this._contents = initContents(this._room.contentTypes);
+    this._poison = {
+      name: "Mysterious Gas",
+      interval: 5000,
+      action: (subject) => {
+        subject.damage(2);
+      },
+    };
+
+    setTimeout(() => {
+      this._player.effects.push(generateEffect(this._poison, this._player));
+    }, 10000);
   }
 
   destroy() {
@@ -58,9 +71,9 @@ class CurrentRoom {
 function initContents(contents) {
   let items = [];
   for (let item of contents) {
-    if (item.type === 'enemy'){
-      items.push(generateEnemy())
-    } else if (item.type === 'chest') {
+    if (item.type === "enemy") {
+      items.push(generateEnemy());
+    } else if (item.type === "chest") {
       items.push(generateChest());
     }
   }

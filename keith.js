@@ -15,4 +15,4 @@ const p = new Player("Keith", {hp: 100, atk: 2, spd: 2, def: 0});
 //   p.attack(e);
 // }, 5000 - (p._stats.spd * 500));
 
-EnterRoom();
+EnterRoom(p);

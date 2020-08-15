@@ -32,6 +32,7 @@ export default class Character {
 
   heal(pts) {
     this._stats.hp += pts;
+    `${this._name} heals ${pts} hp and has ${this._stats.hp} health left.`
   }
 
   attack(char) {
@@ -39,5 +40,9 @@ export default class Character {
     char.damage(this._stats.atk - (char.def || 0));
   }
 
-  destroy() {}
+  destroy() {
+    for(let ef of this._effects) {
+      ef.destroy();
+    }
+  }
 }

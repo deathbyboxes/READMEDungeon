@@ -2,9 +2,9 @@ import Rand from "../utils/rng.js";
 import dec from "../utils/decimalPlace.js";
 
 export const itemTypes = {
-  potion: 0,
-  weapon: 1,
-  armor: 2,
+  potion: 'potion',
+  weapon: 'weapon',
+  armor: 'armor',
 };
 
 class Item {
@@ -39,7 +39,7 @@ class Item {
 
 export function generateItem (type) {
   const item = Object.create(Rand.weightedRandom(type.items));
-  const stats = Object.create(item.stats);
+  const stats = Object.create(item.stats || null);
   const effects = Object.create(item.effects || null);
   return new Item(item.name, type.type, stats, effects)
 }

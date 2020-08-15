@@ -2,11 +2,11 @@ import Rand from "../utils/rng.js";
 import dec from "../utils/decimalPlace.js";
 
 export const effectTypes = {
-  poison: 0,
-  regenerate: 1,
-  impervious: 2,
-  invisible: 3,
-  bleed: 4,
+  poison: 'poison',
+  regenerate: 'regenerate',
+  impervious: 'impervious',
+  invisible: 'invisible',
+  bleed: 'bleed',
 };
 
 class Effect {
@@ -14,19 +14,22 @@ class Effect {
     this._name = effect.name;
     this._id = dec(Rand.random(), 8);
     this._type = effectTypes[effect.type];
-    this._interval = effect.interval;
     this._effect = function () {
       effect.action(subject);
     };
-    this._timeout = effect.duration
-      ? setTimeout(this.destroy, effect.duration)
-      : null;
     if (effect.interval)
-      this._interval = setInterval(this._effect, effect.interval);
+    this._interval = setInterval(this._effect, effect.interval);
     else {
       this._effect();
       this._interval = null;
     }
+    this._timeout = effect.duration
+      ? setTimeout(() => {
+        let self = this
+        self.destroy();
+      }, effect.duration)
+      : null;
+    console.log(this._timeout);
   }
 
   get id() {
@@ -40,6 +43,6 @@ class Effect {
   }
 }
 
-export default function generateEffect(effect, subject) {
+export function generateEffect(effect, subject) {
   return new Effect(effect, subject);
 }

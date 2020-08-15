@@ -2,7 +2,7 @@ import Rand from "../utils/rng.js";
 import dec from "../utils/decimalPlace.js";
 import generateEnemy from "./generateEnemy.js";
 import generateChest from "./generateChest.js";
-import generateEffect from "./generateEffect.js";
+import { generateEffect } from "./generateEffect.js";
 
 let currentRoom = null;
 

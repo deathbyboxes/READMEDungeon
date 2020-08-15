@@ -186,12 +186,9 @@ touch-icon {
   margin: 0 auto;
 }
 
-.e-hp {
-  display: flex;
-  justify-content: space-between;
-}
 .e-health-bar {
   width: 85%;
+  height: 30px;
   background: var(--green);
 }
 

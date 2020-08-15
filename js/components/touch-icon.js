@@ -1,10 +1,5 @@
 export default class TouchIcon extends HTMLElement {
   connectedCallback() {
-    if (this.icon === 'user')
-      this.classList.add('player');
-    else
-      this.setAttribute('locked',this.isLocked);
-    
     this.render();
   }
 
@@ -16,81 +11,71 @@ export default class TouchIcon extends HTMLElement {
 
     //click listener
     this.addEventListener('click', e => {
-      //grab info section
-      let infoSection = document.querySelector('#info-section');
+      switch (this.icon) {
+        case 'user': //player
+          //open/close menu
+          let playerMenu = document.querySelector('#player-menu');
+          if (!this._isOpen) {
+            let menuIconCount = document.querySelectorAll('.menu-item').length;
+            playerMenu.style.top = `-${menuIconCount * 50}px`;
+          } else {
+            playerMenu.style.top = '0';
+          }
 
-      //player icon clicked
-      if (this.icon === 'user') { //display user action options
-        //player menu element
-        let playerMenu = document.querySelector('#player-menu');
-        if (!this._isOpen) {
-          //menu item count
-          let menuIconCount = document.querySelectorAll('.menu-item').length;
-          //adjust top of player menu
-          //number of icons x 50px (40px height + 10px margin-bottom)
-          playerMenu.style.top = `-${menuIconCount * 50}px`
-        } else {
-          //revert menu top to 0
-          playerMenu.style.top = '0';
-        }
-        
-        //change open flag
-        this._isOpen = !this._isOpen;
-      //action icon clicked
-      } else {
-        //remove all active classes
-        document.querySelectorAll('.icon').forEach(el => {
-          el.classList.remove('active');
-        })
-        //if icon is unlocked
-        if (!this.isLocked) {
-          //add active to clicked action icon
-          this.classList.add('active');
-          //display the clicked icon's stats
-          let content = `
+          //change open flag
+          this._isOpen = !this._isOpen;
+          break;
+        case 'chest': //chest
+        case 'skull': //enemy
+          /*MIGHT NEED TO MAKE INFO SECTION A WEB COMPONENT THAT TAKES 'info' AS ARGUMENT*/
+
+          //grab info section
+          let infoSection = document.querySelector('#info-section');
+          //generated info
+          let info = '';
+
+          // remove current active class
+          document.querySelectorAll('.icon').forEach(el => {
+            el.classList.remove('active');
+          })
+          // unlocked action
+          if (!this.isLocked) {
+            //add active to clicked action icon
+            this.classList.add('active');
+            //set the content
+            info = `
             <div class="icon-name">${this.name}</div>
-            <div class="e-hp">
-              <div>HP:</div>
-              <div class="e-health-bar"></div>
-            </div>
+            ${/* maybe make health-bar component */''}
+            <div class="e-health-bar"></div>
+            ${/* some stat display for [atk, def, spd] */''}
             <div class="e-atk">ATK: ${this.atk}</div>
+            ${/* how to add an event listener? maybe component? */''}
             <div class="action-button">Attack</div>`;
-         
-          //render to info section
-          infoSection.innerHTML = content;
-        //if icon is locked
-        } else {
-          //remove blink
-          this.classList.remove('blink');
+          // locked action
+          } else {
+            // blink animation on icon
+            this.classList.remove('blink');
+            void this.offsetWidth;
+            this.classList.add('blink');
 
-          //reflow to trigger animation reset
-          void this.offsetWidth;
-
-          //apply blink class
-          this.classList.add('blink');
-
-          //display locked message
-          let content = `
+            // set the content
+            info = `
             <div class="locked-content">
               <div class="locked-title"><i class="fas fa-lock"></i></div>
               <div class="title">LOCKED</div>
               <div class="sub-title">Complete tasks to unlock</div>
             </div>`;
+          }
 
-          //render to info section
-          infoSection.innerHTML = content;
-        }
+          // display information
+          infoSection.innerHTML = info;
+          break;
+        default:
+          console.log(`no action for ${this.icon}`);
       }
     });
   }
 
-  set setIcon(icon) {
-    this.icon = icon;
-  }
-
-  set setClass(className) {
-    this.classList.add(className);
-  }
   render() {
     this.innerHTML = `
       <i class='fas fa-${this.icon}'></i>

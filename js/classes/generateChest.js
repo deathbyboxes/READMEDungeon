@@ -38,8 +38,7 @@ class Chest {
     return {
       name: this._name,
       contents: this._contents,
-      icon: this._icon,
-      isLocked: this._isLocked,
+      icon: this._icon
     };
   }
 }

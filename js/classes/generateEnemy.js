@@ -5,7 +5,7 @@ import buildElement from "../utils/buildElement.js";
 import dec from "../utils/decimalPlace.js";
 import generateStats from "../utils/generateStats.js";
 import mapRange from "../utils/valueMapper.js";
-import Player from "../classes/player.js";
+import Player from "./player.js";
 
 class Enemy extends Character {
   // TODO: discuss differences enemy class has from generic character class -kc 8/6/2020

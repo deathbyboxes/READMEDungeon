@@ -1,9 +1,7 @@
 import Rand from "../utils/rng.js";
 import dec from "../utils/decimalPlace.js";
-import generateEnemy from "./enemy.js";
-import {potions} from "../data/potions.js";
-import {armor} from "../data/armor.js";
-import {weapons} from "../data/weapons.js";
+import generateEnemy from "./generateEnemy.js";
+import generateChest from "./generateChest.js";
 
 let currentRoom = null;
 
@@ -18,21 +16,6 @@ const itemAmt = [
   {amt: 2, weight:6},
   {amt: 3, weight:2},
   {amt: 4, weight:1},
-]
-
-
-const chestItems = [
-  {weight: 2, items:potions},
-  {weight: 1, items:armor},
-  {weight: 1, items:weapons},
-]
-
-const chestAmt = [
-  {amt: 1, weight:4},
-  {amt: 2, weight:6},
-  {amt: 3, weight:3},
-  {amt: 4, weight:2},
-  {amt: 5, weight:1},
 ]
 
 export default function enterNewRoom(iDir = null) {
@@ -82,15 +65,6 @@ function initContents(contents) {
     }
   }
   return items;
-}
-
-function generateChest() {
-  const chestSize = Rand.weightedRandom(chestAmt).amt;
-  let contents = [];
-  for (let i = 0; i < chestSize; i++) {
-    contents.push(Rand.weightedRandom(Rand.weightedRandom(chestItems).items))
-  }
-  return contents;
 }
 
 function generateContents() {

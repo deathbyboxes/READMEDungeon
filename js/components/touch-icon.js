@@ -21,7 +21,6 @@ export default class TouchIcon extends HTMLElement {
 
       //player icon clicked
       if (this.icon === 'user') { //display user action options
-        console.log(this._isOpen);
         //player menu element
         let playerMenu = document.querySelector('#player-menu');
         if (!this._isOpen) {
@@ -82,7 +81,6 @@ export default class TouchIcon extends HTMLElement {
           infoSection.innerHTML = content;
         }
       }
-      console.log(this.name);
     });
   }
 

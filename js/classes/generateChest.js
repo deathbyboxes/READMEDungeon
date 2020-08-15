@@ -21,7 +21,7 @@ const chestAmt = [
 class Chest {
   constructor(contents) {
     this._name = "Chest";
-    this._icon = "boxes";
+    this._icon = "toolbox";
     this._isLocked = false;
     this._contents = contents;
     this._elements = {};

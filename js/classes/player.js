@@ -35,13 +35,20 @@ class Player extends Character {
     this._icon = 'user';
 
     //build an icon
-    this._elements['createIcon'] = buildElement('touch-icon', {class: 'player'}, this.getInfo);
+    this._elements['createIcon'] = buildElement('touch-icon', {class: 'player'}, this.getIcon);
+  
+    //attach icon to icon-bar
+    document.querySelector('#icon-bar').appendChild(this._elements['createIcon']);
   }
 
-  get getInfo() {
+  get getIcon() {
     return {
-      icon: this._icon,
+      icon: this._icon
     };
+  }
+
+  get getStats() {
+    return {...this._stats};
   }
 
   damage(pts) {

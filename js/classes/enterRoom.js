@@ -48,6 +48,8 @@ class CurrentRoom {
     this._room = room;
     this._connectedRooms = generatePaths();
     this._contents = initContents(this._room.contentTypes);
+
+    console.log(this._contents);
   }
 
   destroy() {

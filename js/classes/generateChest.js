@@ -30,6 +30,8 @@ class Chest {
       { class: "icon" },
       this.getInfo
     );
+
+    document.querySelector('#icon-bar').appendChild(this._elements["createIcon"]);
   }
 
   get getInfo() {

@@ -16,7 +16,7 @@ class Enemy extends Character {
 
     this._icon = "skull";
 
-    this._isLocked = stats.isLocked;
+    this._isLocked = false;
 
     //buildIcon()
     this._elements["createIcon"] = buildElement(
@@ -24,6 +24,8 @@ class Enemy extends Character {
       { class: "icon" },
       this.getInfo
     );
+
+    document.querySelector('#icon-bar').appendChild(this._elements["createIcon"]);
   }
 
   startAttackTimer() {

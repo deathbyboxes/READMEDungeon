@@ -15,6 +15,7 @@ class Enemy extends Character {
     this.attackTimer = null;
 
     this._icon = "skull";
+    this._type = 'enemy';
 
     this._isLocked = false;
 
@@ -53,6 +54,7 @@ class Enemy extends Character {
       spd: this._stats.spd,
       icon: this._icon,
       isLocked: this._isLocked,
+      type: this._type
     };
   }
 }

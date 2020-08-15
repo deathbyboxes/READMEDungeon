@@ -17,6 +17,6 @@ export default function buildElement(el, attrs, props) {
     for (let [prop, val] of Object.entries(props)) {
       element[prop] = val;
     }
-
+    
   return element;
 }

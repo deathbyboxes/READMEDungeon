@@ -21,6 +21,7 @@ const chestAmt = [
 class Chest {
   constructor(contents) {
     this._name = "Chest";
+    this._type = "chest"
     this._icon = "toolbox";
     this._isLocked = false;
     this._contents = contents;
@@ -38,7 +39,8 @@ class Chest {
     return {
       name: this._name,
       contents: this._contents,
-      icon: this._icon
+      icon: this._icon,
+      type: this._type
     };
   }
 }

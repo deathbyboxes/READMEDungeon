@@ -47,9 +47,7 @@ class Player extends Character {
   damage(pts) {
     // TODO: create effect class that has an enum type to avoid comparing strings. -kc 8/6/2020
     if (this._effects.filter((ef) => ef.type === "impervious").length > 0)
-      return;
-    pts -= this._stats.def;
-    if (pts < 0) pts = 0;
+      pts = 0;
     super.damage(pts);
   }
 
@@ -63,7 +61,9 @@ class Player extends Character {
   }
 
   usePotion(item) {
-    this._effects.push(...item.effects);
+    for(const ef of item.effects) {
+      this._effects.push(generateEffect(ef, this));
+    }
     this.removeFromInv(item);
   }
 

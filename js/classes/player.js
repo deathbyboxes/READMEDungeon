@@ -20,10 +20,13 @@ let player = null;
 export default function createPlayer(name, stats) {
   if (!player) {
     player = new Player(name, stats);
+    // TODO: remove this before pushing to prod.
+    window.player = player;
   }
 
   return player;
 }
+
 
 class Player extends Character {
   constructor(name, stats) {
@@ -46,7 +49,7 @@ class Player extends Character {
 
   damage(pts) {
     // TODO: create effect class that has an enum type to avoid comparing strings. -kc 8/6/2020
-    if (this._effects.filter((ef) => ef.type === "impervious").length > 0)
+    if (this._effects.find((ef) => ef.type === "impervious"))
       pts = 0;
     super.damage(pts);
   }

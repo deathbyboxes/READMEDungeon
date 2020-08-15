@@ -19,6 +19,14 @@ const itemAmt = [
   { amt: 4, weight: 1 },
 ];
 
+const poison = {
+  name: "Mysterious Gas",
+  interval: 5000,
+  action: (subject) => {
+    subject.damage(2);
+  },
+};
+
 export default function enterNewRoom(player, iDir = null) {
   let oldRoom;
   if (!currentRoom) {
@@ -50,21 +58,21 @@ class CurrentRoom {
     this._player = player;
     this._connectedRooms = generatePaths();
     this._contents = initContents(this._room.contentTypes);
-    this._poison = {
-      name: "Mysterious Gas",
-      interval: 5000,
-      action: (subject) => {
-        subject.damage(2);
-      },
-    };
 
     setTimeout(() => {
-      this._player.effects.push(generateEffect(this._poison, this._player));
+      this._poison = generateEffect(poison, this._player);
+      this._player.effects.push(this._poison);
     }, 10000);
   }
 
   destroy() {
-    console.log(`Destroying old room: ${this._id}`);
+    let i = this._player.effects.findIndex((ef) => ef.id === this._poison.id);
+    if (i >= 0) {
+      this._player.effects[i]?.destroy();
+      this._player.effects.splice(i, 1);
+      console.log(`Destroying old room: ${this._id}`);
+
+    }
   }
 }
 

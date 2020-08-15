@@ -255,4 +255,6 @@ touch-icon {
   border-radius: 50%;
 }
 
- 
+/* action button colors based on types */
+.chest {background: var(--gold);}
+.enemy {background: var(--purple);}

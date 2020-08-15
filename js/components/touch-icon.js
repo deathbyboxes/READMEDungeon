@@ -72,9 +72,9 @@ export default class TouchIcon extends HTMLElement {
         ${/* some stat display for [atk, def, spd] */''}
         <div class="e-atk">ATK: ${this.atk}</div>
         ${/* how to add an event listener? maybe component? */''}
-        <div class="action-button">Attack</div>`;
+        <div class="action-button ${this.type}">Attack</div>`;
       } else {
-        info = `<div class="action-button ${this.name}">Open</div>`;
+        info = `<div class="action-button ${this.type}">Open</div>`;
       }
     // locked action
     } else {

@@ -70,6 +70,12 @@ export default class TouchIcon extends HTMLElement {
           // display information
           infoSection.innerHTML = info;
           break;
+        case 'arrows-alt': //move
+          console.log('The move button was clicked');
+          break;
+        case 'boxes':
+          console.log('The inventory will show up. Make a good display in Figma before trying.');
+          break;
         default:
           console.log(`no action for ${this.icon}`);
       }

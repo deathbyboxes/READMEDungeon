@@ -170,4 +170,12 @@ class Player extends Character {
       if (this._inv[i].id === item.id) return this._inv.splice(i, 1);
     }
   }
+
+  displayHealth() {
+    console.log('hi from display health:player')
+    //attach health-bar to ui
+    // document.querySelector('#icon-name').appendChild(this._elements['health-bar']);
+    // let maxWidth = document.querySelector('#info-section').getBoundingClientRect().width - 60;
+    // this._elements['health-bar'].style.width = mapRange(this._hp, this._maxHealth, 0, maxWidth, 0);
+  }
 }

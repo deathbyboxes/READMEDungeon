@@ -20,13 +20,22 @@ class Enemy extends Character {
     this._isLocked = false;
 
     //buildIcon()
-    this._elements["createIcon"] = buildElement(
-      "touch-icon",
+    this._elements['createIcon'] = buildElement(
+      'touch-icon',
       { class: "icon" },
       this.getInfo
     );
 
-    document.querySelector('#icon-bar').appendChild(this._elements["createIcon"]);
+    //create health bar
+    this._elements['health-bar'] = buildElement(
+      'health-bar',
+      {class: 'health-bar'},
+      {stats: this._stats,
+       maxHp: this._baseStats.hp}
+    )
+
+    document.querySelector('#icon-bar').appendChild(this._elements['createIcon']);
+    // document.querySelector('#icon-name').appendChild(this._elements['health-bar']);
   }
 
   startAttackTimer() {

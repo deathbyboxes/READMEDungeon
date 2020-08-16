@@ -1,11 +1,13 @@
+import mapRange from '../utils/valueMapper.js';
+
 export default class Character {
   constructor(name, stats) {
     this._name = name;
+    this._baseStats = Object.create(stats);
     this._stats = stats;
-    this._baseStats = stats;
 
     this._effects = [];
-    this._elements = {};
+    this._elements = {}; 
   }
 
   get effects() {
@@ -30,7 +32,7 @@ export default class Character {
       console.log("");
     }
     console.log(`${this._name} takes ${pts} damage and has ${this._stats.hp} health left.`);
-    
+    this._elements['health-bar']?.render();
   }
 
   heal(pts) {

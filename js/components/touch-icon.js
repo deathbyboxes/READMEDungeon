@@ -1,4 +1,4 @@
-export default class TouchIcon extends HTMLElement {
+class TouchIcon extends HTMLElement {
   connectedCallback() {
     this.render();
   }
@@ -30,7 +30,14 @@ export default class TouchIcon extends HTMLElement {
         case 'enemy':
           /*MIGHT NEED TO MAKE INFO SECTION A WEB COMPONENT THAT TAKES 'info' AS ARGUMENT*/
 
-          this.displayInfo();
+          //get the enemy
+          let Entity = null;
+          for (let item of Room.getContents) {
+            if (item._id === +this.id) {
+              Entity = item;
+            }
+          }
+          this.displayInfo(Entity);
 
           //event listener for action button
           document.querySelector('.action-button').addEventListener('click', e => {
@@ -44,16 +51,9 @@ export default class TouchIcon extends HTMLElement {
                 break;
               case 'attack':
                 console.log(`${Player._name} started attacking ${this.name}`)
-                let enemy = null;
-                for (let item of Room.getContents) {
-                  if (item._id === +this.id) {
-                    enemy = item;
-                  }
-                }
-
-                Player.attack(enemy);
-                enemy.startAttackTimer();
-                Player.startAttackTimer(enemy);
+                Player.attack(Entity);
+                Entity.startAttackTimer();
+                Player.startAttackTimer(Entity);
             }
           })
           break;
@@ -69,7 +69,7 @@ export default class TouchIcon extends HTMLElement {
     });
   }
 
-  displayInfo() {
+  displayInfo(Entity) {
     //grab info section
     let infoSection = document.querySelector('#info-section');
     //generated info
@@ -87,18 +87,21 @@ export default class TouchIcon extends HTMLElement {
       if (this.type === 'enemy') {
         //set the content
         info = `
-        <div class="icon-name">${this.name}
-          ${/* maybe make health-bar component */''}
-          <div class="e-health-bar"></div>
+        <div id="icon-name">
+          ${this.name}
         </div>
         
         ${/* some stat display for [atk, def, spd] */''}
         <div>
           ATK: ${this.atk}
           SPD: ${this.spd}
+          HP: ${this.hp}
         </div>
         ${/* how to add an event listener? maybe component? */''}
         <div class="action-button ${this.type}">Attack</div>`;
+
+        infoSection.innerHTML = info;
+        document.querySelector('#icon-name').appendChild(Entity._elements['health-bar']);
       } else {
         info = `
           <div class="icon-name">${this.name}</div>
@@ -122,7 +125,7 @@ export default class TouchIcon extends HTMLElement {
       </div>`;
     }
 
-    infoSection.innerHTML = info;
+    
     // append chest items to chest item area?
   }
 

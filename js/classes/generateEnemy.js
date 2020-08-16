@@ -8,7 +8,6 @@ import mapRange from "../utils/valueMapper.js";
 import Player from "./player.js";
 
 class Enemy extends Character {
-  // TODO: discuss differences enemy class has from generic character class -kc 8/6/2020
   constructor(name, stats, unlock) {
     super(name, stats);
     this._id = dec(Rand.random(), 8);

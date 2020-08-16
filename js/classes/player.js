@@ -1,7 +1,7 @@
 import Character from "./character.js";
 import buildElement from "../utils/buildElement.js";
 import Rand from "../utils/rng.js";
-import { generateEffect } from "./generateEffect.js";
+import { effectTypes, generateEffect } from "./generateEffect.js";
 
 const armorSlots = {
   head: null,
@@ -54,8 +54,7 @@ class Player extends Character {
   }
 
   damage(pts) {
-    // TODO: create effect class that has an enum type to avoid comparing strings. -kc 8/6/2020
-    if (this._effects.find((ef) => ef.type === "impervious")) pts = 0;
+    if (this._effects.find((ef) => ef.type === effectTypes.impervious)) pts = 0;
     super.damage(pts);
   }
 

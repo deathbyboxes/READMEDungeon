@@ -9,18 +9,6 @@
 // import { effectTypes } from "./js/classes/generateEffect.js";
 // import generateEnemy from "./js/classes/generateEnemy.js";
 
-<<<<<<< HEAD
-// const p = new Player("Keith", {hp: 100, atk: 2, spd: 2, def: 0});
-// const sword = new Item("Sword", "weapon", {atk: 10, spd: 3});
-// const helmet = new Item("Helmet", "armor", {def: 5});
-
-// e.startAttackTimer();
-// setInterval(() => {
-//   p.attack(e);
-// }, 5000 - (p._stats.spd * 500));
-
-// EnterRoom();
-=======
 // new Player("Keith", {hp: 100, atk: 1, spd: 2, def: 0});
 // window.dagger = generateItem({ type: itemTypes.weapon, items: [
 //   {
@@ -66,4 +54,3 @@
 // window.enemy = generateEnemy();
 
 //EnterRoom(p);
->>>>>>> master

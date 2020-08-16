@@ -61,7 +61,6 @@ class CurrentRoom {
 
     setTimeout(() => {
       this._poison = generateEffect(poison, this._player);
-      this._player.effects.push(this._poison);
     }, 10000);
   }
 

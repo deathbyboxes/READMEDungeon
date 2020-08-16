@@ -75,7 +75,7 @@ class Player extends Character {
         for (const ef of this._weapon[w]?.effects) {
           let chance = ef.chance || 1;
           if (Rand.random() < chance && !char.effects.find(e => e.type)) {
-            char.effects.push(generateEffect(ef, char));
+            generateEffect(ef, char);
           }
         }
       }

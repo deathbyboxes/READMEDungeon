@@ -41,6 +41,14 @@ class Chest {
       isLocked: this._isLocked,
     };
   }
+
+  get isLocked() {
+    return this._isLocked;
+  }
+
+  set isLocked(b) {
+    this._isLocked = b; 
+  }
 }
 
 export default function generateChest() {

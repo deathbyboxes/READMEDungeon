@@ -77,12 +77,12 @@ class CurrentRoom {
 
 function initContents(contents) {
   let items = [];
-  for (let item of contents) {
-    if (item.type === "enemy") {
-      items.push(generateEnemy());
-    } else if (item.type === "chest") {
-      items.push(generateChest());
-    }
+  let item = null;
+  for (let i of contents) {
+    if (i.type === "enemy") item = generateEnemy();
+    else if (i.type === "chest") item = generateChest();
+
+    item.isLocked = items.length === 0 ? false : true;
   }
   return items;
 }

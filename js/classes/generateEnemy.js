@@ -9,7 +9,7 @@ import Player from "./player.js";
 
 class Enemy extends Character {
   // TODO: discuss differences enemy class has from generic character class -kc 8/6/2020
-  constructor(name, stats) {
+  constructor(name, stats, unlock) {
     super(name, stats);
     this._id = dec(Rand.random(), 8);
     this.attackTimer = null;
@@ -17,7 +17,8 @@ class Enemy extends Character {
     this._icon = "skull";
     this._type = 'enemy';
 
-    this._isLocked = false;
+    this._isLocked = stats.isLocked;
+    this._unlock = unlock;
 
     //buildIcon()
     this._elements['createIcon'] = buildElement(
@@ -38,6 +39,14 @@ class Enemy extends Character {
     // document.querySelector('#icon-name').appendChild(this._elements['health-bar']);
   }
 
+  get isLocked() {
+    return this._isLocked;
+  }
+
+  set isLocked(b) {
+    this._isLocked = b; 
+  }
+
   startAttackTimer() {
     let self = this;
     let mappedVal = mapRange(this._stats.spd, 1, 100, 15000, 1000);
@@ -52,6 +61,7 @@ class Enemy extends Character {
 
   destroy() {
     this.stopAttackTimer();
+    this._unlock(this);
     super.destroy();
   }
 
@@ -69,8 +79,8 @@ class Enemy extends Character {
   }
 }
 
-export default function generateEnemy() {
+export default function generateEnemy(unlock) {
   let enemy = Object.create(Rand.weightedRandom(enemies));
   let stats = generateStats(enemy.stats);
-  return new Enemy(enemy.name, stats);
+  return new Enemy(enemy.name, stats, unlock);
 }

@@ -36,6 +36,7 @@ class Player extends Character {
     this._armor = armorSlots;
     this._weapon = weaponSlots;
     this._inv = [];
+    this._attackTimer = null;
 
     this._icon = 'user';
     this._type = 'player';
@@ -99,6 +100,18 @@ class Player extends Character {
     // TODO: create effect class that has an enum type to avoid comparing strings. -kc 8/6/2020
     if (this._effects.find((ef) => ef.type === "impervious")) pts = 0;
     super.damage(pts);
+  }
+
+  startAttackTimer(char) {
+    let self = this;
+    let mappedVal = mapRange(this._stats.spd, 1, 100, 15000, 1000);
+    this._attackTimer = setInterval(function () {
+      self.attack(char);
+    }, mappedVal);
+  }
+
+  stopAttackTimer() {
+    clearInterval(this._attackTimer);
   }
 
   attack(char) {

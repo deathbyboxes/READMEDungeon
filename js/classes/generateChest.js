@@ -20,11 +20,12 @@ const chestAmt = [
 ];
 
 class Chest {
-  constructor(contents) {
+  constructor(contents, unlock) {
     this._name = "Chest";
     this._type = "chest"
     this._icon = "toolbox";
     this._isLocked = false;
+    this._unlock = unlock
     this._contents = contents;
     this._elements = {};
     this._elements["createIcon"] = buildElement(
@@ -44,13 +45,25 @@ class Chest {
       type: this._type
     };
   }
+
+  get isLocked() {
+    return this._isLocked;
+  }
+
+  set isLocked(b) {
+    this._isLocked = b; 
+  }
+
+  destroy () {
+    this._unlock(this);
+  }
 }
 
-export default function generateChest() {
+export default function generateChest(unlock) {
   const chestSize = Rand.weightedRandom(chestAmt).amt;
   let contents = [];
   for (let i = 0; i < chestSize; i++) {
     generateItem(Rand.weightedRandom(chestItems));
   }
-  return new Chest(contents);
+  return new Chest(contents, unlock);
 }

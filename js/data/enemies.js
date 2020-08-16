@@ -1,3 +1,5 @@
+import { effectTypes } from "../classes/generateEffect.js";
+
 export const enemies = [
   {
     name: "Skeleton Soldier",
@@ -39,9 +41,19 @@ export const enemies = [
     name: "Salve Bug",
     weight: 8,
     stats: {
-      hp: 20,
+      hp: 10,
       atk: 5,
-      spd: 10,
+      spd: 75,
+    },
+    effects: {
+      onDestroy: {
+        name: "Salve",
+        type: effectTypes.regenerate,
+        duration: 1000,
+        action: (subject) => {
+          subject.heal(5);
+        },
+      }
     },
   },
 ];

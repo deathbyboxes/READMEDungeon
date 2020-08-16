@@ -97,11 +97,17 @@ class TouchIcon extends HTMLElement {
           SPD: ${this.spd}
           HP: ${this.hp}
         </div>
+
+        <div id="effects">
+         EFFECTS
+        </div>
         ${/* how to add an event listener? maybe component? */''}
         <div class="action-button ${this.type}">Attack</div>`;
 
         infoSection.innerHTML = info;
         document.querySelector('#icon-name').appendChild(Entity._elements['health-bar']);
+        //display effects if any
+        document.querySelector('#effects').append(Entity.effects)
       } else {
         info = `
           <div class="icon-name">${this.name}</div>

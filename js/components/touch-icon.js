@@ -1,3 +1,5 @@
+import {UI} from '../utils/ui.js';
+
 class TouchIcon extends HTMLElement {
   connectedCallback() {
     this.render();
@@ -42,7 +44,7 @@ class TouchIcon extends HTMLElement {
           this.displayInfo(Entity);
 
           //event listener for action button
-          document.querySelector('.action-button').addEventListener('click', e => {
+          UI.actionButton.addEventListener('click', e => {
             let btnTxt = e.target.innerHTML.toLowerCase();
             switch (btnTxt) {
               case 'open':
@@ -73,7 +75,7 @@ class TouchIcon extends HTMLElement {
 
   displayInfo(Entity) {
     //grab info section
-    let infoSection = document.querySelector('#info-section');
+    let infoSection = UI.infoSection;
     //generated info
     let info = '';
     

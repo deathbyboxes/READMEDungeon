@@ -3,6 +3,7 @@ import buildElement from "../utils/buildElement.js";
 import mapRange from "../utils/valueMapper.js";
 import Rand from "../utils/rng.js";
 import { generateEffect } from "./generateEffect.js";
+import { UI } from "../utils/ui.js";
 
 const armorSlots = {
   head: null,
@@ -49,9 +50,9 @@ class Player extends Character {
     
   
     //attach icon to icon-bar
-    document.querySelector('#icon-bar').appendChild(this._elements['createIcon']);
+    UI.iconBar.appendChild(this._elements['createIcon']);
     //attach player menu to icon-bar
-    document.querySelector('#icon-bar').appendChild(this._elements['playerMenu']);
+    UI.iconBar.appendChild(this._elements['playerMenu']);
     //append menu items
     
     this._elements['playerMenu'].appendChild(buildElement('touch-icon',

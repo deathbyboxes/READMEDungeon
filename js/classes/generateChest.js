@@ -4,6 +4,7 @@ import { weapons } from "../data/weapons.js";
 import { itemTypes, generateItem } from "./generateItem.js"
 import buildElement from "../utils/buildElement.js";
 import Rand from "../utils/rng.js";
+import { UI } from "../utils/ui.js";
 
 const chestItems = [
   { weight: 2, type: itemTypes.potion, items: potions },
@@ -34,7 +35,7 @@ class Chest {
       this.getInfo
     );
 
-    document.querySelector('#icon-bar').appendChild(this._elements["createIcon"]);
+    UI.iconBar.appendChild(this._elements["createIcon"]);
   }
 
   get getInfo() {

@@ -33,8 +33,30 @@ export default class TouchIcon extends HTMLElement {
 
           this.displayInfo();
 
-          //event listener for attack button
-          
+          //event listener for action button
+          document.querySelector('.action-button').addEventListener('click', e => {
+            let btnTxt = e.target.innerHTML.toLowerCase();
+            switch (btnTxt) {
+              case 'open':
+                console.log('You opened the chest to find:');
+                for (let item of this.contents) {
+                  console.log(item.name)
+                }
+                break;
+              case 'attack':
+                console.log(`${Player._name} started attacking ${this.name}`)
+                let enemy = null;
+                for (let item of Room.getContents) {
+                  if (item._id === +this.id) {
+                    enemy = item;
+                  }
+                }
+
+                Player.attack(enemy);
+                enemy.startAttackTimer();
+                Player.startAttackTimer(enemy);
+            }
+          })
           break;
         case 'move': //move
           console.log('The move button was clicked');
@@ -63,18 +85,27 @@ export default class TouchIcon extends HTMLElement {
     if (!this.isLocked) {
       //add active to clicked action icon
       this.classList.add('active');
-      if (this.icon === 'skull') {
+      if (this.type === 'enemy') {
         //set the content
         info = `
-        <div class="icon-name">${this.name}</div>
-        ${/* maybe make health-bar component */''}
-        <div class="e-health-bar"></div>
+        <div class="icon-name">${this.name}
+          ${/* maybe make health-bar component */''}
+          <div class="e-health-bar"></div>
+        </div>
+        
         ${/* some stat display for [atk, def, spd] */''}
-        <div class="e-atk">ATK: ${this.atk}</div>
+        <div>
+          ATK: ${this.atk}
+          SPD: ${this.spd}
+        </div>
         ${/* how to add an event listener? maybe component? */''}
         <div class="action-button ${this.type}">Attack</div>`;
       } else {
-        info = `<div class="action-button ${this.type}">Open</div>`;
+        info = `
+          <div class="icon-name">${this.name}</div>
+          ${/* create a div for chest items
+               append to it after created? */''}
+          <div class="action-button ${this.type}">Open</div>`;
       }
     // locked action
     } else {
@@ -93,6 +124,7 @@ export default class TouchIcon extends HTMLElement {
     }
 
     infoSection.innerHTML = info;
+    // append chest items to chest item area?
   }
 
   render() {

@@ -6,7 +6,7 @@
 import Player from "./js/classes/player.js";
 import EnterRoom from "./js/classes/enterRoom.js";
 
-const p = new Player("Keith", {hp: 100, atk: 2, spd: 2, def: 0});
+// const p = new Player("Keith", {hp: 100, atk: 2, spd: 2, def: 0});
 // const sword = new Item("Sword", "weapon", {atk: 10, spd: 3});
 // const helmet = new Item("Helmet", "armor", {def: 5});
 

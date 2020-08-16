@@ -1,5 +1,6 @@
 import Character from "./character.js";
 import buildElement from "../utils/buildElement.js";
+import mapRange from "../utils/valueMapper.js";
 
 const armorSlots = {
   head: null,
@@ -40,6 +41,8 @@ class Player extends Character {
   
     //attach icon to icon-bar
     document.querySelector('#icon-bar').appendChild(this._elements['createIcon']);
+
+    window.Player = this;
   }
 
   get getInfo() {
@@ -53,6 +56,23 @@ class Player extends Character {
     return {...this._stats};
   }
 
+  startAttackTimer(enemy) {
+    let self = this;
+    let mappedVal = mapRange(this._stats.spd, 1, 100, 15000, 1000);
+    this._attackTimer = setInterval(function () {
+      self.attack(enemy);
+    }, mappedVal);
+  }
+
+  stopAttackTimer() {
+    clearInterval(this._attackTimer);
+  }
+
+  destroy() {
+    this.stopAttackTimer();
+    super.destroy();
+  }
+  
   damage(pts) {
     // TODO: create effect class that has an enum type to avoid comparing strings. -kc 8/6/2020
     if (this._effects.filter((ef) => ef.type === "impervious").length > 0)

@@ -54,7 +54,8 @@ class Enemy extends Character {
       spd: this._stats.spd,
       icon: this._icon,
       isLocked: this._isLocked,
-      type: this._type
+      type: this._type,
+      id: this._id
     };
   }
 }

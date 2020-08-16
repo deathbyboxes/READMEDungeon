@@ -30,9 +30,6 @@ export default function enterNewRoom(iDir = null) {
   return currentRoom;
 }
 
-// TODO: remove this before prod push. this is only for dev env
-window.enterNewRoom = enterNewRoom;
-
 class Room {
   constructor(direction = "") {
     this._id = dec(Rand.random(), 8);
@@ -50,6 +47,13 @@ class CurrentRoom {
     this._contents = initContents(this._room.contentTypes);
 
     console.log(this._contents);
+
+    // TODO: remove this before pushing to prod
+    window.Room = this;
+  }
+
+  get getContents() {
+    return this._contents;
   }
 
   destroy() {

@@ -186,7 +186,7 @@ touch-icon {
 }
 
 .e-health-bar {
-  width: 85%;
+  width: 100%;
   height: 30px;
   background: var(--green);
 }

@@ -16,7 +16,7 @@ export default class Character {
       return;
     }
     console.log(`${this._name} takes ${pts} damage and has ${this._stats.hp} health left.`);
-    console.log("")
+    
   }
 
   heal(pts) {
@@ -24,10 +24,15 @@ export default class Character {
   }
 
   attack(char) {
+    
     console.log(
       `${this._name} attacks ${char._name}.`
     );
     char.damage(this._stats.atk);
+    console.log(`${char._name}'s hp: ${char._stats.hp} ///// ${this._name}'s hp: ${this._stats.hp}`);
+    console.log("")
+    if (char._stats.hp <= 0)
+      this.stopAttackTimer(); //when one entity dies, the attacker stops
   }
 
   destroy() {}

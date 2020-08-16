@@ -7,7 +7,7 @@ import enterNewRoom from './js/classes/enterRoom.js';
 
 // KEVIN TO TEST ICON CLASS
 //create a player
-const p = createPlayer('Chad', {hp:100, atk:5, spd:5, def:0});
+const p = createPlayer('Chad', {hp:100, atk:5, spd:1, def:0});
 
 //adding menu icons
 let playerMenu = document.querySelector('#player-menu');

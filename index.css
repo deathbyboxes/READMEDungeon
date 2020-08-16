@@ -62,7 +62,7 @@ html, body {
   background: white;
 }
 
-#player-menu {
+player-menu {
   position: absolute;
   top: 0;
   left: 10px;
@@ -78,7 +78,7 @@ html, body {
 
 
 
-#player-menu touch-icon {
+player-menu touch-icon {
   margin-bottom: 10px;
 } 
 

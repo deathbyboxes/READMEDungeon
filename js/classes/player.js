@@ -44,22 +44,22 @@ class Player extends Character {
     this._elements['createIcon'] = buildElement('touch-icon', 
                                                 {class: 'player'}, 
                                                 this.getInfo);
-    this._elements['playerMenu'] = buildElement('player-menu',
-                                                {id: 'player-menu'},
-                                                {_isOpen: false});
+    // this._elements['playerMenu'] = buildElement('player-menu',
+    //                                             {id: 'player-menu'},
+    //                                             {isOpen: false});
     
   
     //attach icon to icon-bar
     UI.iconBar.appendChild(this._elements['createIcon']);
     //attach player menu to icon-bar
-    UI.iconBar.appendChild(this._elements['playerMenu']);
-    //append menu items
+    UI.iconBar.appendChild(UI.playerMenu);
     
-    this._elements['playerMenu'].appendChild(buildElement('touch-icon',
+    //append menu items
+    UI.playerMenu.appendChild(buildElement('touch-icon',
                                                           {class: 'menu-item'},
                                                           {icon: 'boxes',
                                                            type: 'inv'}));
-    this._elements['playerMenu'].appendChild(buildElement('touch-icon', 
+    UI.playerMenu.appendChild(buildElement('touch-icon', 
                                                           {class: 'menu-item'}, 
                                                           {icon: 'arrows-alt',
                                                            type: 'move'}));
@@ -68,7 +68,7 @@ class Player extends Character {
       'health-bar',
       {class: 'health-bar'},
       {stats: this._stats,
-        maxHp: this._baseStats.hp}
+       maxHp: this._baseStats.hp}
     );
 
     window.Player = this;

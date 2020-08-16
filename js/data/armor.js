@@ -2,6 +2,22 @@ export const armor = [
   {
     name: "Leather Helmet",
     slot: "head",
+    weight: 15,
+    stats: {
+      def: 2,
+    },
+  },
+  {
+    name: "Leather Tunic",
+    slot: "torso",
+    weight: 13,
+    stats: {
+      def: 2,
+    },
+  },
+  {
+    name: "Rusted Helmet",
+    slot: "head",
     weight: 5,
     stats: {
       def: 2,
@@ -18,7 +34,7 @@ export const armor = [
   {
     name: "Amulet of Haste",
     slot: "accessory",
-    weight: 1,
+    weight: 2,
     stats: {
       spd: 5,
     },

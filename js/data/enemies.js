@@ -1,7 +1,7 @@
 export const enemies = [
   {
     name: "Skeleton Soldier",
-    weight: 5,
+    weight: 16,
     stats: {
       hp: 20,
       atk: 5,
@@ -10,7 +10,7 @@ export const enemies = [
   },
   {
     name: "Glib Glob",
-    weight: 8,
+    weight: 20,
     stats: {
       hp: 12,
       atk: 1,
@@ -19,11 +19,29 @@ export const enemies = [
   },
   {
     name: "Ogre",
-    weight: 2,
+    weight: 10,
     stats: {
       hp: 50,
       atk: 15,
       spd: 5,
+    },
+  },
+  {
+    name: "Giant Rat",
+    weight: 17,
+    stats: {
+      hp: 50,
+      atk: 2,
+      spd: 19,
+    },
+  },
+  {
+    name: "Salve Bug",
+    weight: 8,
+    stats: {
+      hp: 20,
+      atk: 5,
+      spd: 10,
     },
   },
 ];

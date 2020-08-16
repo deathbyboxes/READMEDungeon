@@ -4,7 +4,7 @@ import generateEnemy from "./generateEnemy.js";
 import generateChest from "./generateChest.js";
 import { generateEffect } from "./generateEffect.js";
 
-let currentRoom = null;
+export let currentRoom = null;
 
 const roomItems = [
   { type: "enemy", weight: 3 },
@@ -27,7 +27,7 @@ const poison = {
   },
 };
 
-export default function enterNewRoom(player, iDir = null) {
+export function enterNewRoom(player, iDir = null) {
   let oldRoom;
   if (!currentRoom) {
     currentRoom = new CurrentRoom(player);
@@ -77,12 +77,12 @@ class CurrentRoom {
 
 function initContents(contents) {
   let items = [];
-  for (let item of contents) {
-    if (item.type === "enemy") {
-      items.push(generateEnemy());
-    } else if (item.type === "chest") {
-      items.push(generateChest());
-    }
+  let item = null;
+  for (let i of contents) {
+    if (i.type === "enemy") item = generateEnemy();
+    else if (i.type === "chest") item = generateChest();
+
+    item.isLocked = items.length === 0 ? false : true;
   }
   return items;
 }

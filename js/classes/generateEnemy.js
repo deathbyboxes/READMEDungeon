@@ -26,6 +26,14 @@ class Enemy extends Character {
     );
   }
 
+  get isLocked() {
+    return this._isLocked;
+  }
+
+  set isLocked(b) {
+    this._isLocked = b; 
+  }
+
   startAttackTimer() {
     let self = this;
     let mappedVal = mapRange(this._stats.spd, 1, 100, 15000, 1000);

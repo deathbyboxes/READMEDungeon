@@ -17,8 +17,11 @@ export default class Character {
   damage(pts) {
     if (pts > 0) {
       this._stats.hp -= pts;
+      this._elements['health-bar']?.render();
+      console.log('health rendered')
       if (this._stats.hp <= 0) {
         this._stats.hp = 0;
+        this._elements['health-bar']?.render();
         console.log(`${this._name} has perished.`);
         this.destroy();
         return;
@@ -31,8 +34,8 @@ export default class Character {
       console.log(`${this._name} takes no damage.`);
       console.log("");
     }
-    console.log(`${this._name} takes ${pts} damage and has ${this._stats.hp} health left.`);
-    this._elements['health-bar']?.render();
+    // console.log(`${this._name} takes ${pts} damage and has ${this._stats.hp} health left.`);
+    
   }
 
   heal(pts) {

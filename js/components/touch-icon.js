@@ -50,7 +50,7 @@ class TouchIcon extends HTMLElement {
                 }
                 break;
               case 'attack':
-                console.log(`${Player._name} started attacking ${this.name}`)
+                // console.log(`${Player._name} started attacking ${this.name}`)
                 Player.attack(Entity);
                 Entity.startAttackTimer();
                 Player.startAttackTimer(Entity);

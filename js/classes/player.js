@@ -5,10 +5,9 @@ import { effectTypes, generateEffect } from "./generateEffect.js";
 
 const armorSlots = {
   head: null,
-  neck: null,
   torso: null,
-  back: null,
-  ring: null,
+  accessory: null,
+  accessory: null,
 };
 
 const weaponSlots = {
@@ -16,7 +15,7 @@ const weaponSlots = {
   rHand: null,
 };
 
-const invLimit = 5;
+const invLimit = 15;
 let player = null;
 
 export default function createPlayer(name, stats) {

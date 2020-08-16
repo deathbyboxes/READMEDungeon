@@ -17,7 +17,7 @@ export const armor = [
   },
   {
     name: "Amulet of Haste",
-    slot: "neck",
+    slot: "accessory",
     weight: 1,
     stats: {
       spd: 5,

@@ -68,7 +68,7 @@ class CurrentRoom {
   }
 
   get getContents() {
-    return this._room.contents;
+    return this._contents;
   }
 
   destroy() {

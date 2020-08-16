@@ -2,6 +2,7 @@ export default class Character {
   constructor(name, stats) {
     this._name = name;
     this._stats = stats;
+    this._baseStats = stats;
 
     this._effects = [];
     this._elements = {};

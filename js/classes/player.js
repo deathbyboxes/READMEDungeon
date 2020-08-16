@@ -44,9 +44,25 @@ class Player extends Character {
     this._elements['createIcon'] = buildElement('touch-icon', 
                                                 {class: 'player'}, 
                                                 this.getInfo);
+    this._elements['playerMenu'] = buildElement('player-menu',
+                                                {id: 'player-menu'},
+                                                {_isOpen: false});
+    
   
     //attach icon to icon-bar
     document.querySelector('#icon-bar').appendChild(this._elements['createIcon']);
+    //attach player menu to icon-bar
+    document.querySelector('#icon-bar').appendChild(this._elements['playerMenu']);
+    //append menu items
+    
+    this._elements['playerMenu'].appendChild(buildElement('touch-icon',
+                                                          {class: 'menu-item'},
+                                                          {icon: 'boxes',
+                                                           type: 'inv'}));
+    this._elements['playerMenu'].appendChild(buildElement('touch-icon', 
+                                                          {class: 'menu-item'}, 
+                                                          {icon: 'arrows-alt',
+                                                           type: 'move'}));
 
     window.Player = this;
   }

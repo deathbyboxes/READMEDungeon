@@ -6,16 +6,15 @@ export default class TouchIcon extends HTMLElement {
   constructor() {
     super();
 
-    //set an open/close flag for the user menu
-    this._isOpen = false;
-
     //click listener
     this.addEventListener('click', e => {
+      console.log(this.type);
       switch (this.type) {
         case 'player':
           //open/close menu
           let playerMenu = document.querySelector('#player-menu');
-          if (!this._isOpen) {
+          console.log(playerMenu._isOpen)
+          if (!playerMenu._isOpen) {
             let menuIconCount = document.querySelectorAll('.menu-item').length;
             playerMenu.style.top = `-${menuIconCount * 50}px`;
             
@@ -24,7 +23,7 @@ export default class TouchIcon extends HTMLElement {
           }
 
           //change open flag
-          this._isOpen = !this._isOpen;
+          playerMenu._isOpen = !playerMenu._isOpen;
           break;
         //TODO: create function that handles duplicate code for toolbox and skull
         case 'chest':

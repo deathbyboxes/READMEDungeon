@@ -60,15 +60,15 @@ class CurrentRoom {
 
     // TODO: remove this before pushing to prod
     window.Room = this;
+
+    // setTimeout(() => {
+    //   this._poison = generateEffect(poison, this._player);
+    //   this._player.effects.push(this._poison);
+    // }, 10000);
   }
 
   get getContents() {
-    setTimeout(() => {
-      this._poison = generateEffect(poison, this._player);
-      this._player.effects.push(this._poison);
-    }, 10000);
     return this._contents;
-    
   }
 
   destroy() {

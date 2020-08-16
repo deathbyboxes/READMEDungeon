@@ -79,12 +79,21 @@ function initContents(contents) {
   let items = [];
   let item = null;
   for (let i of contents) {
-    if (i.type === "enemy") item = generateEnemy();
-    else if (i.type === "chest") item = generateChest();
+    if (i.type === "enemy") item = generateEnemy(unlockItem);
+    else if (i.type === "chest") item = generateChest(unlockItem);
 
     item.isLocked = items.length === 0 ? false : true;
   }
   return items;
+}
+
+function unlockItem (curItem) {
+  for(const item in this._contents) {
+    if (item.isLocked) {
+      item.isLocked = false;
+      return;
+    }
+  }
 }
 
 function generateContents() {

@@ -1,5 +1,3 @@
-import mapRange from '../utils/valueMapper.js';
-
 export default class Character {
   constructor(name, stats) {
     this._name = name;
@@ -33,9 +31,7 @@ export default class Character {
     } else {
       console.log(`${this._name} takes no damage.`);
       console.log("");
-    }
-    // console.log(`${this._name} takes ${pts} damage and has ${this._stats.hp} health left.`);
-    
+    }  
   }
 
   heal(pts) {

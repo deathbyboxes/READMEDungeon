@@ -36,7 +36,6 @@ class Enemy extends Character {
     )
 
     document.querySelector('#icon-bar').appendChild(this._elements['createIcon']);
-    // document.querySelector('#icon-name').appendChild(this._elements['health-bar']);
   }
 
   get isLocked() {

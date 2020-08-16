@@ -23,8 +23,6 @@ let player = null;
 export default function createPlayer(name, stats) {
   if (!player) {
     player = new Player(name, stats);
-    // TODO: remove this before pushing to prod.
-    window.player = player;
   }
 
   return player;
@@ -71,7 +69,7 @@ class Player extends Character {
       {stats: this._stats,
         maxHp: this._baseStats.hp}
     );
-    
+
     window.Player = this;
   }
 
@@ -193,9 +191,5 @@ class Player extends Character {
 
   displayHealth() {
     console.log('hi from display health:player')
-    //attach health-bar to ui
-    // document.querySelector('#icon-name').appendChild(this._elements['health-bar']);
-    // let maxWidth = document.querySelector('#info-section').getBoundingClientRect().width - 60;
-    // this._elements['health-bar'].style.width = mapRange(this._hp, this._maxHealth, 0, maxWidth, 0);
   }
 }

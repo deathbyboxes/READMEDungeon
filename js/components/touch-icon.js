@@ -29,6 +29,8 @@ class TouchIcon extends HTMLElement {
         case 'enemy':
           /*MIGHT NEED TO MAKE INFO SECTION A WEB COMPONENT THAT TAKES 'info' AS ARGUMENT*/
           
+          //get the player
+          let Player = Room._player;
           //get the enemy
           let Entity = null;
           for (let item of Room.getContents) {

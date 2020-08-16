@@ -27,7 +27,7 @@ const poison = {
   },
 };
 
-export default function enterNewRoom(player, iDir = null) {
+export function enterNewRoom(player, iDir = null) {
   let oldRoom;
   if (!currentRoom) {
     currentRoom = new CurrentRoom(player);

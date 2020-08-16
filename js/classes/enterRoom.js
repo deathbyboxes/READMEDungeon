@@ -2,29 +2,38 @@ import Rand from "../utils/rng.js";
 import dec from "../utils/decimalPlace.js";
 import generateEnemy from "./generateEnemy.js";
 import generateChest from "./generateChest.js";
+import { generateEffect } from "./generateEffect.js";
 
 let currentRoom = null;
 
 const roomItems = [
-  {type: "enemy", weight:3},
-  {type: "chest", weight:1},
-]
+  { type: "enemy", weight: 3 },
+  { type: "chest", weight: 1 },
+];
 
 const itemAmt = [
-  {amt: 0, weight:1},
-  {amt: 1, weight:3},
-  {amt: 2, weight:6},
-  {amt: 3, weight:2},
-  {amt: 4, weight:1},
-]
+  { amt: 0, weight: 1 },
+  { amt: 1, weight: 3 },
+  { amt: 2, weight: 6 },
+  { amt: 3, weight: 2 },
+  { amt: 4, weight: 1 },
+];
 
-export default function enterNewRoom(iDir = null) {
+const poison = {
+  name: "Mysterious Gas",
+  interval: 5000,
+  action: (subject) => {
+    subject.damage(2);
+  },
+};
+
+export default function enterNewRoom(player, iDir = null) {
   let oldRoom;
   if (!currentRoom) {
-    currentRoom = new CurrentRoom();
+    currentRoom = new CurrentRoom(player);
   } else {
     oldRoom = currentRoom;
-    currentRoom = new CurrentRoom(currentRoom._connectedRooms[iDir]);
+    currentRoom = new CurrentRoom(player, currentRoom._connectedRooms[iDir]);
     oldRoom.destroy();
   }
   return currentRoom;
@@ -39,10 +48,11 @@ class Room {
 }
 
 class CurrentRoom {
-  constructor(room) {
+  constructor(player, room) {
     if (!room) room = new Room();
 
     this._room = room;
+    this._player = player;
     this._connectedRooms = generatePaths();
     this._contents = initContents(this._room.contentTypes);
 
@@ -53,20 +63,30 @@ class CurrentRoom {
   }
 
   get getContents() {
+    setTimeout(() => {
+      this._poison = generateEffect(poison, this._player);
+      this._player.effects.push(this._poison);
+    }, 10000);
     return this._contents;
+    
   }
 
   destroy() {
-    console.log(`Destroying old room: ${this._id}`);
+    let i = this._player.effects.findIndex((ef) => ef.id === this._poison.id);
+    if (i >= 0) {
+      this._player.effects[i]?.destroy();
+      this._player.effects.splice(i, 1);
+      console.log(`Destroying old room: ${this._id}`);
+    }
   }
 }
 
 function initContents(contents) {
   let items = [];
   for (let item of contents) {
-    if (item.type === 'enemy'){
-      items.push(generateEnemy())
-    } else if (item.type === 'chest') {
+    if (item.type === "enemy") {
+      items.push(generateEnemy());
+    } else if (item.type === "chest") {
       items.push(generateChest());
     }
   }

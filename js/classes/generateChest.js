@@ -1,13 +1,14 @@
 import { potions } from "../data/potions.js";
 import { armor } from "../data/armor.js";
 import { weapons } from "../data/weapons.js";
+import { itemTypes, generateItem } from "./generateItem.js"
 import buildElement from "../utils/buildElement.js";
 import Rand from "../utils/rng.js";
 
 const chestItems = [
-  { weight: 2, items: potions },
-  { weight: 1, items: armor },
-  { weight: 1, items: weapons },
+  { weight: 2, type: itemTypes.potion, items: potions },
+  { weight: 1, type: itemTypes.armor, items: armor },
+  { weight: 1, type: itemTypes.weapon, items: weapons },
 ];
 
 const chestAmt = [
@@ -49,7 +50,7 @@ export default function generateChest() {
   const chestSize = Rand.weightedRandom(chestAmt).amt;
   let contents = [];
   for (let i = 0; i < chestSize; i++) {
-    contents.push(Rand.weightedRandom(Rand.weightedRandom(chestItems).items));
+    generateItem(Rand.weightedRandom(chestItems));
   }
   return new Chest(contents);
 }

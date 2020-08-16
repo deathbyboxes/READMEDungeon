@@ -1,14 +1,14 @@
 import Rand from "../utils/rng.js";
 import dec from "../utils/decimalPlace.js";
 
-const itemType = {
-  POTION: 0,
-  WEAPON: 1,
-  ARMOR: 2,
+export const itemTypes = {
+  potion: 'potion',
+  weapon: 'weapon',
+  armor: 'armor',
 };
 
-export default class Item {
-  constructor(name, type, stats, effects = []) {
+class Item {
+  constructor(name, type, stats = {}, effects = []) {
     this._name = name;
     this._type = type;
     this._stats = stats;
@@ -35,4 +35,11 @@ export default class Item {
   get id() {
     return this._id;
   }
+}
+
+export function generateItem (type) {
+  const item = Object.create(Rand.weightedRandom(type.items));
+  const stats = Object.create(item.stats || null);
+  const effects = Object.create(item.effects || null);
+  return new Item(item.name, type.type, stats, effects)
 }

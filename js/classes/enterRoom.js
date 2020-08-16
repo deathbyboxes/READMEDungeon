@@ -4,7 +4,7 @@ import generateEnemy from "./generateEnemy.js";
 import generateChest from "./generateChest.js";
 import { generateEffect } from "./generateEffect.js";
 
-let currentRoom = null;
+export let currentRoom = null;
 
 const roomItems = [
   { type: "enemy", weight: 3 },
@@ -27,7 +27,7 @@ const poison = {
   },
 };
 
-export default function enterNewRoom(player, iDir = null) {
+export function enterNewRoom(player, iDir = null) {
   let oldRoom;
   if (!currentRoom) {
     currentRoom = new CurrentRoom(player);

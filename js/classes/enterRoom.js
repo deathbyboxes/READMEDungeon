@@ -71,7 +71,6 @@ class CurrentRoom {
       this._player.effects[i]?.destroy();
       this._player.effects.splice(i, 1);
       console.log(`Destroying old room: ${this._id}`);
-
     }
   }
 }

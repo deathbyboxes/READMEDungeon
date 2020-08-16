@@ -41,6 +41,7 @@ export const weapons = [
       {
         name: "Poison",
         type: effectTypes.poison,
+        chance: 0.33,
         interval: 500,
         duration: 5000,
         action: (subject) => {

@@ -27,7 +27,7 @@ const poison = {
   },
 };
 
-export function enterNewRoom(player, iDir = null) {
+export default function enterNewRoom(player, iDir = null) {
   let oldRoom;
   if (!currentRoom) {
     currentRoom = new CurrentRoom(player);
@@ -68,7 +68,7 @@ class CurrentRoom {
   }
 
   get getContents() {
-    return this._contents;
+    return this._room.contents;
   }
 
   destroy() {
@@ -87,8 +87,9 @@ function initContents(contents) {
   for (let i of contents) {
     if (i.type === "enemy") item = generateEnemy(unlockItem);
     else if (i.type === "chest") item = generateChest(unlockItem);
-
+ 
     item.isLocked = items.length === 0 ? false : true;
+    items.push(item);
   }
   return items;
 }

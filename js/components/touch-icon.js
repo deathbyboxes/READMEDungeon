@@ -8,7 +8,6 @@ class TouchIcon extends HTMLElement {
 
     //click listener
     this.addEventListener('click', e => {
-      console.log(this.type);
       switch (this.type) {
         case 'player':
           //open/close menu
@@ -29,12 +28,15 @@ class TouchIcon extends HTMLElement {
         case 'chest':
         case 'enemy':
           /*MIGHT NEED TO MAKE INFO SECTION A WEB COMPONENT THAT TAKES 'info' AS ARGUMENT*/
-
+          console.log('hi from enemy/chest click')
+          console.log(Room)
           //get the enemy
           let Entity = null;
           for (let item of Room.getContents) {
+            console.log(item)
             if (item._id === +this.id) {
               Entity = item;
+              console.log(item._id)
             }
           }
           this.displayInfo(Entity);

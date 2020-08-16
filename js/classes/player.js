@@ -65,6 +65,13 @@ class Player extends Character {
                                                           {icon: 'arrows-alt',
                                                            type: 'move'}));
 
+    this._elements['health-bar'] = buildElement(
+      'health-bar',
+      {class: 'health-bar'},
+      {stats: this._stats,
+        maxHp: this._baseStats.hp}
+    );
+    
     window.Player = this;
   }
 

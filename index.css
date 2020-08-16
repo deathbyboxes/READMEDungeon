@@ -263,3 +263,8 @@ health-bar {
 /* action button colors based on types */
 .chest {background: var(--gold);}
 .enemy {background: var(--purple);}
+
+#header {
+  background: var(--black);
+  padding: 30px;
+}

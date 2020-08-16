@@ -10,3 +10,5 @@ import './js/components/health-bar.js';
 //create a player
 const p = createPlayer('Chad', {hp:100, atk:5, spd:1, def:0});
 enterNewRoom(p);
+
+document.querySelector('#player-info').appendChild(Player._elements['health-bar']);

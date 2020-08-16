@@ -1,25 +1,35 @@
+
+import { effectTypes } from "../classes/generateEffect.js";
+
 export const potions = [
   {
     name: "Minor Health Vial",
     weight: 8,
-    stats: {
-      hp: 10,
-    },
+    effects: [
+      {
+        name: "Heal",
+        type: effectTypes.regenerate,
+        interval: 1000,
+        duration: 5000,
+        action: (subject) => {
+          subject.heal(2);
+        },
+      }
+    ],
   },
   {
     name: "Major Health Vial",
     weight: 2,
-    stats: {
-      def: 50,
-    },
-  },
-  {
-    name: "Protein Powder",
-    duration: 30000,
-    weight: 3,
-    stats: {
-      def: 5,
-      atk: 5,
-    },
+    effects: [
+      {
+        name: "Heal",
+        type: effectTypes.regenerate,
+        interval: 1000,
+        duration: 5000,
+        action: (subject) => {
+          subject.heal(10);
+        },
+      }
+    ],
   },
 ];

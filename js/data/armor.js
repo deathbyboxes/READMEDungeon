@@ -20,15 +20,15 @@ export const armor = [
     slot: "head",
     weight: 5,
     stats: {
-      def: 2,
+      def: 6,
     },
   },
   {
-    name: "Leather Tunic",
+    name: "Rusted Breastplate",
     slot: "torso",
     weight: 3,
     stats: {
-      def: 2,
+      def: 5,
     },
   },
   {

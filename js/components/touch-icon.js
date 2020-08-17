@@ -36,14 +36,13 @@ class TouchIcon extends HTMLElement {
             let btnTxt = e.target.innerHTML.toLowerCase();
             switch (btnTxt) {
               case 'open':
-                console.log('You opened the chest to find:');
-                console.log(this.contents);
-                for (let item of this.contents) {
-                  console.log(item.name)
+                for (const item of this.contents) {
+                  let div = document.createElement('div');
+                  div.textContent = item.name;
+                  document.querySelector('#contents').append(div);
                 }
                 break;
               case 'attack':
-                // console.log(`${Player._name} started attacking ${this.name}`)
                 Player.attack(Entity);
                 Entity.startAttackTimer();
                 Player.startAttackTimer(Entity);
@@ -106,11 +105,7 @@ class TouchIcon extends HTMLElement {
           <div class="action-button ${this.type}">Open</div>`;
           
           UI.infoSection.innerHTML = info;
-          for (const item of this.contents) {
-            let div = document.createElement('div');
-            div.textContent = item.name;
-            document.querySelector('#contents').append(div);
-          }
+          
       }
     // locked action
     } else {

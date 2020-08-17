@@ -6,7 +6,9 @@
  * you create.
  */
 import Rand from "./utils/rng.js";
+import "./utils/svgLoad.js";
 
 //importing test files
 import '../keith.js';
 import '../kevin.js';
+

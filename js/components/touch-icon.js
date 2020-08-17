@@ -32,7 +32,7 @@ class TouchIcon extends HTMLElement {
           this.displayInfo(Entity);
 
           //event listener for action button
-          UI.actionButton.addEventListener('click', e => {
+          document.querySelector('.action-button').addEventListener('click', e => {
             let btnTxt = e.target.innerHTML.toLowerCase();
             switch (btnTxt) {
               case 'open':
@@ -106,6 +106,7 @@ class TouchIcon extends HTMLElement {
           ${/* create a div for chest items
                append to it after created? */''}
           <div class="action-button ${this.type}">Open</div>`;
+          infoSection.innerHTML = info;
       }
     // locked action
     } else {

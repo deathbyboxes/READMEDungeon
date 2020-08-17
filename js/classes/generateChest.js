@@ -64,7 +64,7 @@ export default function generateChest(unlock) {
   const chestSize = Rand.weightedRandom(chestAmt).amt;
   let contents = [];
   for (let i = 0; i < chestSize; i++) {
-    generateItem(Rand.weightedRandom(chestItems));
+    contents.push(generateItem(Rand.weightedRandom(chestItems)));
   }
   return new Chest(contents, unlock);
 }

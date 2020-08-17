@@ -3,6 +3,7 @@ import { armor } from "../data/armor.js";
 import { weapons } from "../data/weapons.js";
 import { itemTypes, generateItem } from "./generateItem.js"
 import buildElement from "../utils/buildElement.js";
+import dec from "../utils/decimalPlace.js";
 import Rand from "../utils/rng.js";
 import { UI } from "../utils/ui.js";
 
@@ -25,6 +26,7 @@ class Chest {
     this._name = "Chest";
     this._type = "chest"
     this._icon = "toolbox";
+    this._id = dec(Rand.random(), 8);
     this._isLocked = false;
     this._unlock = unlock
     this._contents = contents;
@@ -43,7 +45,8 @@ class Chest {
       name: this._name,
       contents: this._contents,
       icon: this._icon,
-      type: this._type
+      type: this._type,
+      id: this._id
     };
   }
 

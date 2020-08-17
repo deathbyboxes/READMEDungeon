@@ -22,14 +22,14 @@ class TouchIcon extends HTMLElement {
           //get the player
           let Player = Room._player;
           //get the enemy
-          let Entity = null;
-          for (let item of Room.getContents) {
-            
-            if (item._id === +this.id) {
-              Entity = item;
-            }
-          }
-          this.displayInfo(Entity);
+          // let Entity = null;
+          // for (let item of Room.getContents) {
+          //   if (item._id === +this.id) {
+          //     Entity = item;
+          //   }
+          // }
+
+          this.displayInfo();
 
           //event listener for action button
           document.querySelector('.action-button').addEventListener('click', e => {
@@ -37,6 +37,7 @@ class TouchIcon extends HTMLElement {
             switch (btnTxt) {
               case 'open':
                 console.log('You opened the chest to find:');
+                console.log(this.contents);
                 for (let item of this.contents) {
                   console.log(item.name)
                 }
@@ -61,9 +62,7 @@ class TouchIcon extends HTMLElement {
     });
   }
 
-  displayInfo(Entity) {
-    //grab info section
-    let infoSection = UI.infoSection;
+  displayInfo() {
     //generated info
     let info = '';
     
@@ -96,17 +95,22 @@ class TouchIcon extends HTMLElement {
         ${/* how to add an event listener? maybe component? */''}
         <div class="action-button ${this.type}">Attack</div>`;
 
-        infoSection.innerHTML = info;
-        document.querySelector('#icon-name').appendChild(Entity._elements['health-bar']);
+        UI.infoSection.innerHTML = info;
+        document.querySelector('#icon-name').appendChild(this.elements['health-bar']);
         //display effects if any
-        document.querySelector('#effects').append(Entity.effects)
+        document.querySelector('#effects').append(this.effects)
       } else {
         info = `
           <div class="icon-name">${this.name}</div>
-          ${/* create a div for chest items
-               append to it after created? */''}
+          <div id="contents"></div>
           <div class="action-button ${this.type}">Open</div>`;
-          infoSection.innerHTML = info;
+          
+          UI.infoSection.innerHTML = info;
+          for (const item of this.contents) {
+            let div = document.createElement('div');
+            div.textContent = item.name;
+            document.querySelector('#contents').append(div);
+          }
       }
     // locked action
     } else {

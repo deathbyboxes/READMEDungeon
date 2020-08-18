@@ -58,9 +58,7 @@ class CurrentRoom {
 
     console.log(this._contents);
 
-    // TODO: remove this before pushing to prod
-    window.Room = this;
-
+    /* poison works, but not needed for testing phase */
     // setTimeout(() => {
     //   this._poison = generateEffect(poison, this._player);
     //   this._player.effects.push(this._poison);

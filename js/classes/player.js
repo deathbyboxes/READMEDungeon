@@ -41,24 +41,30 @@ class Player extends Character {
     this._type = 'player';
 
     //build an icon
-    this._elements['createIcon'] = buildElement('touch-icon', 
-                                                {class: 'player'}, 
-                                                this.getInfo);
-  
+    this._elements['createIcon'] = buildElement(
+      'touch-icon', 
+      {class: 'player'}, 
+       this.getInfo
+    );
+
     //attach icon to icon-bar
     UI.iconBar.appendChild(this._elements['createIcon']);
     //attach player menu to icon-bar
     UI.iconBar.appendChild(UI.playerMenu);
     
     //append menu items
-    UI.playerMenu.appendChild(buildElement('touch-icon',
-                                           {class: 'menu-item'},
-                                           {icon: 'boxes',
-                                           type: 'inv'}));
-    UI.playerMenu.appendChild(buildElement('touch-icon', 
-                                           {class: 'menu-item'}, 
-                                           {icon: 'arrows-alt',
-                                           type: 'move'}));
+    UI.playerMenu.appendChild(buildElement(
+      'touch-icon',
+      {class: 'menu-item'},
+      {icon: 'boxes',
+       type: 'inv'}
+    ));
+    UI.playerMenu.appendChild(buildElement(
+      'touch-icon', 
+      {class: 'menu-item'}, 
+      {icon: 'arrows-alt',
+       type: 'move'}
+    ));
 
     this._elements['health-bar'] = buildElement(
       'health-bar',

@@ -1,4 +1,5 @@
 import {UI} from '../utils/ui.js';
+import { currentRoom } from '../classes/enterRoom.js';
 
 class TouchIcon extends HTMLElement {
   connectedCallback() {
@@ -18,8 +19,6 @@ class TouchIcon extends HTMLElement {
         case 'chest':
         case 'enemy':
           /*MIGHT NEED TO MAKE INFO SECTION A WEB COMPONENT THAT TAKES 'info' AS ARGUMENT*/
-          
-          
 
           this.displayInfo();
 
@@ -35,6 +34,8 @@ class TouchIcon extends HTMLElement {
                 }
                 break;
               case 'attack':
+                //get the room
+                let Room = currentRoom;
                 //get the player
                 let Player = Room._player;
                 //get the enemy
@@ -126,14 +127,13 @@ class TouchIcon extends HTMLElement {
         <div class="sub-title">Complete tasks to unlock</div>
       </div>`;
     }
-
-    
-    // append chest items to chest item area?
   }
 
   render() {
     this.innerHTML = `
-      <i class='fas fa-${this.icon}'></i>
+      <svg style="margin: 10px; width:55px; height:55px; fill:white;">
+        <use xlink:href="#rmd-${this.icon}" />
+      </svg>
     `
   }
 }

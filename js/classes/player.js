@@ -36,7 +36,7 @@ class Player extends Character {
     this._inv = [];
     this._attackTimer = null;
 
-    this._icon = 'user';
+    this._icon = 'player';
     this._type = 'player';
 
     //build an icon
@@ -55,13 +55,13 @@ class Player extends Character {
     UI.playerMenu.appendChild(buildElement(
       'touch-icon',
       {class: 'menu-item'},
-      {icon: 'boxes',
+      {icon: 'inventory',
        type: 'inv'}
     ));
     UI.playerMenu.appendChild(buildElement(
       'touch-icon', 
       {class: 'menu-item'}, 
-      {icon: 'arrows-alt',
+      {icon: 'move',
        type: 'move'}
     ));
 

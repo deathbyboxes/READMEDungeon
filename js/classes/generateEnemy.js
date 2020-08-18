@@ -15,10 +15,10 @@ class Enemy extends Character {
     this._id = dec(Rand.random(), 8);
     this.attackTimer = null;
 
-    this._icon = "skull";
+    this._icon = "enemy";
     this._type = 'enemy';
 
-    this._isLocked = stats.isLocked;
+    this._isLocked = null;
     this._unlock = unlock;
     this._onEffects = onEffects;
     
@@ -65,7 +65,7 @@ class Enemy extends Character {
   }
 
   destroy() {
-    if(this._onEffects.onDestroy) {
+    if(this._onEffects?.onDestroy) {
       generateEffect(this._onEffects.onDestroy, Player())
     }
     this.stopAttackTimer();

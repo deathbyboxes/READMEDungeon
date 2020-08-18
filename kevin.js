@@ -10,7 +10,7 @@ import {UI} from './js/utils/ui.js';
 
 // KEVIN TO TEST ICON CLASS
 //create a player
-const p = createPlayer('Chad', {hp:100, atk:5, spd:1, def:0});
+const p = createPlayer('Chad', {hp:100, atk:5, spd:50, def:0});
 //player's health bar
 UI.playerInfo.appendChild(p._elements['health-bar']);
 

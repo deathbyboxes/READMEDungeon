@@ -1,10 +1,11 @@
 export default class Character {
   constructor(name, stats) {
     this._name = name;
+    this._baseStats = Object.create(stats);
     this._stats = stats;
 
     this._effects = [];
-    this._elements = {};
+    this._elements = {}; 
   }
 
   get effects() {
@@ -14,8 +15,11 @@ export default class Character {
   damage(pts) {
     if (pts > 0) {
       this._stats.hp -= pts;
+      this._elements['health-bar']?.render();
+      console.log('health rendered')
       if (this._stats.hp <= 0) {
         this._stats.hp = 0;
+        this._elements['health-bar']?.render();
         console.log(`${this._name} has perished.`);
         this.destroy();
         return;
@@ -27,7 +31,7 @@ export default class Character {
     } else {
       console.log(`${this._name} takes no damage.`);
       console.log("");
-    }
+    }  
   }
 
   heal(pts) {
@@ -36,8 +40,15 @@ export default class Character {
   }
 
   attack(char) {
-    console.log(`${this._name} attacks ${char._name}.`);
+    
+    console.log(
+      `${this._name} attacks ${char._name}.`
+    );
     char.damage(this._stats.atk - (char.def || 0));
+    console.log(`${char._name}'s hp: ${char._stats.hp} ///// ${this._name}'s hp: ${this._stats.hp}`);
+    console.log("")
+    if (char._stats.hp <= 0)
+      this.stopAttackTimer(); //when one entity dies, the attacker stops
   }
 
   destroy() {

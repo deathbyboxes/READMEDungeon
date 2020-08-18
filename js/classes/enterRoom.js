@@ -39,9 +39,6 @@ export function enterNewRoom(player, iDir = null) {
   return currentRoom;
 }
 
-// TODO: remove this before prod push. this is only for dev env
-window.enterNewRoom = enterNewRoom;
-
 class Room {
   constructor(direction = "") {
     this._id = dec(Rand.random(), 8);
@@ -59,10 +56,17 @@ class CurrentRoom {
     this._connectedRooms = generatePaths();
     this._contents = initContents(this._room.contentTypes);
 
-    setTimeout(() => {
-      this._poison = generateEffect(poison, this._player);
-      this._player.effects.push(this._poison);
-    }, 10000);
+    console.log(this._contents);
+
+    /* poison works, but not needed for testing phase */
+    // setTimeout(() => {
+    //   this._poison = generateEffect(poison, this._player);
+    //   this._player.effects.push(this._poison);
+    // }, 10000);
+  }
+
+  get getContents() {
+    return this._contents;
   }
 
   destroy() {
@@ -81,8 +85,9 @@ function initContents(contents) {
   for (let i of contents) {
     if (i.type === "enemy") item = generateEnemy(unlockItem);
     else if (i.type === "chest") item = generateChest(unlockItem);
-
+ 
     item.isLocked = items.length === 0 ? false : true;
+    items.push(item);
   }
   return items;
 }

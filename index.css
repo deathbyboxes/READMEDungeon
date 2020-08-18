@@ -32,7 +32,7 @@ html, body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 40%;
+  height: 50%;
 
   display: flex;
   flex-direction: column;
@@ -62,11 +62,11 @@ html, body {
   background: white;
 }
 
-#player-menu {
+player-menu {
   position: absolute;
   top: 0;
   left: 10px;
-  z-index: -1;
+  z-index: 0;
   width: 40px;
 
   display: flex;
@@ -76,9 +76,7 @@ html, body {
   transition: all .5s ease;
 }
 
-
-
-#player-menu touch-icon {
+player-menu touch-icon {
   margin-bottom: 10px;
 } 
 
@@ -157,6 +155,7 @@ touch-icon {
 }
 
 #info-section {
+  z-index: 1;
   width: 100%;
   flex: 2;
   display: flex;
@@ -172,6 +171,7 @@ touch-icon {
 }
 
 .icon-name {
+  position: relative;
   text-transform: uppercase;
 }
 
@@ -180,18 +180,17 @@ touch-icon {
 
   text-align: center;
 
-  background: var(--purple);
-
   padding: 10px 0;
   margin: 0 auto;
 }
 
-.e-hp {
-  display: flex;
-  justify-content: space-between;
-}
-.e-health-bar {
-  width: 85%;
+health-bar {
+  position: relative;
+  /* width: 100%; */
+  height: 15px;
+
+  display: block;
+
   background: var(--green);
 }
 
@@ -259,4 +258,11 @@ touch-icon {
   border-radius: 50%;
 }
 
- 
+/* action button colors based on types */
+.chest {background: var(--gold);}
+.enemy {background: var(--purple);}
+
+#header {
+  background: var(--black);
+  padding: 30px;
+}

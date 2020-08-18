@@ -7,6 +7,7 @@ import generateStats from "../utils/generateStats.js";
 import mapRange from "../utils/valueMapper.js";
 import Player from "./player.js";
 import { generateEffect } from "./generateEffect.js";
+import { UI } from "../utils/ui.js";
 
 class Enemy extends Character {
   constructor(name, stats, onEffects, unlock) {
@@ -15,16 +16,28 @@ class Enemy extends Character {
     this.attackTimer = null;
 
     this._icon = "skull";
+    this._type = 'enemy';
+
     this._isLocked = stats.isLocked;
     this._unlock = unlock;
     this._onEffects = onEffects;
     
     //buildIcon()
-    this._elements["createIcon"] = buildElement(
-      "touch-icon",
+    this._elements['createIcon'] = buildElement(
+      'touch-icon',
       { class: "icon" },
       this.getInfo
     );
+
+    //create health bar
+    this._elements['health-bar'] = buildElement(
+      'health-bar',
+      {class: 'health-bar'},
+      {stats: this._stats,
+       maxHp: this._baseStats.hp}
+    )
+
+    UI.iconBar.appendChild(this._elements['createIcon']);
   }
 
   get onEffects() {
@@ -67,7 +80,10 @@ class Enemy extends Character {
       atk: this._stats.atk,
       spd: this._stats.spd,
       icon: this._icon,
-      isLocked: this._isLocked,
+      type: this._type,
+      id: this._id,
+      elements: this._elements,
+      effects: this._effects
     };
   }
 }

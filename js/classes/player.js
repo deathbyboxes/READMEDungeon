@@ -1,7 +1,9 @@
 import Character from "./character.js";
 import buildElement from "../utils/buildElement.js";
+import mapRange from "../utils/valueMapper.js";
 import Rand from "../utils/rng.js";
 import { effectTypes, generateEffect } from "./generateEffect.js";
+import { UI } from "../utils/ui.js";
 
 const armorSlots = {
   head: null,
@@ -21,8 +23,6 @@ let player = null;
 export default function createPlayer(name, stats) {
   if (!player) {
     player = new Player(name, stats);
-    // TODO: remove this before pushing to prod.
-    window.player = player;
   }
 
   return player;
@@ -36,22 +36,71 @@ class Player extends Character {
     this._inv = [];
     this._attackTimer = null;
 
-    this._icon = "user";
+    this._icon = 'user';
+    this._type = 'player';
 
     //build an icon
-    this._elements["createIcon"] = buildElement(
-      "touch-icon",
-      { class: "player" },
-      this.getInfo
+    this._elements['createIcon'] = buildElement(
+      'touch-icon', 
+      {class: 'player'}, 
+       this.getInfo
+    );
+
+    //attach icon to icon-bar
+    UI.iconBar.appendChild(this._elements['createIcon']);
+    //attach player menu to icon-bar
+    UI.iconBar.appendChild(UI.playerMenu);
+    
+    //append menu items
+    UI.playerMenu.appendChild(buildElement(
+      'touch-icon',
+      {class: 'menu-item'},
+      {icon: 'boxes',
+       type: 'inv'}
+    ));
+    UI.playerMenu.appendChild(buildElement(
+      'touch-icon', 
+      {class: 'menu-item'}, 
+      {icon: 'arrows-alt',
+       type: 'move'}
+    ));
+
+    this._elements['health-bar'] = buildElement(
+      'health-bar',
+      {class: 'health-bar'},
+      {stats: this._stats,
+       maxHp: this._baseStats.hp}
     );
   }
 
   get getInfo() {
     return {
       icon: this._icon,
+      type: this._type
     };
   }
 
+  get getStats() {
+    return {...this._stats};
+  }
+
+  startAttackTimer(enemy) {
+    let self = this;
+    let mappedVal = mapRange(this._stats.spd, 1, 100, 15000, 1000);
+    this._attackTimer = setInterval(function () {
+      self.attack(enemy);
+    }, mappedVal);
+  }
+
+  stopAttackTimer() {
+    clearInterval(this._attackTimer);
+  }
+
+  destroy() {
+    this.stopAttackTimer();
+    super.destroy();
+  }
+  
   damage(pts) {
     if (this._effects.find((ef) => ef.type === effectTypes.impervious)) pts = 0;
     super.damage(pts);
@@ -137,5 +186,9 @@ class Player extends Character {
     for (let i = 0; i > this._inv.length; i++) {
       if (this._inv[i].id === item.id) return this._inv.splice(i, 1);
     }
+  }
+
+  displayHealth() {
+    console.log('hi from display health:player')
   }
 }

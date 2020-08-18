@@ -3,7 +3,9 @@ import { armor } from "../data/armor.js";
 import { weapons } from "../data/weapons.js";
 import { itemTypes, generateItem } from "./generateItem.js"
 import buildElement from "../utils/buildElement.js";
+import dec from "../utils/decimalPlace.js";
 import Rand from "../utils/rng.js";
+import { UI } from "../utils/ui.js";
 
 const chestItems = [
   { weight: 2, type: itemTypes.potion, items: potions },
@@ -22,7 +24,9 @@ const chestAmt = [
 class Chest {
   constructor(contents, unlock) {
     this._name = "Chest";
-    this._icon = "boxes";
+    this._type = "chest"
+    this._icon = "toolbox";
+    this._id = dec(Rand.random(), 8);
     this._isLocked = false;
     this._unlock = unlock
     this._contents = contents;
@@ -32,6 +36,8 @@ class Chest {
       { class: "icon" },
       this.getInfo
     );
+
+    UI.iconBar.appendChild(this._elements["createIcon"]);
   }
 
   get getInfo() {
@@ -39,7 +45,8 @@ class Chest {
       name: this._name,
       contents: this._contents,
       icon: this._icon,
-      isLocked: this._isLocked,
+      type: this._type,
+      id: this._id
     };
   }
 
@@ -60,7 +67,7 @@ export default function generateChest(unlock) {
   const chestSize = Rand.weightedRandom(chestAmt).amt;
   let contents = [];
   for (let i = 0; i < chestSize; i++) {
-    generateItem(Rand.weightedRandom(chestItems));
+    contents.push(generateItem(Rand.weightedRandom(chestItems)));
   }
   return new Chest(contents, unlock);
 }

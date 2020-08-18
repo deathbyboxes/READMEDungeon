@@ -15,7 +15,7 @@ class Enemy extends Character {
     this._id = dec(Rand.random(), 8);
     this.attackTimer = null;
 
-    this._icon = "skull";
+    this._icon = "enemy";
     this._type = 'enemy';
 
     this._isLocked = stats.isLocked;

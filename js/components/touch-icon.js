@@ -126,14 +126,13 @@ class TouchIcon extends HTMLElement {
         <div class="sub-title">Complete tasks to unlock</div>
       </div>`;
     }
-
-    
-    // append chest items to chest item area?
   }
 
   render() {
     this.innerHTML = `
-      <i class='fas fa-${this.icon}'></i>
+      <svg style="margin: 10px; width:55px; height:55px; fill:white;">
+        <use xlink:href="#rmd-${this.icon}" />
+      </svg>
     `
   }
 }

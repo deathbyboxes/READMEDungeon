@@ -25,7 +25,7 @@ class Chest {
   constructor(contents, unlock) {
     this._name = "Chest";
     this._type = "chest"
-    this._icon = "toolbox";
+    this._icon = "chest";
     this._id = dec(Rand.random(), 8);
     this._isLocked = false;
     this._unlock = unlock

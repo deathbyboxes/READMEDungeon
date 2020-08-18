@@ -27,7 +27,7 @@ class Chest {
     this._type = "chest"
     this._icon = "chest";
     this._id = dec(Rand.random(), 8);
-    this._isLocked = false;
+    this._isLocked = null;
     this._unlock = unlock
     this._contents = contents;
     this._elements = {};

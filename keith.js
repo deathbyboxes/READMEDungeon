@@ -4,34 +4,21 @@
 // * just uncomment and run locally. view information in the console logs
 
 // import Player from "./js/classes/player.js";
-// import EnterRoom from "./js/classes/enterRoom.js";
+// import {enterNewRoom} from "./js/classes/enterRoom.js";
 // import { itemTypes, generateItem } from "./js/classes/generateItem.js";
 // import { effectTypes } from "./js/classes/generateEffect.js";
 // import generateEnemy from "./js/classes/generateEnemy.js";
 
-// new Player("Keith", {hp: 100, atk: 1, spd: 2, def: 0});
+// new Player("Keith", {hp: 100, atk: 3, spd: 2, def: 0});
 // window.dagger = generateItem({ type: itemTypes.weapon, items: [
 //   {
-//     name: "Nightshade Dagger",
-//     type: itemTypes.weapon,
-//     weight: 2,
+//     name: "Basic Sword",
 //     hands: 1,
+//     weight: 5,
 //     stats: {
-//       atk: 1,
-//       spd: 3,
+//       atk: 5,
+//       spd: 2,
 //     },
-//     effects: [
-//       {
-//         name: "Poison",
-//         type: effectTypes.poison,
-//         chance: 0.33,
-//         interval: 500,
-//         duration: 5000,
-//         action: (subject) => {
-//           subject.damage(1);
-//         }
-//       },
-//     ],
 //   },
 // ] },);
 // window.health = generateItem({ type: itemTypes.potion, items: [
@@ -51,6 +38,6 @@
 //     ],
 //   },
 // ] },);
-// window.enemy = generateEnemy();
+// window.enemy = generateEnemy(true);
 
 //EnterRoom(p);

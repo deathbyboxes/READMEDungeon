@@ -2,15 +2,14 @@ import Character from "./character.js";
 import buildElement from "../utils/buildElement.js";
 import mapRange from "../utils/valueMapper.js";
 import Rand from "../utils/rng.js";
-import { generateEffect } from "./generateEffect.js";
+import { effectTypes, generateEffect } from "./generateEffect.js";
 import { UI } from "../utils/ui.js";
 
 const armorSlots = {
   head: null,
-  neck: null,
   torso: null,
-  back: null,
-  ring: null,
+  accessory: null,
+  accessory: null,
 };
 
 const weaponSlots = {
@@ -18,7 +17,7 @@ const weaponSlots = {
   rHand: null,
 };
 
-const invLimit = 5;
+const invLimit = 15;
 let player = null;
 
 export default function createPlayer(name, stats) {
@@ -103,8 +102,7 @@ class Player extends Character {
   }
   
   damage(pts) {
-    // TODO: create effect class that has an enum type to avoid comparing strings. -kc 8/6/2020
-    if (this._effects.find((ef) => ef.type === "impervious")) pts = 0;
+    if (this._effects.find((ef) => ef.type === effectTypes.impervious)) pts = 0;
     super.damage(pts);
   }
 
@@ -126,7 +124,7 @@ class Player extends Character {
         for (const ef of this._weapon[w]?.effects) {
           let chance = ef.chance || 1;
           if (Rand.random() < chance && !char.effects.find(e => e.type)) {
-            char.effects.push(generateEffect(ef, char));
+            generateEffect(ef, char);
           }
         }
       }

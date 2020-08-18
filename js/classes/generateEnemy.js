@@ -6,11 +6,11 @@ import dec from "../utils/decimalPlace.js";
 import generateStats from "../utils/generateStats.js";
 import mapRange from "../utils/valueMapper.js";
 import Player from "./player.js";
+import { generateEffect } from "./generateEffect.js";
 import { UI } from "../utils/ui.js";
 
 class Enemy extends Character {
-  // TODO: discuss differences enemy class has from generic character class -kc 8/6/2020
-  constructor(name, stats, unlock) {
+  constructor(name, stats, onEffects, unlock) {
     super(name, stats);
     this._id = dec(Rand.random(), 8);
     this.attackTimer = null;
@@ -20,7 +20,8 @@ class Enemy extends Character {
 
     this._isLocked = stats.isLocked;
     this._unlock = unlock;
-
+    this._onEffects = onEffects;
+    
     //buildIcon()
     this._elements['createIcon'] = buildElement(
       'touch-icon',
@@ -37,6 +38,10 @@ class Enemy extends Character {
     )
 
     UI.iconBar.appendChild(this._elements['createIcon']);
+  }
+
+  get onEffects() {
+    return this._onEffects;
   }
 
   get isLocked() {
@@ -60,8 +65,11 @@ class Enemy extends Character {
   }
 
   destroy() {
+    if(this._onEffects.onDestroy) {
+      generateEffect(this._onEffects.onDestroy, Player())
+    }
     this.stopAttackTimer();
-    this._unlock(this);
+    //this._unlock(this);
     super.destroy();
   }
 
@@ -83,5 +91,5 @@ class Enemy extends Character {
 export default function generateEnemy(unlock) {
   let enemy = Object.create(Rand.weightedRandom(enemies));
   let stats = generateStats(enemy.stats);
-  return new Enemy(enemy.name, stats, unlock);
+  return new Enemy(enemy.name, stats, enemy.effects, unlock);
 }

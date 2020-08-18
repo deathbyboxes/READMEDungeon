@@ -1,6 +1,8 @@
 /*
-  * This function will build web components (custom or otherwise) using pure javascript
+  * This function will build existing web components (custom or otherwise) using pure javascript
   * and returns the element built.
+  * NOTE: for the el parameter you must use an already established element. if you're using a 
+  * a custom element, you need to make sure you've created and defined that element first.
   * @param el - the DOM element you wish to create
   * @param attrs - an object listing the attributes you wish to add to the element
   * @param props - properties you wish the element to have that are stored in the element's class 

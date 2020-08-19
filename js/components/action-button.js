@@ -37,13 +37,23 @@ class ActionButton extends HTMLElement {
             div.textContent = item.name;
             document.querySelector('#contents').append(div);
           }
+          //change button text
+          this.innerHTML = 'take all';
           break;
         case 'attack':
-          
-          
           Entity.startAttackTimer();
           Player.startAttackTimer(Entity);
           Player.attack(Entity);
+
+          this.innerHTML = 'stop attack';
+          break;
+        case 'take all':
+          //add all items to inventory
+          console.log('add all items to inv');
+          break;
+        case 'stop attack':
+          Player.stopAttackTimer();
+          this.innerHTML = 'attack';
           break;
         default:
           console.log(`No action for ${btnTxt}`);

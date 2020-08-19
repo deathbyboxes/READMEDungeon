@@ -1,7 +1,14 @@
 import { currentRoom } from '../classes/enterRoom.js';
 
+const colorCodes = {
+  purple: '#C451FA',
+  gold: '#E3B204'
+}
+
 class ActionButton extends HTMLElement {
   connectedCallback() {
+    //styles
+    this.style.backgroundColor = this.setBackgroundColor();
     this.render();
   }
 
@@ -42,6 +49,15 @@ class ActionButton extends HTMLElement {
           console.log(`No action for ${btnTxt}`);
       }
     })
+  }
+
+  setBackgroundColor() {
+    switch (this.type) {
+      case 'enemy':
+        return colorCodes.purple;
+      case 'chest':
+        return colorCodes.gold;
+    }
   }
 
   render() {

@@ -72,9 +72,10 @@ class TouchIcon extends HTMLElement {
         UI.infoSection.innerHTML = info;
         UI.infoSection.appendChild(buildElement(
           'action-button',
-          {class: this.type},
+          null,
           {text: 'attack',
-           id: +this.id}
+           id: +this.id,
+           type: this.type}
         ))
 
         document.querySelector('#icon-name').appendChild(this.elements['health-bar']);
@@ -89,9 +90,10 @@ class TouchIcon extends HTMLElement {
         UI.infoSection.innerHTML = info;
         UI.infoSection.appendChild(buildElement(
           'action-button',
-          {class: this.type},
+          null,
           {text: 'open',
-           id: +this.id}
+           id: +this.id,
+           type: this.type}
         ))  
       }
     // locked action

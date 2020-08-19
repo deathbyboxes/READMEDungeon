@@ -175,13 +175,15 @@ touch-icon {
   text-transform: uppercase;
 }
 
-.action-button {
+action-button {
   width: 65%;
 
   text-align: center;
 
   padding: 10px 0;
   margin: 0 auto;
+
+  text-transform: uppercase;
 }
 
 health-bar {
@@ -257,10 +259,6 @@ health-bar {
 
   border-radius: 50%;
 }
-
-/* action button colors based on types */
-.chest {background: var(--gold);}
-.enemy {background: var(--purple);}
 
 #header {
   background: var(--black);

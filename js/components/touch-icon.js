@@ -84,10 +84,15 @@ class TouchIcon extends HTMLElement {
         info = `
           <div class="icon-name">${this.name}</div>
           <div id="contents"></div>
-          <div class="action-button ${this.type}">Open</div>`;
+        `;
           
-          UI.infoSection.innerHTML = info;
-          
+        UI.infoSection.innerHTML = info;
+        UI.infoSection.appendChild(buildElement(
+          'action-button',
+          {class: this.type},
+          {text: 'open',
+           id: +this.id}
+        ))  
       }
     // locked action
     } else {

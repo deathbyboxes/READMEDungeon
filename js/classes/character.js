@@ -16,7 +16,6 @@ export default class Character {
     if (pts > 0) {
       this._stats.hp -= pts;
       this._elements['health-bar']?.render();
-      console.log('health rendered')
       if (this._stats.hp <= 0) {
         this._stats.hp = 0;
         this._elements['health-bar']?.render();

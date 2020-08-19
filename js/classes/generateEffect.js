@@ -17,22 +17,27 @@ class Effect {
     this._effect = function () {
       effect.action(subject);
     };
-    if (effect.interval)
+
+    let needsPush = true;
+
+    if (effect.interval) { 
       this._interval = setInterval(this._effect, effect.interval);
-    else {
+      if (needsPush) {
+        subject.effects.push(this);
+        needsPush = false;
+      }
+    } else {
       this._interval = null;
       this._effect();
+      this.destroy();
     }
+
     if (effect.duration) {
-      subject.effects.push(this)
-      setTimeout(() => {
+      this._timeout = setTimeout(() => {
         let self = this;
         self.destroy();
       }, effect.duration);
-    }
-    else {
-      this._timeout = null;
-      this.destroy();
+      if (needsPush) subject.effects.push(this);
     }
   }
 

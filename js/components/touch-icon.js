@@ -45,9 +45,10 @@ class TouchIcon extends HTMLElement {
                     Entity = item;
                   }
                 }
-                Player.attack(Entity);
+                
                 Entity.startAttackTimer();
                 Player.startAttackTimer(Entity);
+                Player.attack(Entity);
                 break;
               default:
                 console.log(`No action for ${btnTxt}`);

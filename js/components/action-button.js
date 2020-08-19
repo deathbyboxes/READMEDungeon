@@ -43,7 +43,6 @@ class ActionButton extends HTMLElement {
         case 'attack':
           Entity.startAttackTimer();
           Player.startAttackTimer(Entity);
-          Player.attack(Entity);
 
           this.innerHTML = 'stop attack';
           break;

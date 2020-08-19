@@ -55,9 +55,11 @@ class Enemy extends Character {
   startAttackTimer() {
     let self = this;
     let mappedVal = mapRange(this._stats.spd, 1, 100, 15000, 1000);
-    this._attackTimer = setInterval(function () {
-      self.attack(Player());
-    }, mappedVal);
+    if  (!this._attackTimer)
+      this._attackTimer = setInterval(function () {
+        self.attack(Player());
+      }, mappedVal);
+    console.log(this._attackTimer)
   }
 
   stopAttackTimer() {

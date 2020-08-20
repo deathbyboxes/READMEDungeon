@@ -39,7 +39,7 @@ export const enemies = [
   },
   {
     name: "Salve Bug",
-    weight: 8,
+    weight: 100,
     stats: {
       hp: 10,
       atk: 5,

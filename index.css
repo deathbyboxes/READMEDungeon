@@ -173,6 +173,9 @@ touch-icon {
 .icon-name {
   position: relative;
   text-transform: uppercase;
+
+  display: flex;
+  align-items: center;
 }
 
 action-button {

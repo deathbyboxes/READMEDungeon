@@ -2,6 +2,7 @@ import {UI} from '../utils/ui.js';
 
 import buildElement from '../utils/buildElement.js';
 import '../components/action-button.js';
+import '../components/display-icon.js';
 
 class TouchIcon extends HTMLElement {
   connectedCallback() {
@@ -59,7 +60,21 @@ class TouchIcon extends HTMLElement {
           ${/* action button component goes here */''}
         `;
 
+        
         UI.infoSection.innerHTML = info;
+      
+        console.log(this.onEffects);
+        
+        for (let ef in this.onEffects) {
+          console.log(this.onEffects[ef].type)
+          document.querySelector('#icon-name').appendChild(buildElement(
+            'display-icon',
+            null,
+            {icon: this.onEffects[ef].type}
+          ))
+        }
+          
+
         UI.infoSection.appendChild(buildElement(
           'action-button',
           null,

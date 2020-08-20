@@ -264,3 +264,9 @@ health-bar {
   background: var(--black);
   padding: 30px;
 }
+
+#contents {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(auto-fit, 20%);
+}

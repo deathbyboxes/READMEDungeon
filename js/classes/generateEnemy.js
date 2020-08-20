@@ -85,7 +85,8 @@ class Enemy extends Character {
       type: this._type,
       id: this._id,
       elements: this._elements,
-      effects: this._effects
+      effects: this._effects,
+      onEffects: this._onEffects
     };
   }
 }

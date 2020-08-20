@@ -53,17 +53,7 @@ class TouchIcon extends HTMLElement {
         info = `
           <div id="icon-name">
             ${this.name}
-          </div>
-          
-          ${/* some stat display for [atk, def, spd] */''}
-          <div>
-            ATK: ${this.atk}
-            SPD: ${this.spd}
-            HP: ${this.hp}
-          </div>
-
-          <div id="effects">
-          EFFECTS
+            ${/* health bar component goes here */''}
           </div>
 
           ${/* action button component goes here */''}
@@ -79,12 +69,12 @@ class TouchIcon extends HTMLElement {
         ))
 
         document.querySelector('#icon-name').appendChild(this.elements['health-bar']);
-        //display effects if any
-        document.querySelector('#effects').append(this.effects)
       } else {
         info = `
           <div class="icon-name">${this.name}</div>
           <div id="contents"></div>
+
+          ${/* action button component goes here */''}
         `;
           
         UI.infoSection.innerHTML = info;
@@ -115,7 +105,7 @@ class TouchIcon extends HTMLElement {
 
   render() {
     this.innerHTML = `
-      <svg style="margin: 10px; width:55px; height:55px; fill:white;">
+      <svg style="margin:10px; width: 40px; height:40px; fill:white;">
         <use xlink:href="#rmd-${this.icon}" />
       </svg>
     `

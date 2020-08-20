@@ -1,4 +1,5 @@
 import { currentRoom } from '../classes/enterRoom.js';
+import buildElement from '../utils/buildElement.js';
 
 const colorCodes = {
   purple: '#C451FA',
@@ -34,7 +35,11 @@ class ActionButton extends HTMLElement {
         case 'open':
           for (const item of Entity.getInfo.contents) {
             let div = document.createElement('div');
-            div.textContent = item.name;
+            div.appendChild(buildElement(
+              'touch-icon', //change to card element
+              null,
+              {icon: item.icon}
+            ))
             document.querySelector('#contents').append(div);
           }
           //change button text

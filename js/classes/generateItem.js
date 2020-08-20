@@ -14,18 +14,7 @@ class Item {
     this._stats = stats;
     this._effects = effects;
     this._id = dec(Rand.random(), 8);
-    this._icon = '';
-
-    switch (icon) {
-      case 'head':
-        this._icon = 'helmet';
-        break;
-      case 'torso':
-        this._icon = 'breastplate';
-        break;
-      default:
-        this._icon = icon;
-    }
+    this._icon = icon;
 
     console.log(name)
     console.log(icon)

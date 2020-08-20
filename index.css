@@ -270,3 +270,7 @@ health-bar {
   grid-template-rows: 1fr;
   grid-template-columns: repeat(auto-fit, 20%);
 }
+
+health-bar {
+  transition: width .3s ease;
+}

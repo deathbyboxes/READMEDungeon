@@ -22,6 +22,8 @@ const itemAmt = [
 const poison = {
   name: "Mysterious Gas",
   interval: 5000,
+  type: "poison",
+  // no duration
   action: (subject) => {
     subject.damage(2);
   },
@@ -59,9 +61,9 @@ class CurrentRoom {
     console.log(this._contents);
 
     /* poison works, but not needed for testing phase */
-    // setTimeout(() => {
-    //   this._poison = generateEffect(poison, this._player);
-    // }, 10000);
+    setTimeout(() => {
+      this._poison = generateEffect(poison, this._player);
+    }, 2000);
   }
 
   get getContents() {

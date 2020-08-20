@@ -84,18 +84,6 @@ class Player extends Character {
     return {...this._stats};
   }
 
-  startAttackTimer(enemy) {
-    let self = this;
-    let mappedVal = mapRange(this._stats.spd, 1, 100, 15000, 1000);
-    this._attackTimer = setInterval(function () {
-      self.attack(enemy);
-    }, mappedVal);
-  }
-
-  stopAttackTimer() {
-    clearInterval(this._attackTimer);
-  }
-
   destroy() {
     this.stopAttackTimer();
     super.destroy();

@@ -1,5 +1,7 @@
 import {UI} from '../utils/ui.js';
-import { currentRoom } from '../classes/enterRoom.js';
+
+import buildElement from '../utils/buildElement.js';
+import '../components/action-button.js';
 
 class TouchIcon extends HTMLElement {
   connectedCallback() {
@@ -19,40 +21,7 @@ class TouchIcon extends HTMLElement {
         case 'chest':
         case 'enemy':
           /*MIGHT NEED TO MAKE INFO SECTION A WEB COMPONENT THAT TAKES 'info' AS ARGUMENT*/
-
           this.displayInfo();
-
-          //event listener for action button
-          document.querySelector('.action-button').addEventListener('click', e => {
-            let btnTxt = e.target.innerHTML.toLowerCase();
-            switch (btnTxt) {
-              case 'open':
-                for (const item of this.contents) {
-                  let div = document.createElement('div');
-                  div.textContent = item.name;
-                  document.querySelector('#contents').append(div);
-                }
-                break;
-              case 'attack':
-                //get the room
-                let Room = currentRoom;
-                //get the player
-                let Player = Room._player;
-                //get the enemy
-                let Entity = null;
-                for (let item of Room.getContents) {
-                  if (item._id === +this.id) {
-                    Entity = item;
-                  }
-                }
-                Player.attack(Entity);
-                Entity.startAttackTimer();
-                Player.startAttackTimer(Entity);
-                break;
-              default:
-                console.log(`No action for ${btnTxt}`);
-            }
-          })
           break;
         case 'move': //move
           console.log('The move button was clicked');
@@ -82,35 +51,40 @@ class TouchIcon extends HTMLElement {
       if (this.type === 'enemy') {
         //set the content
         info = `
-        <div id="icon-name">
-          ${this.name}
-        </div>
-        
-        ${/* some stat display for [atk, def, spd] */''}
-        <div>
-          ATK: ${this.atk}
-          SPD: ${this.spd}
-          HP: ${this.hp}
-        </div>
+          <div id="icon-name">
+            ${this.name}
+            ${/* health bar component goes here */''}
+          </div>
 
-        <div id="effects">
-         EFFECTS
-        </div>
-        ${/* how to add an event listener? maybe component? */''}
-        <div class="action-button ${this.type}">Attack</div>`;
+          ${/* action button component goes here */''}
+        `;
 
         UI.infoSection.innerHTML = info;
+        UI.infoSection.appendChild(buildElement(
+          'action-button',
+          null,
+          {text: 'attack',
+           id: +this.id,
+           type: this.type}
+        ))
+
         document.querySelector('#icon-name').appendChild(this.elements['health-bar']);
-        //display effects if any
-        document.querySelector('#effects').append(this.effects)
       } else {
         info = `
           <div class="icon-name">${this.name}</div>
           <div id="contents"></div>
-          <div class="action-button ${this.type}">Open</div>`;
+
+          ${/* action button component goes here */''}
+        `;
           
-          UI.infoSection.innerHTML = info;
-          
+        UI.infoSection.innerHTML = info;
+        UI.infoSection.appendChild(buildElement(
+          'action-button',
+          null,
+          {text: 'open',
+           id: +this.id,
+           type: this.type}
+        ))  
       }
     // locked action
     } else {
@@ -131,7 +105,7 @@ class TouchIcon extends HTMLElement {
 
   render() {
     this.innerHTML = `
-      <svg style="margin: 10px; width:55px; height:55px; fill:white;">
+      <svg style="margin:10px; width: 40px; height:40px; fill:white;">
         <use xlink:href="#rmd-${this.icon}" />
       </svg>
     `

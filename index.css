@@ -12,7 +12,7 @@
   --white: #FCFCFC;
 }
 
-*{
+* {
   box-sizing: border-box;
 }
 
@@ -99,7 +99,7 @@ touch-icon {
 }
 
 .player {position: relative;}
-.player::after {
+.player::after { /* vertical separator line */
   content: '';
   position: absolute;
   right: -15px;
@@ -175,13 +175,15 @@ touch-icon {
   text-transform: uppercase;
 }
 
-.action-button {
+action-button {
   width: 65%;
 
   text-align: center;
 
   padding: 10px 0;
   margin: 0 auto;
+
+  text-transform: uppercase;
 }
 
 health-bar {
@@ -258,11 +260,13 @@ health-bar {
   border-radius: 50%;
 }
 
-/* action button colors based on types */
-.chest {background: var(--gold);}
-.enemy {background: var(--purple);}
-
 #header {
   background: var(--black);
   padding: 30px;
+}
+
+#contents {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(auto-fit, 20%);
 }

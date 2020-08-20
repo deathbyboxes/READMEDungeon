@@ -62,19 +62,17 @@ class TouchIcon extends HTMLElement {
 
         
         UI.infoSection.innerHTML = info;
-      
-        console.log(this.onEffects);
-        
+        //display any effects the enemy can apply to player
         for (let ef in this.onEffects) {
           console.log(this.onEffects[ef].type)
           document.querySelector('#icon-name').appendChild(buildElement(
             'display-icon',
-            null,
+            {class: 'effect-icon'},
             {icon: this.onEffects[ef].type}
           ))
         }
           
-
+        //create the action button for an enemy
         UI.infoSection.appendChild(buildElement(
           'action-button',
           null,
@@ -84,7 +82,7 @@ class TouchIcon extends HTMLElement {
         ))
 
         document.querySelector('#icon-name').appendChild(this.elements['health-bar']);
-      } else {
+      } else { //chest
         info = `
           <div class="icon-name">${this.name}</div>
           <div id="contents"></div>
@@ -93,6 +91,8 @@ class TouchIcon extends HTMLElement {
         `;
           
         UI.infoSection.innerHTML = info;
+
+        //create action button for a chest
         UI.infoSection.appendChild(buildElement(
           'action-button',
           null,

@@ -11,7 +11,7 @@ class DisplayIcon extends HTMLElement {
 
   render() {
     this.innerHTML = `
-      <svg style="margin:10px; width: 15px; height:15px; fill:white;">
+      <svg style="margin:10px; fill:white;">
         <use xlink:href="#rmd-${this.icon}" />
       </svg>
     `

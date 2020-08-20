@@ -277,3 +277,13 @@ health-bar {
 health-bar {
   transition: width .3s ease;
 }
+
+.item-icon svg {
+  width: 40px;
+  height: 40px;
+}
+
+.effect-icon svg {
+  width: 20px;
+  height: 20px;
+}

@@ -16,7 +16,7 @@ class TouchIcon extends HTMLElement {
     this.addEventListener('click', e => {
       switch (this.type) {
         case 'player':
-          UI.playerMenu.render();
+          this.elements.playerMenu.render();
           break;
         //TODO: create function that handles duplicate code for toolbox and skull
         case 'chest':

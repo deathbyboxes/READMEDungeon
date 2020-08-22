@@ -1,15 +1,15 @@
 import {UI} from '../utils/ui.js';
 
 class PlayerMenu extends HTMLElement {
-  connectedCallback() {
-    this.render();
-  }
+  // connectedCallback() {
+  //   this.render();
+  // }
 
   constructor() {
     super();
 
-    this.style.width = '40px';
-    this.style.top = '0';
+    // this.style.width = '40px';
+    // this.style.top = '0';
   }
 
   render() {

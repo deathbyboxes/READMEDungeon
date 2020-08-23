@@ -3,6 +3,7 @@ import {UI} from '../utils/ui.js';
 import buildElement from '../utils/buildElement.js';
 import '../components/action-button.js';
 import '../components/display-icon.js';
+import '../components/info-section.js';
 
 class TouchIcon extends HTMLElement {
   connectedCallback() {
@@ -38,7 +39,9 @@ class TouchIcon extends HTMLElement {
 
   displayInfo() {
     //generated info
-    let info = '';
+    let props = {
+      type: this.type
+    };
     
     // remove current active class
     document.querySelectorAll('.icon').forEach(el => {
@@ -49,58 +52,41 @@ class TouchIcon extends HTMLElement {
     if (!this.isLocked) {
       //add active to clicked action icon
       this.classList.add('active');
+
       if (this.type === 'enemy') {
-        //set the content
-        info = `
-          <div id="icon-name">
-            ${this.name}
-            ${/* health bar component goes here */''}
-          </div>
-
-          ${/* action button component goes here */''}
-        `;
-
-        
-        UI.infoSection.innerHTML = info;
-        //display any effects the enemy can apply to player
-        for (let ef in this.onEffects) {
-          console.log(this.onEffects[ef].type)
-          document.querySelector('#icon-name').appendChild(buildElement(
+        props['name'] = this.name;
+        props['effects'] = [];
+        Object.entries(this.onEffects).forEach((effect, ndx) => {
+          props.effects.push(buildElement(
             'display-icon',
             {class: 'effect-icon'},
-            {icon: this.onEffects[ef].type}
+            {icon: effect[1].type}
           ))
-        }
-          
-        //create the action button for an enemy
-        UI.infoSection.appendChild(buildElement(
+        })
+        props['healthBar'] = this.elements['health-bar']
+        props['actionButton'] = buildElement(
           'action-button',
           null,
           {text: 'attack',
            id: +this.id,
            type: this.type}
-        ))
-
-        document.querySelector('#icon-name').appendChild(this.elements['health-bar']);
+        )
       } else { //chest
-        info = `
-          <div class="icon-name">${this.name}</div>
-          <div id="contents"></div>
-
-          ${/* action button component goes here */''}
-        `;
-          
-        UI.infoSection.innerHTML = info;
-
-        //create action button for a chest
-        UI.infoSection.appendChild(buildElement(
+        props['name'] = this.name;
+        props['actionButton'] = buildElement(
           'action-button',
           null,
           {text: 'open',
            id: +this.id,
            type: this.type}
-        ))  
+        )
       }
+      console.log(props)
+      document.querySelector('#footer').appendChild(buildElement(
+        'info-section',
+        null,
+        props
+      ))
     // locked action
     } else {
       // blink animation on icon

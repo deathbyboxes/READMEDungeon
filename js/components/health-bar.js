@@ -13,7 +13,7 @@ class HealthBar extends HTMLElement {
   }
 
   render() {
-    let maxWidth = UI.infoSection.getBoundingClientRect().width - 60;
+    let maxWidth = document.documentElement.clientWidth - 60;
     let elWidth = mapRange(this.stats.hp, this.maxHp, 0, maxWidth, 0);
     this.style.width = `${elWidth}px`;
   }

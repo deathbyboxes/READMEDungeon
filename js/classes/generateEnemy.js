@@ -20,7 +20,7 @@ class Enemy extends Character {
 
     this._isLocked = null;
     this._unlock = unlock;
-    this._onEffects = onEffects;
+    this._onEffects = onEffects || {};
     
     //buildIcon()
     this._elements['createIcon'] = buildElement(

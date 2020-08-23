@@ -1,6 +1,4 @@
-// An object of all the UI components for easy access over document.querySelector
-
-import buildElement from "../utils/buildElement.js";
+// A function to get the UI component based on a class, id, or element name
 
 export const UI = {
   infoSection: document.querySelector('#info-section'),

@@ -39,7 +39,7 @@ export const enemies = [
   },
   {
     name: "Salve Bug",
-    weight: 8,
+    weight: 800,
     stats: {
       hp: 10,
       atk: 5,
@@ -53,7 +53,7 @@ export const enemies = [
         action: (subject) => {
           subject.heal(5);
         },
-      }
+      },
     },
   },
 ];

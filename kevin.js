@@ -14,7 +14,13 @@ const p = createPlayer('Chad', {hp:100, atk:7, spd:50, def:0});
 //player's health bar
 UI.playerInfo.appendChild(p._elements['health-bar']);
 
-
+//create empty info-section
+//should this be in room?
+document.querySelector('#footer').appendChild(buildElement(
+  'info-section',
+  null,
+  null
+));
 //enter a room
 enterNewRoom(p);
 

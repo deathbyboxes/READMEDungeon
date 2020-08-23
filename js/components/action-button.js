@@ -34,6 +34,9 @@ class ActionButton extends HTMLElement {
 
       switch (btnTxt) {
         case 'open':
+          //somehow set the chest._isOpen to true
+          this.open();
+          console.log('chest opened?')
           for (const item of Entity.getInfo.contents) {
             let div = document.createElement('div');
             div.appendChild(buildElement(

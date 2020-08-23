@@ -1,9 +1,8 @@
-import {UI} from '../utils/ui.js';
-
 import buildElement from '../utils/buildElement.js';
 import '../components/action-button.js';
 import '../components/display-icon.js';
 import '../components/info-section.js';
+import {currentRoom} from '../classes/enterRoom.js';
 
 class TouchIcon extends HTMLElement {
   connectedCallback() {
@@ -72,13 +71,20 @@ class TouchIcon extends HTMLElement {
            type: this.type}
         )
       } else { //chest
+        console.log('is open: ', this.isOpen());
         props['name'] = this.name;
+
+        let text = !this.isOpen() ? 'open' : 'take all';
+        
         props['actionButton'] = buildElement(
           'action-button',
           null,
-          {text: 'open',
-           id: +this.id,
-           type: this.type}
+          {text,
+           id: this.id,
+           type: this.type,
+           isOpen: this.isOpen,
+           open: this.open
+          }
         )
       }
       console.log(props)
@@ -87,6 +93,29 @@ class TouchIcon extends HTMLElement {
         null,
         props
       ))
+      if (this.type === 'chest' && this.isOpen()) {
+        //get the room
+        let Room = currentRoom;
+        //get the player
+        let Player = Room._player;
+        //get the enemy
+        let Entity = null;
+        for (let item of Room.getContents) {
+          if (item._id === +this.id) {
+            Entity = item;
+          }
+        }
+        for (const item of Entity.getInfo.contents) {
+          let div = document.createElement('div');
+          div.appendChild(buildElement(
+            'display-icon', //change to card element
+            {class: 'item-icon'},
+            {icon: item.icon}
+          ))
+          document.querySelector('#contents').append(div);
+        }
+      }
+
     // locked action
     } else {
       // blink animation on icon

@@ -19,15 +19,15 @@ const itemAmt = [
   { amt: 4, weight: 1 },
 ];
 
-const poison = {
-  name: "Mysterious Gas",
-  interval: 5000,
-  type: "poison",
-  // no duration
-  action: (subject) => {
-    subject.damage(2);
-  },
-};
+// const poison = {
+//   name: "Mysterious Gas",
+//   interval: 5000,
+//   type: "poison",
+//   // no duration
+//   action: (subject) => {
+//     subject.damage(2);
+//   },
+// };
 
 export function enterNewRoom(player, iDir = null) {
   let oldRoom;

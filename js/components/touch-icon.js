@@ -1,7 +1,8 @@
-import {UI} from '../utils/ui.js';
-
 import buildElement from '../utils/buildElement.js';
 import '../components/action-button.js';
+import '../components/display-icon.js';
+import '../components/info-section.js';
+import {currentRoom} from '../classes/enterRoom.js';
 
 class TouchIcon extends HTMLElement {
   connectedCallback() {
@@ -15,7 +16,7 @@ class TouchIcon extends HTMLElement {
     this.addEventListener('click', e => {
       switch (this.type) {
         case 'player':
-          UI.playerMenu.render();
+          this.elements.playerMenu.render();
           break;
         //TODO: create function that handles duplicate code for toolbox and skull
         case 'chest':
@@ -37,7 +38,9 @@ class TouchIcon extends HTMLElement {
 
   displayInfo() {
     //generated info
-    let info = '';
+    let props = {
+      type: this.type
+    };
     
     // remove current active class
     document.querySelectorAll('.icon').forEach(el => {
@@ -48,44 +51,71 @@ class TouchIcon extends HTMLElement {
     if (!this.isLocked) {
       //add active to clicked action icon
       this.classList.add('active');
+
       if (this.type === 'enemy') {
-        //set the content
-        info = `
-          <div id="icon-name">
-            ${this.name}
-            ${/* health bar component goes here */''}
-          </div>
-
-          ${/* action button component goes here */''}
-        `;
-
-        UI.infoSection.innerHTML = info;
-        UI.infoSection.appendChild(buildElement(
+        props['name'] = this.name;
+        props['effects'] = [];
+        Object.entries(this.onEffects).forEach((effect, ndx) => {
+          props.effects.push(buildElement(
+            'display-icon',
+            {class: 'effect-icon'},
+            {icon: effect[1].type}
+          ))
+        })
+        props['healthBar'] = this.elements['health-bar']
+        props['actionButton'] = buildElement(
           'action-button',
           null,
           {text: 'attack',
            id: +this.id,
            type: this.type}
-        ))
+        )
+      } else { //chest
+        console.log('is open: ', this.isOpen());
+        props['name'] = this.name;
 
-        document.querySelector('#icon-name').appendChild(this.elements['health-bar']);
-      } else {
-        info = `
-          <div class="icon-name">${this.name}</div>
-          <div id="contents"></div>
-
-          ${/* action button component goes here */''}
-        `;
-          
-        UI.infoSection.innerHTML = info;
-        UI.infoSection.appendChild(buildElement(
+        let text = !this.isOpen() ? 'open' : 'take all';
+        
+        props['actionButton'] = buildElement(
           'action-button',
           null,
-          {text: 'open',
-           id: +this.id,
-           type: this.type}
-        ))  
+          {text,
+           id: this.id,
+           type: this.type,
+           isOpen: this.isOpen,
+           open: this.open
+          }
+        )
       }
+      console.log(props)
+      document.querySelector('#footer').appendChild(buildElement(
+        'info-section',
+        null,
+        props
+      ))
+      if (this.type === 'chest' && this.isOpen()) {
+        //get the room
+        let Room = currentRoom;
+        //get the player
+        let Player = Room._player;
+        //get the enemy
+        let Entity = null;
+        for (let item of Room.getContents) {
+          if (item._id === +this.id) {
+            Entity = item;
+          }
+        }
+        for (const item of Entity.getInfo.contents) {
+          let div = document.createElement('div');
+          div.appendChild(buildElement(
+            'display-icon', //change to card element
+            {class: 'item-icon'},
+            {icon: item.icon}
+          ))
+          document.querySelector('#contents').append(div);
+        }
+      }
+
     // locked action
     } else {
       // blink animation on icon

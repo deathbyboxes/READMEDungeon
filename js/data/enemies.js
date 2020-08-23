@@ -53,7 +53,7 @@ export const enemies = [
         action: (subject) => {
           subject.heal(5);
         },
-      }
+      },
     },
   },
 ];

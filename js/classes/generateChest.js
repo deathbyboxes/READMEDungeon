@@ -30,6 +30,7 @@ class Chest {
     this._isLocked = null;
     this._unlock = unlock
     this._contents = contents;
+    this._isOpen = false;
     this._elements = {};
     this._elements["createIcon"] = buildElement(
       "touch-icon",
@@ -46,8 +47,20 @@ class Chest {
       contents: this._contents,
       icon: this._icon,
       type: this._type,
-      id: this._id
+      id: this._id,
+      open: this.openChest,
+      isOpen: this.isOpen
     };
+  }
+
+  openChest = () => {
+    console.log(this._isOpen)
+    this._isOpen = true;
+    console.log(this._isOpen)
+  }
+
+  isOpen = () => {
+    return this._isOpen;
   }
 
   get isLocked() {

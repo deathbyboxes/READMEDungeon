@@ -40,25 +40,31 @@ class Player extends Character {
     this._type = 'player';
 
     //build an icon
-    this._elements['createIcon'] = buildElement(
+    this._elements['touchIcon'] = buildElement(
       'touch-icon', 
       {class: 'player'}, 
        this.getInfo
     );
+    //build the menu
+    this._elements['playerMenu'] = buildElement(
+      'player-menu',
+      null,
+      {isOpen: false}
+    )
 
     //attach icon to icon-bar
-    UI.iconBar.appendChild(this._elements['createIcon']);
+    UI.iconBar.appendChild(this._elements['touchIcon']);
     //attach player menu to icon-bar
-    UI.iconBar.appendChild(UI.playerMenu);
+    UI.iconBar.appendChild(this._elements['playerMenu']);
     
     //append menu items
-    UI.playerMenu.appendChild(buildElement(
+    this._elements['playerMenu'].appendChild(buildElement(
       'touch-icon',
       {class: 'menu-item'},
       {icon: 'inventory',
        type: 'inv'}
     ));
-    UI.playerMenu.appendChild(buildElement(
+    this._elements['playerMenu'].appendChild(buildElement(
       'touch-icon', 
       {class: 'menu-item'}, 
       {icon: 'move',
@@ -71,12 +77,13 @@ class Player extends Character {
       {stats: this._stats,
        maxHp: this._baseStats.hp}
     );
-  }
+  } // end constructor
 
   get getInfo() {
     return {
       icon: this._icon,
-      type: this._type
+      type: this._type,
+      elements: this._elements
     };
   }
 

@@ -36,7 +36,6 @@ html, body {
 
   display: flex;
   flex-direction: column;
-
 }
 
 #icon-bar {
@@ -154,7 +153,7 @@ touch-icon {
   border-top-right-radius: 50%;
 }
 
-#info-section {
+info-section {
   z-index: 1;
   width: 100%;
   flex: 2;
@@ -163,7 +162,7 @@ touch-icon {
   justify-content: space-between;
 
   color: var(--white);
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 
   background: black;
 
@@ -173,6 +172,9 @@ touch-icon {
 .icon-name {
   position: relative;
   text-transform: uppercase;
+
+  display: flex;
+  align-items: center;
 }
 
 action-button {
@@ -188,7 +190,6 @@ action-button {
 
 health-bar {
   position: relative;
-  /* width: 100%; */
   height: 15px;
 
   display: block;
@@ -269,4 +270,18 @@ health-bar {
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: repeat(auto-fit, 20%);
+}
+
+health-bar {
+  transition: width .3s ease;
+}
+
+.item-icon svg {
+  width: 40px;
+  height: 40px;
+}
+
+.effect-icon svg {
+  width: 20px;
+  height: 20px;
 }

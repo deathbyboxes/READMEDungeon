@@ -21,7 +21,7 @@ export default class FSM {
   }
 }
 
-function buildStates (transitions, callbacks) {
+function buildStates (transitions = [], callbacks = {}) {
   for(const trans of transitions) {
     let name = trans.name;
     
@@ -96,7 +96,7 @@ function createOptions(options, transition) {
   if (typeof transition.from === "string") {
     options[transition.from] = transition.to
   } else {
-    for (from of transition.from) {
+    for (const from of transition.from) {
       options[from] = transition.to
     }
   }

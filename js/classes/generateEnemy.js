@@ -8,6 +8,7 @@ import mapRange from "../utils/valueMapper.js";
 import Player from "./player.js";
 import { generateEffect } from "./generateEffect.js";
 import { UI } from "../utils/ui.js";
+import FSM from "../utils/fsm.js";
 
 class Enemy extends Character {
   constructor(name, stats, onEffects, unlock) {
@@ -21,23 +22,63 @@ class Enemy extends Character {
     this._isLocked = null;
     this._unlock = unlock;
     this._onEffects = onEffects;
-    
-    //buildIcon()
-    this._elements['createIcon'] = buildElement(
-      'touch-icon',
-      { class: "icon" },
-      this.getInfo
-    );
 
     //create health bar
-    this._elements['health-bar'] = buildElement(
+    this._elements.healthBar = buildElement(
       'health-bar',
       {class: 'health-bar'},
-      {stats: this._stats,
-       maxHp: this._baseStats.hp}
+      {
+        stats: this._stats,
+        maxHp: this._baseStats.hp
+      }
     )
 
-    UI.iconBar.appendChild(this._elements['createIcon']);
+    this._elements.actionBtn = buildElement("action-button");
+
+    this._elements.infoPanel = buildElement(
+      'info-panel',
+      null,
+      {header: [this._name]}
+    )
+
+    //buildIcon()
+    this._elements.createIcon = buildElement(
+      'touch-icon',
+      { class: "icon" },
+      {icon: this._icon, action: () => this._elements.infoPanel.render()}
+    );
+    UI.iconBar.appendChild(this._elements.createIcon);
+
+    this.fsm = new FSM({
+      init: "locked",
+      transitions: [
+        { name: "unlock", from: "locked", to: "idling" },
+        { name: "attack", from: "locked", to: "attacking" },
+        { name: "idle", from: "attacking", to: "idling" },
+        { name: "die", from: ["idling", "attacking"], to: "dead" },
+      ],
+      callbacks: {
+        onunlock: () => {
+          this.startAttackTimer();
+          this._elements.infoPanel.isLocked = false;
+          this._elements.actionBtn.text = "attack";
+          this._elements.actionBtn.action = () => Player().startAttackTimer(this);
+          this._elements.actionBtn.render();
+          this._elements.healthBar.render();
+          this._elements.infoPanel.header = [this._name, this._elements.healthBar]
+          this._elements.infoPanel.footer = [this._elements.actionBtn];
+        },
+        ondie: () => {
+          this._elements.infoPanel.body = `${this._name} has perished!`;
+          this._elements.infoPanel.footer = null;
+          this._elements.infoPanel.render();
+          this.destroy()
+          this._unlock();
+        },
+      },
+    });
+
+    this._elements.createIcon.fsm = this.fsm
   }
 
   get onEffects() {
@@ -59,7 +100,6 @@ class Enemy extends Character {
       this._attackTimer = setInterval(function () {
         self.attack(Player());
       }, mappedVal);
-    console.log(this._attackTimer)
   }
 
   stopAttackTimer() {

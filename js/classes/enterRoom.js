@@ -2,12 +2,11 @@ import Rand from "../utils/rng.js";
 import dec from "../utils/decimalPlace.js";
 import generateEnemy from "./generateEnemy.js";
 import generateChest from "./generateChest.js";
-import { generateEffect } from "./generateEffect.js";
 
 export let currentRoom = null;
 
 const roomItems = [
-  { type: "enemy", weight: 3 },
+  { type: "enemy", weight: 1 },
   { type: "chest", weight: 1 },
 ];
 
@@ -52,18 +51,15 @@ class Room {
 class CurrentRoom {
   constructor(player, room) {
     if (!room) room = new Room();
-
     this._room = room;
     this._player = player;
     this._connectedRooms = generatePaths();
-    this._contents = initContents(this._room.contentTypes);
-
-    console.log(this._contents);
+    this._contents = initContents.bind(this,this._room.contentTypes)();
 
     /* poison works, but not needed for testing phase */
-    setTimeout(() => {
-      this._poison = generateEffect(poison, this._player);
-    }, 2000);
+    // setTimeout(() => {
+    //   this._poison = generateEffect(poison, this._player);
+    // }, 2000);
   }
 
   get getContents() {
@@ -84,22 +80,23 @@ function initContents(contents) {
   let items = [];
   let item = null;
   for (let i of contents) {
-    if (i.type === "enemy") item = generateEnemy(unlockItem);
-    else if (i.type === "chest") item = generateChest(unlockItem);
+    if (i.type === "enemy") item = generateEnemy(unlockItem.bind(this));
+    else if (i.type === "chest") item = generateChest(unlockItem.bind(this));
  
-    item.isLocked = items.length === 0 ? false : true;
+    if(items.length === 0) item.fsm.unlock();
     items.push(item);
   }
   return items;
 }
 
 function unlockItem (curItem) {
-  for(const item in this._contents) {
-    if (item.isLocked) {
-      item.isLocked = false;
+  for(const item of this._contents) {
+    if (item.fsm.is('locked')) {
+      item.fsm.unlock();
       return;
     }
   }
+  enterNewRoom(this._player, 0)
 }
 
 function generateContents() {

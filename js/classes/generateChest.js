@@ -33,7 +33,7 @@ class Chest {
     this._elements = {};
 
     this._elements.infoPanel = buildElement("info-panel", null, {
-      header: this._name,
+      header: [this._name],
     });
     this._elements.actionBtn = buildElement("action-button");
     this._elements.createIcon = buildElement(
@@ -55,7 +55,7 @@ class Chest {
           this._elements.actionBtn.text = "open";
           this._elements.actionBtn.action = () => this.fsm.open();
           this._elements.actionBtn.render();
-          this._elements.infoPanel.footer = this._elements.actionBtn;
+          this._elements.infoPanel.footer = [this._elements.actionBtn];
         },
         onopen: () => {
           let inv = document.createElement("div");
@@ -64,8 +64,11 @@ class Chest {
             el.innerHTML = `<div>${item.name}</div>`;
             inv.appendChild(el);
           }
-          this._elements.infoPanel.body = inv;
-          this._elements.infoPanel.footer = null;
+          this._elements.infoPanel.body = [inv];
+          this._elements.actionBtn.text = "Take All";
+          this._elements.actionBtn.action = () => console.log("Take all the items!");
+          this._elements.actionBtn.render();
+          this._elements.infoPanel.footer = [this._elements.actionBtn];
           this._elements.infoPanel.render();
           this._unlock();
         },

@@ -1,81 +1,45 @@
-import { currentRoom } from '../classes/enterRoom.js';
-import buildElement from '../utils/buildElement.js';
-
 const colorCodes = {
   purple: '#C451FA',
   gold: '#E3B204'
 }
 
 class ActionButton extends HTMLElement {
-  connectedCallback() {
-    //styles
-    this.style.backgroundColor = this.setBackgroundColor();
-    this.render();
-  }
-
   constructor() {
     super();
 
+    this.styles = `
+      width:80%;
+      flex:1;
+      padding:1rem;
+      margin:1.5rem;
+      box-sizing:border-box;
+      background-color: transparent;
+      border: 0;
+      color: inherit;
+      font-weight:700;
+      letter-spacing:.2rem;
+      font-size: 1.3rem;
+      text-transform: uppercase
+    `
+    this.action = null 
+    
     this.addEventListener('click', function(e) {
-      let btnTxt = e.target.innerHTML.toLowerCase();
-
-      //get the room
-      let Room = currentRoom;
-      //get the player
-      let Player = Room._player;
-      //get the enemy
-      let Entity = null;
-      for (let item of Room.getContents) {
-        if (item._id === +this.id) {
-          Entity = item;
-        }
-      }
-
-      switch (btnTxt) {
-        case 'open':
-          for (const item of Entity.getInfo.contents) {
-            let div = document.createElement('div');
-            div.appendChild(buildElement(
-              'touch-icon', //change to card element
-              null,
-              {icon: item.icon}
-            ))
-            document.querySelector('#contents').append(div);
-          }
-          //change button text
-          this.innerHTML = 'take all';
-          break;
-        case 'attack':
-          Entity.startAttackTimer();
-          Player.startAttackTimer(Entity);
-
-          this.innerHTML = 'stop attack';
-          break;
-        case 'take all':
-          //add all items to inventory
-          console.log('add all items to inv');
-          break;
-        case 'stop attack':
-          Player.stopAttackTimer();
-          this.innerHTML = 'attack';
-          break;
-        default:
-          console.log(`No action for ${btnTxt}`);
-      }
+      this.action();
     })
   }
 
-  setBackgroundColor() {
-    switch (this.type) {
-      case 'enemy':
-        return colorCodes.purple;
-      case 'chest':
-        return colorCodes.gold;
-    }
+  connectedCallback() {
+    //styles
+    this.style.backgroundColor = colorCodes.gold
+    //this.render();
   }
 
+
   render() {
-    this.innerHTML = this.text;
+    let html = `
+      <button style="${this.styles}">${this.text}</button>
+    `
+    this.innerHTML = html;
   }
 }
 

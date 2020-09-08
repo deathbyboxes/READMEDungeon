@@ -8,8 +8,6 @@ class HealthBar extends HTMLElement {
 
   constructor() {
     super();
-
-
   }
 
   render() {

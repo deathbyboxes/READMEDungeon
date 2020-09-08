@@ -4,6 +4,7 @@ import mapRange from "../utils/valueMapper.js";
 import Rand from "../utils/rng.js";
 import { effectTypes, generateEffect } from "./generateEffect.js";
 import { UI } from "../utils/ui.js";
+import FSM from "../utils/fsm.js";
 
 const armorSlots = {
   head: null,
@@ -43,11 +44,11 @@ class Player extends Character {
     this._elements['createIcon'] = buildElement(
       'touch-icon', 
       {class: 'player'}, 
-       this.getInfo
+      {icon: this._icon, isPlayer: true}
     );
 
     //attach icon to icon-bar
-    UI.iconBar.appendChild(this._elements['createIcon']);
+    UI.iconBar.appendChild(this._elements.createIcon);
     //attach player menu to icon-bar
     UI.iconBar.appendChild(UI.playerMenu);
     
@@ -65,12 +66,23 @@ class Player extends Character {
        type: 'move'}
     ));
 
-    this._elements['health-bar'] = buildElement(
+    this._elements.healthBar = buildElement(
       'health-bar',
       {class: 'health-bar'},
       {stats: this._stats,
        maxHp: this._baseStats.hp}
     );
+
+    this.fsm = new FSM({
+      transitions: [
+        { name: 'idle', from: ['none', 'attacking'], to: 'idling'},
+        { name: 'attack', from: ['idle'], to: 'attacking'},
+        { name: 'die', from: ['attacking', 'idle'], to: 'dead'},
+      ],
+    });
+
+    this._elements.createIcon.fsm = this.fsm
+    this._elements.createIcon.action = () => UI.playerMenu.render()
   }
 
   get getInfo() {
@@ -95,10 +107,9 @@ class Player extends Character {
   }
 
   startAttackTimer(char) {
-    let self = this;
     let mappedVal = mapRange(this._stats.spd, 1, 100, 15000, 1000);
-    this._attackTimer = setInterval(function () {
-      self.attack(char);
+    this._attackTimer = setInterval(() => {
+      this.attack(char);
     }, mappedVal);
   }
 

@@ -15,12 +15,12 @@ export default class Character {
   damage(pts) {
     if (pts > 0) {
       this._stats.hp -= pts;
-      this._elements['health-bar']?.render();
+      this._elements.healthBar?.render();
       if (this._stats.hp <= 0) {
         this._stats.hp = 0;
-        this._elements['health-bar']?.render();
+        this._elements.healthBar?.render();
         console.log(`${this._name} has perished.`);
-        this.destroy();
+        this.fsm?.die()
         return;
       }
       console.log(

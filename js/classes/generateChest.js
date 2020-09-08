@@ -1,11 +1,12 @@
 import { potions } from "../data/potions.js";
 import { armor } from "../data/armor.js";
 import { weapons } from "../data/weapons.js";
-import { itemTypes, generateItem } from "./generateItem.js"
+import { itemTypes, generateItem } from "./generateItem.js";
 import buildElement from "../utils/buildElement.js";
 import dec from "../utils/decimalPlace.js";
 import Rand from "../utils/rng.js";
 import { UI } from "../utils/ui.js";
+import FSM from "../utils/fsm.js";
 
 const chestItems = [
   { weight: 2, type: itemTypes.potion, items: potions },
@@ -24,42 +25,57 @@ const chestAmt = [
 class Chest {
   constructor(contents, unlock) {
     this._name = "Chest";
-    this._type = "chest"
+    this._type = "chest";
     this._icon = "chest";
     this._id = dec(Rand.random(), 8);
-    this._isLocked = null;
-    this._unlock = unlock
+    this._unlock = unlock;
     this._contents = contents;
     this._elements = {};
-    this._elements["createIcon"] = buildElement(
+
+    this._elements.infoPanel = buildElement("info-panel", null, {
+      header: [this._name],
+    });
+    this._elements.actionBtn = buildElement("action-button");
+    this._elements.createIcon = buildElement(
       "touch-icon",
       { class: "icon" },
-      this.getInfo
+      { icon: this._icon, action: () => this._elements.infoPanel.render() }
     );
+    UI.iconBar.appendChild(this._elements.createIcon);
 
-    UI.iconBar.appendChild(this._elements["createIcon"]);
-  }
+    this.fsm = new FSM({
+      init: "locked",
+      transitions: [
+        { name: "unlock", from: "locked", to: "closed" },
+        { name: "open", from: "closed", to: "opened" },
+      ],
+      callbacks: {
+        onunlock: () => {
+          this._elements.infoPanel.isLocked = false;
+          this._elements.actionBtn.text = "open";
+          this._elements.actionBtn.action = () => this.fsm.open();
+          this._elements.actionBtn.render();
+          this._elements.infoPanel.footer = [this._elements.actionBtn];
+        },
+        onopen: () => {
+          let inv = document.createElement("div");
+          for (const item of this._contents) {
+            let el = document.createElement("div");
+            el.innerHTML = `<div>${item.name}</div>`;
+            inv.appendChild(el);
+          }
+          this._elements.infoPanel.body = [inv];
+          this._elements.actionBtn.text = "Take All";
+          this._elements.actionBtn.action = () => console.log("Take all the items!");
+          this._elements.actionBtn.render();
+          this._elements.infoPanel.footer = [this._elements.actionBtn];
+          this._elements.infoPanel.render();
+          this._unlock();
+        },
+      },
+    });
 
-  get getInfo() {
-    return {
-      name: this._name,
-      contents: this._contents,
-      icon: this._icon,
-      type: this._type,
-      id: this._id
-    };
-  }
-
-  get isLocked() {
-    return this._isLocked;
-  }
-
-  set isLocked(b) {
-    this._isLocked = b; 
-  }
-
-  destroy () {
-    this._unlock(this);
+    this._elements.createIcon.fsm = this.fsm;
   }
 }
 

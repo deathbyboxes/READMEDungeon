@@ -26,9 +26,6 @@ class Item {
       default:
         this._icon = icon;
     }
-
-    console.log(name)
-    console.log(icon)
   }
 
   get name() {

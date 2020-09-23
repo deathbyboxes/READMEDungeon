@@ -1,11 +1,19 @@
+import { renderElements } from '../utils/webComponent.js'
+
 export default class Character {
   constructor(name, stats) {
-    this._name = name;
-    this._baseStats = Object.create(stats);
-    this._stats = stats;
-
     this._effects = [];
     this._elements = {}; 
+    this.renderElements = renderElements.bind(this)
+    
+    this._name = name;
+    this._baseStats = Object.create(stats);
+    this._stats = new Proxy(stats, {
+      set: (target, prop, val) => {
+        this.renderElements(prop, val)
+        return Reflect.set(target, prop, val)  
+      }
+    });
   }
 
   get effects() {
@@ -15,10 +23,8 @@ export default class Character {
   damage(pts) {
     if (pts > 0) {
       this._stats.hp -= pts;
-      this._elements.healthBar?.render();
       if (this._stats.hp <= 0) {
         this._stats.hp = 0;
-        this._elements.healthBar?.render();
         console.log(`${this._name} has perished.`);
         this.fsm?.die()
         return;

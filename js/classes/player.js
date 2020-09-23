@@ -1,5 +1,5 @@
 import Character from "./character.js";
-import buildElement from "../utils/buildElement.js";
+import { buildElement } from "../utils/webComponent.js";
 import mapRange from "../utils/valueMapper.js";
 import Rand from "../utils/rng.js";
 import { effectTypes, generateEffect } from "./generateEffect.js";
@@ -69,9 +69,15 @@ class Player extends Character {
     this._elements.healthBar = buildElement(
       'health-bar',
       {class: 'health-bar'},
-      {stats: this._stats,
-       maxHp: this._baseStats.hp}
+      {
+        ...this._stats,
+        maxHp: this._baseStats.hp
+      }
     );
+
+    this._elements.healthBar.render();
+    document.querySelector('#player-info').append(this._name)
+    document.querySelector('#player-info').appendChild(this._elements.healthBar);
 
     this.fsm = new FSM({
       transitions: [

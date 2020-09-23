@@ -1,7 +1,7 @@
 import Character from "./character.js";
 import { enemies } from "../data/enemies.js";
 import Rand from "../utils/rng.js";
-import buildElement from "../utils/buildElement.js";
+import {buildElement} from "../utils/webComponent.js";
 import dec from "../utils/decimalPlace.js";
 import generateStats from "../utils/generateStats.js";
 import mapRange from "../utils/valueMapper.js";
@@ -28,7 +28,7 @@ class Enemy extends Character {
       'health-bar',
       {class: 'health-bar'},
       {
-        stats: this._stats,
+        ...this._stats,
         maxHp: this._baseStats.hp
       }
     )

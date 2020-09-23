@@ -1,8 +1,3 @@
-// import {UI} from '../utils/ui.js';
-
-// import buildElement from '../utils/buildElement.js';
-// import '../components/action-button.js';
-
 class TouchIcon extends HTMLElement {
   connectedCallback() {
     this.render();

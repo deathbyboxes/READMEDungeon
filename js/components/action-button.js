@@ -31,7 +31,6 @@ class ActionButton extends HTMLElement {
   connectedCallback() {
     //styles
     this.style.backgroundColor = colorCodes.gold
-    //this.render();
   }
 
 

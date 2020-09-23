@@ -74,5 +74,5 @@ import "./js/utils/ui.js";
 import Player from "./js/classes/player.js";
 import {enterNewRoom} from "./js/classes/enterRoom.js";
 
-let p = Player("Keith", {hp: 100, atk: 5, spd: 80, def: 0});
+let p = Player("Sir Rad-Cool III", {hp: 100, atk: 5, spd: 80, def: 0});
 enterNewRoom(p);

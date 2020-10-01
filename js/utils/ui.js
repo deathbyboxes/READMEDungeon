@@ -1,6 +1,6 @@
 // An object of all the UI components for easy access over document.querySelector
 
-import buildElement from "../utils/buildElement.js";
+import {buildElement} from "../utils/webComponent.js";
 
 export const UI = {
   infoSection: document.querySelector('#info-section'),

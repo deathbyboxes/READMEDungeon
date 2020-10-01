@@ -9,7 +9,7 @@
   * 
   * YOU MUST HAVE THE COMPONENT JS FILE THAT GOES WITH IT
 */
-export default function buildElement(el, attrs = null, props = null) {
+function buildElement(el, attrs = null, props = null) {
   let element = document.createElement(el);
   if (attrs)
     for (let [attr, val] of Object.entries(attrs)) {
@@ -24,3 +24,14 @@ export default function buildElement(el, attrs = null, props = null) {
     
   return element;
 }
+
+function renderElements(p, val) {
+  Object.keys(this._elements).forEach(el => {
+    if(this._elements[el][p] && this._elements[el][p] !== val) {
+      this._elements[el][p] = val
+      this._elements[el].render();
+    }
+  });
+}
+
+export {buildElement, renderElements}

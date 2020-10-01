@@ -2,7 +2,7 @@ import { potions } from "../data/potions.js";
 import { armor } from "../data/armor.js";
 import { weapons } from "../data/weapons.js";
 import { itemTypes, generateItem } from "./generateItem.js";
-import buildElement from "../utils/buildElement.js";
+import {buildElement} from "../utils/webComponent.js";
 import dec from "../utils/decimalPlace.js";
 import Rand from "../utils/rng.js";
 import { UI } from "../utils/ui.js";
